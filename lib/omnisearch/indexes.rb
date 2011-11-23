@@ -45,10 +45,13 @@ module OmniSearch
   ##
   ##
   class Indexes
-    @@list = []
+    @@list = Hash.new()
 
     def self.list
-      @@list
+      @@list[self.to_s] ||= []
+    end
+    def list
+      @@list[self.class.to_s] ||= []
     end
 
     def initialize
@@ -57,14 +60,14 @@ module OmniSearch
 
     def contents
       @contents = {}
-      @@list.each {|index|
-        @contents.merge! index.to_hash
+      list.each {|index|
+         @contents.merge! index.to_hash
       }
       @contents
     end
 
     def build
-      @@list.each {|index|
+      list.each {|index|
         index.build
       }
     end

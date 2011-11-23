@@ -1,7 +1,7 @@
 module OmniSearch
 class Indexes
-  module Builder  
-  
+  module Builder
+
   ##
   ##
   #
@@ -76,7 +76,7 @@ class Indexes
     end
 
     def records
-      @records ||= file.load
+      @records ||= load
     end
 
     def build_records
@@ -90,7 +90,7 @@ class Indexes
     end
 
   end
-  
+
 end
 end
 end

@@ -1,4 +1,3 @@
-
 module OmniSearch
 class Indexes
   ##
@@ -33,7 +32,7 @@ module Storage
 
   class Base
     attr_accessor :records
-    attr_reader   :class_name
+    attr_reader   :index_name
 
     BASE_FILENAME = 'omnisearch_index'
     PATH = '/tmp/omnisearch/'
@@ -60,12 +59,12 @@ module Storage
     end
 
     def file_path
-       File.join(PATH, filename)
+       File.join(self.class::PATH, filename)
     end
 
     def mkdir
-      unless File.exists?(PATH) and File.directory?(PATH)
-       Dir.mkdir(PATH)
+      unless File.exists?(self.class::PATH) and File.directory?(self.class::PATH)
+       Dir.mkdir(self.class::PATH)
       end
     end
 
@@ -81,6 +80,6 @@ module Storage
     BASE_FILENAME = 'omnisearch_trigram_index'
   end
 
-end  
+end
 end
 end
