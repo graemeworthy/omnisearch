@@ -7,13 +7,6 @@ describe Indexes::Storage::Base do
   let(:the_instance){Indexes::Storage::Base.new(the_index_name)}
 
 
-  def silently(&block)
-    warn_level = $VERBOSE
-    $VERBOSE = nil
-    result = block.call
-    $VERBOSE = warn_level
-    result
-  end
   def create_storage
     `mkdir #{the_temp_path}`
   end
