@@ -1,0 +1,31 @@
+---
+- :id: 1
+  :value: abcdefg
+  :label: ABCDEFG
+- :id: 3
+  :value: lorem_ipsum
+  :label: lorem_ipsum
+- :id: 4
+  :value: fancy_pony
+  :label: fancy pony
+- :id: 8
+  :value: Scripps Memorial Hospital La Jolla
+  :label: Scripps Memorial Hospital La Jolla
+- :id: 21
+  :value: Scripps Mercy Hospital
+  :label: Scripps Mercy Hospital
+- :id: 2
+  :value: Scripps Clinic
+  :label: Scripps Clinic
+- :id: 72
+  :value: Locations
+  :label: Locations
+- :id: 57
+  :value: Scripps Clinic Carmel Valley
+  :label: Scripps Clinic Carmel Valley
+- :id: 67
+  :value: Scripps Clinic Division of Dermatology
+  :label: Scripps Clinic Division of Dermatology
+- :id: 66
+  :value: Scripps Clinic Del Mar
+  :label: Scripps Clinic Del Mar
