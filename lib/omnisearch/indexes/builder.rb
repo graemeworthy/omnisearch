@@ -39,16 +39,24 @@ class Indexes
   #
   ##
   ##
+  module Base
 
-  module Plain
-    STORAGE_ENGINE = OmniSearch::Indexes::Storage::Plain
-    MASTER_INDEX   = OmniSearch::Indexes::Plain
-
+    # the following is a fancy bit of metaprogramming..
+    # i'm sorry, really it's too clever, but I had something I needed to do
+    # when Base is included in another module..
+    #   we add all ClassMethods as class methods (hence no self.xxx)
+    # then when Plain, (or Trigram) are included we're already safe, and this doesn't happen again..
+    #
     def self.included(base)
-      class_exec(base){|including|
-        #Index.list << including
-        MASTER_INDEX.list << including.new
-      }
+        base.extend ClassMethods
+    end
+
+    module ClassMethods
+      def included(base)
+        class_exec(base){|including|
+          self::MASTER_INDEX.list << including.new
+        }
+      end
     end
 
     def index_name
@@ -56,11 +64,11 @@ class Indexes
     end
 
     def collection
-      raise NotImplementedError,"#{self.class} needs to implement collection"
+      raise NotImplementedError, "#{self.class} needs to implement collection"
     end
 
     def record_template(item)
-      raise NotImplementedError,"#{self.class} needs to implement record_template"
+      raise NotImplementedError, "#{self.class} needs to implement record_template"
     end
 
     def build
@@ -77,6 +85,8 @@ class Indexes
 
     def records
       @records ||= load
+      @records.dup
+
     end
 
     def build_records
@@ -86,9 +96,15 @@ class Indexes
     end
 
     def file
-      STORAGE_ENGINE.new(index_name)
+      self.class::STORAGE_ENGINE.new(index_name)
     end
 
+  end
+
+  module Plain
+    include Base
+    STORAGE_ENGINE = OmniSearch::Indexes::Storage::Plain
+    MASTER_INDEX   = OmniSearch::Indexes::Plain
   end
 
 end
