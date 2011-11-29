@@ -2,10 +2,17 @@ require './spec/spec_helper'
 
 describe "Engines::Regex" do
   let(:the_instance) {Engines::Regex.new('')}
-  it 'defines score' 
-  it 'defines cutoff' 
+  #these are hardly tests at all
+  it 'defines score' do
+   the_instance.should respond_to :score
+  end
+
+  it 'defines cutoff' do
+    the_instance.cutoff.should be_a Fixnum
+  end
+
   describe 'The Big Picture' do
-    it "scores all items in an index, dropping those below cutoff, highlighting the top ones" do
+    it "scores all items in an index, dropping those below cutoff" do
       the_instance.stub(:index) {{
 
         :fake_index => [
@@ -22,15 +29,9 @@ describe "Engines::Regex" do
         :fake_index=>
           [
             {:id => 1, :value => 'puppies', :score => 1},
-          ],
-        :top_hit=>
-          [
-            {:id => 1, :value => 'puppies', :score => 1},
           ]
         }
 
     end
   end
-  
-  
 end
