@@ -1,21 +1,27 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "OmniSearch/version"
+require "omnisearch/version"
 
 Gem::Specification.new do |s|
-  s.name        = "OmniSearch"
-  s.version     = Omnisearch::VERSION
+  s.name        = "omnisearch"
+  s.version     = OmniSearch::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Graeme Worthy"]
+  s.email       = ["graeme@workben.ch"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{OmniSearch is for providing fast intellegent results as search suggestions for sparkle}
+  s.description = %q{OmniSearch, is watching you.}
 
-  s.rubyforge_project = "OmniSearch"
+  s.rubyforge_project = "omnisearch"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_development_dependency "rails"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "simplecov"
+  s.add_development_dependency "ZenTest"
+
 end
