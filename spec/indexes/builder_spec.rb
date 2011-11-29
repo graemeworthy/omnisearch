@@ -45,12 +45,19 @@ describe Indexes::Builder::Plain do
       it 'raises unless #index_name is defined' do
         expect { host_instance.index_name }.to raise_error
       end
+
       it 'raises unless #collection is defined' do
         expect { host_instance.collection }.to raise_error
       end
+
       it 'raises unless #record_template is defined' do
         expect { host_instance.record_template('') }.to raise_error
       end
+
+      it 'raises unless #extended_results is defined' do
+        expect { host_instance.extended_results('') }.to raise_error
+      end
+
     end
 
 
@@ -102,10 +109,9 @@ describe Indexes::Builder::Plain do
       end
 
       it '#to_hash creates a simple hash for merging upstream' do
-        host_instance.stub(:index_name) {'el_indexio'}
         host_instance.stub(:records) {['canadians']}
 
-        host_instance.to_hash.should == {'el_indexio' => ['canadians']}
+        host_instance.to_hash.should == {Something => ['canadians']}
       end
 
     end

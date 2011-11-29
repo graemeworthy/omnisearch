@@ -14,8 +14,8 @@ describe Search do
   end
 end
 
-
-describe 'A working Example' do
+#
+ describe 'A working Example' do
   before(:all) do
     #first we set up the Index, Builder and Storage classes
     class DemoIndex < OmniSearch::Indexes
@@ -38,6 +38,9 @@ describe 'A working Example' do
        include DemoIndex::Builder
        def index_name
            'physician'
+       end
+       def extended_results_for(winner)
+         []
        end
      end
      # two
@@ -73,13 +76,10 @@ describe 'A working Example' do
   it 'can search those indexes' do
     # the demo indexes contain ten items each
     OmniSearch::Engines::Regex.new('abcde').results.should ==
-      { "physician"=>[],
-        "service"=>[],
-        "location"=>[
+      { PhysicianIndex=>[],
+        ServiceIndex=>[],
+        LocationIndex=>[
             {:id=>1, :value=>"abcdefg", :label=>"ABCDEFG", :score=>1}
-         ],
-        :top_hit=>[
-           {:id=>1, :value=>"abcdefg", :label=>"ABCDEFG", :score=>1}
          ]
       }
   end
@@ -90,9 +90,12 @@ describe 'A working Example' do
      }
   end
   it "Can search from OmniSearch::Search" do
-    results = OmniSearch::Search.find('abcde')
-    results.
+    OmniSearch::Search.find('bruff').results.should be_a Hash
   end
-
-
+  it "Calculates a top from the results" do
+    OmniSearch::Search.find('bruff').top.should be_a Hash
+  end
+  it "Gathers Extended Results, but there's no winner, so doesn't return them" do
+    OmniSearch::Search.find('bruff').extended_results.should == []
+  end
 end

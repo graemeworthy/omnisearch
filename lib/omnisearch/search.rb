@@ -1,13 +1,31 @@
 module OmniSearch
-   # Usage 
+   # Usage
    # -------------------------------------
    # OmniSearch::Search.find('term')
-   # returns a Results object   
+   # returns a Results object
    # if it finds a synonym, that is substituted for term
    # if it finds a 'perfect' match, the intellegent results are also returned
-  class Search
+class Search
+
     def self.find(term = nil)
-      @results = Results.new
+      instance = self.new(term)
+      instance.find
     end
-  end
+
+    def initialize(term = nil)
+      @term = term
+    end
+
+    def find
+      @results = Results.new search_all_indexes
+      @results
+    end
+
+    def results
+    end
+
+    def search_all_indexes
+      OmniSearch::Engines::StartDistance.new(@term).results
+    end
+end
 end

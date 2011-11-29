@@ -6,6 +6,8 @@ $: << File.expand_path( File.dirname(__FILE__))
 
 require 'omnisearch/search'
 require 'omnisearch/results'
+require 'omnisearch/results/top'
+require 'omnisearch/results/extended'
 require 'omnisearch/indexes'
 require 'omnisearch/indexes/storage'
 require 'omnisearch/indexes/builder'
@@ -13,6 +15,7 @@ require 'omnisearch/engines'
 require 'omnisearch/engines/plain/base'
 require 'omnisearch/engines/plain/regex'
 require 'omnisearch/engines/plain/start_distance'
+#require 'omnisearch/engines/plain/string_score'
 
 
 

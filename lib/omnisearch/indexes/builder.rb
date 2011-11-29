@@ -71,6 +71,11 @@ class Indexes
       raise NotImplementedError, "#{self.class} needs to implement record_template"
     end
 
+    def extended_results_for(item)
+      raise NotImplementedError, "#{self.class} needs to implement extended_results_for"
+    end
+
+
     def build
       file.save(build_records)
     end
@@ -80,7 +85,7 @@ class Indexes
     end
 
     def to_hash
-      {index_name => records}
+      {self.class => records}
     end
 
     def records

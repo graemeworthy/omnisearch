@@ -2,7 +2,7 @@ require './spec/spec_helper'
 
 describe Results do
   let (:the_class) {Results}
-  let (:the_instance) {Results.new()}
+  let (:the_instance) {Results.new({})}
   describe 'Class Methods' do
 
   end
