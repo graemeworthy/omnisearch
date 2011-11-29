@@ -1,71 +1,24 @@
-class Physician
-  class SearchIndex
-    include OmniSearch::Indexes::Builder::Plain
+class PhysicianIndex
+  include OmniSearch::Indexes::Builder::Plain
+  indexes :physician
 
-    def index_name
-      'physician'
-    end
-
-    def collection
-      ['a', 'b']
-    end
-
-    def record_template(item)
-      {:french => 'fries'}
-    end
-
+  def indexable_items
+    Physician.all
   end
-end
 
-class Service
-  class SearchIndex
-    include OmniSearch::Indexes::Builder::Plain
-
-    def index_name
-      'service'
-    end
-
-    def collection
-      ['a', 'b']
-    end
-
-    def record_template(item)
-      {:tube => 'steak'}
-    end
-
+  def record_template(item)
+    {:id => }
   end
-end
 
-class Location
-  class SearchIndex
-    include OmniSearch::Index::Builder::Plain
-
-    def index_name
-      'location'
-    end
-
-    def collection
-      ['a', 'b']
-    end
-
-    def record_template(item)
-      {:cotton => 'candy'}
-    end
+  def extended_results_for(item)
 
   end
 end
 
 
-
-dex = OmniSearch::PlainIndexes
-dex.build
-p a = OmniSearch::PlainIndexes.list.first
-p a.index_name
-p a.build_records
-p a.build
-p 'loaded'
-p a.file.load
-p OmniSearch::PlainIndexes.new.contents
-
-
-
+###
+## def self.indexes
+## (name)
+## @klass = name.to_s.classify.contantize
+## @index_name = name
+## name.to_s
