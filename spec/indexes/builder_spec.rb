@@ -8,9 +8,9 @@ describe Indexes::Builder do
 
 end
 
-describe Indexes::Builder::Plain do
-  let(:the_class) {Indexes::Builder::Plain}
-  let(:the_instance){Indexes::Builder::Plain.new}
+describe Indexes::Builder::Plaintext do
+  let(:the_class) {Indexes::Builder::Plaintext}
+  let(:the_instance){Indexes::Builder::Plaintext.new}
 
   describe "Constants" do
     it 'STORAGE_ENGINE should be a storage engine' do
@@ -24,14 +24,14 @@ describe Indexes::Builder::Plain do
 
   describe "Including" do
     before(:all) do
-      Indexes::Plain.list.clear
+      Indexes::Plaintext.list.clear
       class Something
-        include Indexes::Builder::Plain
+        include Indexes::Builder::Plaintext
       end
     end
 
     after(:all) do
-      Indexes::Plain.list.clear
+      Indexes::Plaintext.list.clear
     end
 
     it 'adds itself to some Index#list when included' do

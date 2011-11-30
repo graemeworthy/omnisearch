@@ -1,6 +1,6 @@
 module OmniSearch::Engines
 
-class Regex < Plain::Base
+class Regex < Plaintext::Base
   def cutoff
     1
   end

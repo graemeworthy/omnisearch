@@ -3,11 +3,11 @@ module OmniSearch::Engines
   # I'm just going to dump them all in here
   # probably devided by index?
   #
-  module Plain
-    INDEX = OmniSearch::Indexes::Plain
+  module Plaintext
+    INDEX = OmniSearch::Indexes::Plaintext
     INDEXED_FIELD = :value
   end
-  class Plain::Base
+  class Plaintext::Base
     attr_accessor :string
 
     def score(item)
@@ -29,7 +29,7 @@ module OmniSearch::Engines
     protected
 
     def index
-      Plain::INDEX.new.contents
+      Plaintext::INDEX.new.contents
     end
 
     def score_index
@@ -52,7 +52,7 @@ module OmniSearch::Engines
     end
     
     def item_value(item)
-      item[Plain::INDEXED_FIELD]
+      item[Plaintext::INDEXED_FIELD]
     end
 
 

@@ -22,7 +22,7 @@ end
       # this holds the subindex list
     end
       # this sets up the storage locations
-    class DemoIndex::Storage < OmniSearch::Indexes::Storage::Plain
+    class DemoIndex::Storage < OmniSearch::Indexes::Storage::Plaintext
       BASE_FILENAME = 'omnisearch_demo_index'
       PATH = './spec/examples/'
     end
@@ -59,7 +59,7 @@ end
      end
      # the search tools have to be configured to use the demo indexes
      # silently
-     silently {OmniSearch::Engines::Plain::INDEX = DemoIndex}
+     silently {OmniSearch::Engines::Plaintext::INDEX = DemoIndex}
   end
   it 'has a list of indexes' do
     DemoIndex.list.length.should == 3

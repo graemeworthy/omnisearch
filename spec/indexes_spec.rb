@@ -76,31 +76,31 @@ describe Indexes do
   end
 
 
-  describe "The Big Picture, how it works with Builder for Indexes::Plain" do
+  describe "The Big Picture, how it works with Builder for Indexes::Plaintext" do
     before(:all) do
-      Indexes::Plain.list.clear
+      Indexes::Plaintext.list.clear
       class Includer
-        include Indexes::Builder::Plain
+        include Indexes::Builder::Plaintext
         def index_name; ""; end
         def collection; [];end
       end
     end
     after(:all) do
-      Indexes::Plain.list.clear
+      Indexes::Plaintext.list.clear
 
     end
     it 'Builder adds an instsnce of any including classes to list' do
-      Indexes::Plain.list.first.should be_an Includer
+      Indexes::Plaintext.list.first.should be_an Includer
     end
 
     it 'calls build on all including classes from build' do
       Includer.any_instance.should_receive(:build)
-      Indexes::Plain.build
+      Indexes::Plaintext.build
     end
 
     it 'calls to_hash on all including classes from contents' do
         Includer.any_instance.should_receive(:to_hash).and_return({})
-        Indexes::Plain.new.contents
+        Indexes::Plaintext.new.contents
     end
 
   end

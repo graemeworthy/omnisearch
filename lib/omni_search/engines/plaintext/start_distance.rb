@@ -1,6 +1,6 @@
 module OmniSearch::Engines
 
-class StartDistance < Plain::Base
+class StartDistance < Plaintext::Base
   def cutoff
     0.1
   end

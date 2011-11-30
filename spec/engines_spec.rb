@@ -1,18 +1,18 @@
 require './spec/spec_helper'
 
-describe "Engines::Plain" do
-let(:the_class) {Engines::Plain}
+describe "Engines::Plaintext" do
+let(:the_class) {Engines::Plaintext}
 describe 'Constants'do
-  it 'INDEX should point at the plain index' do
-    the_class::INDEX.should == OmniSearch::Indexes::Plain
+  it 'INDEX should point at the plaintext index' do
+    the_class::INDEX.should == OmniSearch::Indexes::Plaintext
   end
 end
 
 end
-describe "Engines::Plain::Base" do
+describe "Engines::Plaintext::Base" do
 
-  let(:the_instance) {Engines::Plain::Base.new}
-  let(:the_class) {Engines::Plain::Base}
+  let(:the_instance) {Engines::Plaintext::Base.new}
+  let(:the_class) {Engines::Plaintext::Base}
   let(:fake_index) {{
     :fake_category => [
       {:id => 1, :value => 'puppies'},
@@ -69,7 +69,7 @@ describe "Engines::Plain::Base" do
   describe 'index' do
     it 'returns the contents of of INDEX' do
       dummy_index = double()
-      OmniSearch::Indexes::Plain.should_receive(:new).and_return(dummy_index)
+      OmniSearch::Indexes::Plaintext.should_receive(:new).and_return(dummy_index)
       dummy_index.should_receive(:contents).and_return({})
       the_instance.send(:index)
     end

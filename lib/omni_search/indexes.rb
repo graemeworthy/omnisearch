@@ -5,7 +5,7 @@ module OmniSearch
   # Indexes
   # ------------------
   # two Flavours:
-  #   PlainIndex
+  #   PlaintextIndex
   #   TrigramIndex
   #
   # Indexes are added to these master classes through 'includes' on anything indexable
@@ -13,18 +13,18 @@ module OmniSearch
   # Usage:
   # -----------------
   # to retrive the contents of an index
-  #    PlainIndex.new.contents
+  #    PlaintextIndex.new.contents
   # to retrive the contents of an indexed class
-  #    PlainIndex.new.contents['physicians']
+  #    PlaintextIndex.new.contents['physicians']
   #
   #
   # to build an index for all indexed models
-  #    PlainIndex.build
+  #    PlaintextIndex.build
   #
   # to add any class to the index:
   #
   #   class SomeClass
-  #      include PlainIndexBuilder
+  #      include PlaintextIndexBuilder
   #      def index_name
   #         'some_class'
   #      end
@@ -78,7 +78,7 @@ module OmniSearch
     end
   end
 
-  class Indexes::Plain < OmniSearch::Indexes
+  class Indexes::Plaintext < OmniSearch::Indexes
   end
 
   class Indexes::Trigram < OmniSearch::Indexes

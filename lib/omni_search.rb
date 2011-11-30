@@ -12,9 +12,8 @@ require 'omni_search/indexes'
 require 'omni_search/indexes/storage'
 require 'omni_search/indexes/builder'
 require 'omni_search/engines'
-require 'omni_search/engines/plain/base'
-require 'omni_search/engines/plain/regex'
-require 'omni_search/engines/plain/start_distance'
-#require 'omnisearch/engines/plain/string_score'
+require 'omni_search/engines/plaintext/base'
+require 'omni_search/engines/plaintext/regex'
+require 'omni_search/engines/plaintext/start_distance'
 
 

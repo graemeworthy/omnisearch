@@ -4,7 +4,7 @@ module Engines
   # I'm just going to dump them all in here
   # probably devided by index?
   #
-  module Plain
+  module Plaintext
   end
 
 end

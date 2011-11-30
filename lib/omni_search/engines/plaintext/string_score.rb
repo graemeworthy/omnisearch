@@ -1,6 +1,6 @@
 module OmniSearch::Engines
 
-class StringScore < Plain::Base
+class StringScore < Plaintext::Base
   def cutoff
     0.3
   end

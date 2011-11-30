@@ -5,10 +5,10 @@ class Indexes
   ##
   ##
   #
-  # Plain Index Builder -- Module
+  # Plaintext Index Builder -- Module
   # ====================
   #
-  # include PlainIndexBuilder
+  # include PlaintextIndexBuilder
   # if you want to have your class
   #
   # Usage:
@@ -16,7 +16,7 @@ class Indexes
   # 1) Adding an Index:
   #
   # SomeClass
-  #   include PlainIndexBuilder
+  #   include PlaintextIndexBuilder
   #
   # YourClass needs to implement
   #  #index_name
@@ -28,7 +28,7 @@ class Indexes
   #  #record_template(item)
   #    - a template, mostly just a hash.
   #
-  # including PlainIndexBuilder adds your class to PlainIndexes
+  # including PlaintextIndexBuilder adds your class to PlaintextIndexes
   #
   # adds the following important methods to your classes
   # 2) Instance Methods
@@ -45,7 +45,7 @@ class Indexes
     # i'm sorry, really it's too clever, but I had something I needed to do
     # when Base is included in another module..
     #   we add all ClassMethods as class methods (hence no self.xxx)
-    # then when Plain, (or Trigram) are included we're already safe, and this doesn't happen again..
+    # then when Plaintext, (or Trigram) are included we're already safe, and this doesn't happen again..
     #
     def self.included(base)
         base.extend ClassMethods
@@ -106,10 +106,10 @@ class Indexes
 
   end
 
-  module Plain
+  module Plaintext
     include Base
-    STORAGE_ENGINE = OmniSearch::Indexes::Storage::Plain
-    MASTER_INDEX   = OmniSearch::Indexes::Plain
+    STORAGE_ENGINE = OmniSearch::Indexes::Storage::Plaintext
+    MASTER_INDEX   = OmniSearch::Indexes::Plaintext
   end
 
 end

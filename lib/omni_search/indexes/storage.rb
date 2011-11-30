@@ -8,7 +8,7 @@ class Indexes
   # for saving and retrieving records to a file specified by the argment
   # nothing that important really, just that
   # I've made two Flavours
-  #  Storage::Plain
+  #  Storage::Plaintext
   #  Storage::Trigram
   #
   # Usage:
@@ -71,8 +71,8 @@ module Storage
   end
 
   # same as the base index, but with a different save location
-  class Plain < Base
-    BASE_FILENAME = 'omnisearch_plain_index'
+  class Plaintext < Base
+    BASE_FILENAME = 'omnisearch_plaintext_index'
   end
 
   # Same as base index, but with a different save location
