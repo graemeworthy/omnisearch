@@ -2,7 +2,7 @@ require 'simplecov'
 SimpleCov.start
 
 
-require './lib/omnisearch'
+require './lib/omni_search'
 include OmniSearch
 
 

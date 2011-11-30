@@ -4,18 +4,17 @@ module OmniSearch
 end
 $: << File.expand_path( File.dirname(__FILE__))
 
-require 'omnisearch/search'
-require 'omnisearch/results'
-require 'omnisearch/results/top'
-require 'omnisearch/results/extended'
-require 'omnisearch/indexes'
-require 'omnisearch/indexes/storage'
-require 'omnisearch/indexes/builder'
-require 'omnisearch/engines'
-require 'omnisearch/engines/plain/base'
-require 'omnisearch/engines/plain/regex'
-require 'omnisearch/engines/plain/start_distance'
+require 'omni_search/search'
+require 'omni_search/results'
+require 'omni_search/results/top'
+require 'omni_search/results/extended'
+require 'omni_search/indexes'
+require 'omni_search/indexes/storage'
+require 'omni_search/indexes/builder'
+require 'omni_search/engines'
+require 'omni_search/engines/plain/base'
+require 'omni_search/engines/plain/regex'
+require 'omni_search/engines/plain/start_distance'
 #require 'omnisearch/engines/plain/string_score'
-
 
 
