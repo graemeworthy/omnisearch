@@ -1,21 +1,34 @@
 require './spec/spec_helper'
+class PizzaIndex; end
+class PantherIndex; end
+class PredatorIndex; end
 
 describe Results::Top do
   let (:the_class) {Results::Top}
   let (:the_instance) {Results::Top.new({})}
-  describe 'The Constructor' do
-    it 'takes a hash set of results'
-  end
-  describe 'Class Methods' do
-    it 'exposes #find on the class' do
+  describe 'the big picture' do
+    let(:some_results) {{ 
+            PizzaIndex => [
+                {:score => 12}, 
+                {:score => 10}
+               ],
+            PantherIndex => [
+                {:score => 120}, 
+                {:score => 11}
+                ],
+            PredatorIndex => [
+                {:score => 12}, 
+                {:score => 10}
+               ],
+
+              }}
+
+    it 'takes a set of results' do
+        the_class.new(some_results)
+    end
+    it 'returns sorts through them and grabs the best one' do
+        the_class.find(some_results).should == {:score => 120}      
     end
 
-  end
-  describe 'Instance Methods' do
-    it 'find_top returns the top item' do
-    end
-    it 'inspects as a hash' do
-      the_instance.inspect.should == []
-    end
   end
 end
