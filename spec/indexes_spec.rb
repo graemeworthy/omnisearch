@@ -22,45 +22,38 @@ describe Indexes do
   describe "Instance Methods" do
     before(:each) do
       the_class.list.clear
+      @a_builder = double()
+      @b_builder = double()
+      @a_builder_instance = double()
+      @b_builder_instance = double()
+
+      @a_builder.stub(:new){@a_builder_instance}
+      @b_builder.stub(:new){@b_builder_instance}
+
+      the_class.list << @a_builder
+      the_class.list << @b_builder
+      
     end
     it '#build calls :build on everything in @@list' do
-      a_builder = double()
-      b_builder = double()
 
-      the_class.list << a_builder
-      the_class.list << b_builder
-
-      a_builder.should_receive(:build)
-      b_builder.should_receive(:build)
+      @a_builder_instance.should_receive(:build)
+      @b_builder_instance.should_receive(:build)
 
       the_class.build
 
     end
 
     it '#contents calls :to_hash on everything in @@list' do
-      a_builder = double()
-      b_builder = double()
-
-      the_class.list << a_builder
-      the_class.list << b_builder
-
-       a_builder.should_receive(:to_hash).and_return({})
-       b_builder.should_receive(:to_hash).and_return({})
+       @a_builder_instance.should_receive(:to_hash).and_return({})
+       @b_builder_instance.should_receive(:to_hash).and_return({})
 
       the_instance.contents
     end
     it '#contents merges @@list hashes into itself' do
-      a_builder = double()
-      b_builder = double()
-
       a_contents = {:a => 'fun_times'}
       b_contents = {:b => 'groovy_times'}
-
-      the_class.list << a_builder
-      the_class.list << b_builder
-
-      a_builder.should_receive(:to_hash).and_return(a_contents)
-      b_builder.should_receive(:to_hash).and_return(b_contents)
+      @a_builder_instance.should_receive(:to_hash).and_return(a_contents)
+      @b_builder_instance.should_receive(:to_hash).and_return(b_contents)
 
       the_instance.contents.should == {:a => 'fun_times', :b => 'groovy_times'}
 
@@ -90,7 +83,7 @@ describe Indexes do
 
     end
     it 'Builder adds an instsnce of any including classes to list' do
-      Indexes::Plaintext.list.first.should be_an Includer
+      Indexes::Plaintext.list.first.should be Includer
     end
 
     it 'calls build on all including classes from build' do

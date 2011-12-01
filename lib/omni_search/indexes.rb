@@ -61,14 +61,14 @@ module OmniSearch
     def contents
       @contents = {}
       list.each {|index|
-         @contents.merge! index.to_hash
+         @contents.merge! index.new.to_hash
       }
       @contents
     end
 
     def build
       list.each {|index|
-        index.build
+        index.new.build
       }
     end
 

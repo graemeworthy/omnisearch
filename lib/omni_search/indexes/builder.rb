@@ -54,7 +54,8 @@ class Indexes
     module ClassMethods
       def included(base)
         class_exec(base){|including|
-          self::MASTER_INDEX.list << including.new
+          self::MASTER_INDEX.list << including
+          self::MASTER_INDEX.list.uniq!          
         }
       end
     end
@@ -74,7 +75,6 @@ class Indexes
     def extended_results_for(item)
       raise NotImplementedError, "#{self.class} needs to implement extended_results_for"
     end
-
 
     def build
       file.save(build_records)

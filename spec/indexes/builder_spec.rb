@@ -35,7 +35,7 @@ describe Indexes::Builder::Plaintext do
     end
 
     it 'adds itself to some Index#list when included' do
-      the_class::MASTER_INDEX.list.first.should be_a Something
+      the_class::MASTER_INDEX.list.first.should be Something
     end
 
     describe "Required Implementations" do

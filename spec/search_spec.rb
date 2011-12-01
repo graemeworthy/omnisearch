@@ -63,9 +63,9 @@ end
   end
   it 'has a list of indexes' do
     DemoIndex.list.length.should == 3
-    DemoIndex.list.first.should be_a PhysicianIndex
-    DemoIndex.list[1].should    be_a ServiceIndex
-    DemoIndex.list.last.should  be_a LocationIndex
+    DemoIndex.list.first.should be PhysicianIndex
+    DemoIndex.list[1].should    be ServiceIndex
+    DemoIndex.list.last.should  be LocationIndex
   end
   it 'has a contents for those indexes' do
     # the demo indexes contain ten items each
