@@ -2,12 +2,13 @@ module OmniSearch::Engines
 
 class StartDistance < Plaintext::Base
   def cutoff
-    0.1
+    0.6
   end
 
   def score(item)
-    return 0 if item == ""
     list_item = item.downcase
+    list_item.strip!
+    return 0 if list_item == ""
     list_item_words = list_item.split(" ")
     search_string = @string.downcase
     search_string_words = @string.split(" ")
@@ -16,6 +17,7 @@ class StartDistance < Plaintext::Base
         scores.sort.pop
     }
        score_sum = my_scores.inject(:+)
+       return 0 if my_scores.length == 0
        score_sum / my_scores.length
   end
 
@@ -26,15 +28,19 @@ class StartDistance < Plaintext::Base
   end
 
   def overlength_penalty(search_word, list_word)
-    penalty = 0.01 * (list_word.length - search_word.length)
+    penalty = 0.001 * (list_word.length - search_word.length)
     penalty
   end
 
   def offset_penalty(search_word, list_word)
     index = list_word.index(search_word)
     return 0 if index == nil
-    penalty = 0.001 * index
+    penalty = 0.01 * index
     penalty
+  end
+
+  def out_of_order_penalty
+        
   end
 
   def word_score(search_word, list_word)

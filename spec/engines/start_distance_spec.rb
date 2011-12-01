@@ -26,8 +26,8 @@ describe "Engines::StartDistance" do
        the_instance.results.should == {
         :fake_index=>
           [
-            {:id => 1, :value => 'puppies', :score => 0.96},
-            {:id => 3, :value => 'rug puppies', :score => 0.96},
+            {:id => 1, :value => 'puppies', :score => 0.996},
+            {:id => 3, :value => 'rug puppies', :score => 0.996},
           ]
         }
     end

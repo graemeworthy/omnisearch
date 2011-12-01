@@ -17,7 +17,7 @@ class Search
     end
 
     def find
-      @results = Results.new search_all_indexes
+      @results =  search_all_indexes
       @results
     end
 
@@ -25,7 +25,17 @@ class Search
     end
 
     def search_all_indexes
-      OmniSearch::Engines::StartDistance.new(@term).results
+      
+      a = Time.now
+      results = Results.new OmniSearch::Engines::Regex.new(@term).results
+      b = Time.now
+      puts "searched regex in: #{b-a} seconds"
+      return results if results.top
+      a = Time.now
+      results = Results.new OmniSearch::Engines::StartDistance.new(@term).results
+      b = Time.now
+      puts "searched startdist in: #{b-a} seconds"
+      results
     end
 end
 end
