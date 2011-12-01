@@ -34,7 +34,7 @@ class Results
     end
     def initialize(results)
       @results = results
-      @top     = []
+      @top     = nil
       @top_score = 0
     end
     def inspect
@@ -45,8 +45,8 @@ class Results
         @results.each do |k, v|
            next unless v.first #no empty arrays
            if v.first[:score] > @top_score
-             @top = v.first
-             @top_core = v.first[:score]
+             @top = v.first.dup()
+             @top_score = v.first[:score]
            end
         end
     end
