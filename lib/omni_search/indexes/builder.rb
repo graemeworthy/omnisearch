@@ -48,22 +48,41 @@ class Indexes
     # then when Plaintext, (or Trigram) are included we're already safe, and this doesn't happen again..
     #
     def self.included(base)
-        base.extend ClassMethods
+        base.extend InheritedMethods
     end
 
-    module ClassMethods
+    module InheritedMethods
       def included(base)
         class_exec(base){|including|
           self::MASTER_INDEX.list << including
           self::MASTER_INDEX.list.uniq!          
         }
+        base.extend ClassMethods
+        
       end
+
     end
 
+    module ClassMethods
+      def indexes(name)
+       @index_name = _name
+      end
+      def index_name
+        if @index_name == nil
+           raise NotImplementedError, "#{self.class} needs to declare indexes()"
+        end
+        
+        @index_name.to_s
+      end      
+    end
+    
     def index_name
-      raise NotImplementedError, "#{self.class} needs to implement index_name"
+      self.class.index_name
     end
-
+    def indexed_class
+      index_name.camelize.constantize
+    end
+    
     def collection
       raise NotImplementedError, "#{self.class} needs to implement collection"
     end

@@ -41,8 +41,8 @@ describe Indexes::Builder::Plaintext do
     describe "Required Implementations" do
       let(:host_class) {Something}
       let(:host_instance) {host_class.new}
-
-      it 'raises unless #index_name is defined' do
+      
+      it 'raises unless indexes() is declared' do
         expect { host_instance.index_name }.to raise_error
       end
 
