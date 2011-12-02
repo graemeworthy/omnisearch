@@ -65,7 +65,7 @@ class Indexes
 
     module ClassMethods
       def indexes(name)
-       @index_name = _name
+       @index_name = name
       end
       def index_name
         if @index_name == nil

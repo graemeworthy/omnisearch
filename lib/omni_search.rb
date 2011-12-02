@@ -15,5 +15,6 @@ require 'omni_search/engines'
 require 'omni_search/engines/plaintext/base'
 require 'omni_search/engines/plaintext/regex'
 require 'omni_search/engines/plaintext/start_distance'
+require 'omni_search/synonym'
 
 

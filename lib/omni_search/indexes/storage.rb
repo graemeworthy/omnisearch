@@ -37,7 +37,7 @@ module Storage
     BASE_FILENAME = 'omnisearch_index'
     PATH = '/tmp/omnisearch/'
 
-    def initialize(name)
+    def initialize(name = nil)
       @index_name = name
     end
 
@@ -55,7 +55,11 @@ module Storage
     protected
 
     def filename
-      (self.class::BASE_FILENAME) + "_" + @index_name
+      if @index_name        
+       self.class::BASE_FILENAME + "_" + @index_name
+     else
+       self.class::BASE_FILENAME
+      end
     end
 
     def file_path
@@ -78,6 +82,11 @@ module Storage
   # Same as base index, but with a different save location
   class Trigram < Base
     BASE_FILENAME = 'omnisearch_trigram_index'
+  end
+
+  class Synonyms < Base
+    BASE_FILENAME = 'omnisearch_synonym_index'
+    
   end
 
 end

@@ -34,9 +34,6 @@ describe Indexes::Storage::Base do
     it 'takes one argument "name"' do
       the_class.new('a name').index_name.should == 'a name'
     end
-    it 'fails without the argument' do
-      expect { the_class.new }.to raise_error
-    end
 
   end
   describe "Instance Methods" do

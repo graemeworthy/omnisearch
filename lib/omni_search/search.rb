@@ -7,25 +7,30 @@ module OmniSearch
    # if it finds a 'perfect' match, the intellegent results are also returned
 class Search
 
-    def self.find(term = nil)
-      instance = self.new(term)
+    def self.find(query = nil)
+      instance = self.new(query)
       instance.find
     end
 
-    def initialize(term = nil)
-      @term = term
+    def initialize(query = nil)
+      @query = query
+      @term =  query
+      @synonym = false
+      
+      check_synonyms
     end
-
+ 
     def find
       @results =  search_all_indexes
+      @results.searching_as = {:mistake => @query, :correction => @term} if @synonym
+      @results
+    end
+  
+    def results
       @results
     end
 
-    def results
-    end
-
     def search_all_indexes
-      
       a = Time.now
       results = Results.new OmniSearch::Engines::Regex.new(@term).results
       b = Time.now
@@ -36,6 +41,11 @@ class Search
       b = Time.now
       puts "searched startdist in: #{b-a} seconds"
       results
+    end
+    
+    def check_synonyms
+      @synonym = Synonym.for(@term)
+      @term = @synonym if @synonym
     end
 end
 end
