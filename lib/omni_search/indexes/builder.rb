@@ -95,7 +95,6 @@ module Indexes::Builder
     end
 
     def build
-      puts "building index for #{self.class} at #{file.file_path}"
       file.save(build_records)
     end
 
