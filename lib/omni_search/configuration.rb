@@ -1,5 +1,17 @@
 # module OmniSearch
 module OmniSearch
+  ##
+  # Sets the location of
+  #   file storage
+  #   classes which define indexes
+  # 
+  # Usage
+  # ---------------------------------
+  # OmniSearch.configuration {|config|
+  #      config.path_to_index_files =  '/tmp/omnisearch_sparkle/'
+  #      config.path_to_autoload_search_classes_from =  File.join(Rails.root, '/app/search_indexes')
+  # }
+  # 
 
   class Configuration
     # we need to store indexes somewhere
@@ -29,7 +41,5 @@ module OmniSearch
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)
-  end
-  class ConfigurationError < StandardError
   end
 end
