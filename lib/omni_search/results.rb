@@ -39,6 +39,7 @@ module OmniSearch
     def extended_results
       Extended.find(@results)
     end
+
     def inspect
       {:top_hit => top, :results => results, :extended => extended_results}
     end

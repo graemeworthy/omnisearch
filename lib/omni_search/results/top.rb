@@ -25,20 +25,25 @@ module OmniSearch
   # {:score => 120}
   # 
 class Results::Top
+
     attr_accessor :top
+
     def self.find(results)
       instance = self.new(results)
       instance.find_top
       instance.top      
     end
+
     def initialize(results)
       @results = results
       @top     = nil
       @top_score = 0
     end
+
     def inspect
       @top
     end
+
     #they're sorted, we just pick the top one from each hash
     def find_top
         @results.each do |k, v|
@@ -49,5 +54,6 @@ class Results::Top
            end
         end
     end
+
   end
 end
