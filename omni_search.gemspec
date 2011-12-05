@@ -25,4 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "simplecov"
   s.add_development_dependency "ZenTest"
 
+  s.add_runtime_dependency "rails"
+
 end
