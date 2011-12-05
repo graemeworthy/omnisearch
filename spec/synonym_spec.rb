@@ -9,14 +9,14 @@ describe Synonym do
     it {should respond_to :for}
     it {should respond_to :add}
     it {should respond_to :remove}
-    it {should respond_to :correcting_to}    
+    it {should respond_to :correcting_to}
   end
 
   describe 'Instance Methods' do
     it {should respond_to :list}
     it {should respond_to :add}
     it {should respond_to :remove}
-    
+
     it {should respond_to :file}
     it {should respond_to :save}
     it {should respond_to :load}
@@ -74,10 +74,10 @@ describe Synonym do
   describe 'Synonym for' do
     it 'removes it from the list' do
       the_class.add('a mistake', 'a correction')
-      the_class.for('a mistake').should == 'a correction'      
+      the_class.for('a mistake').should == 'a correction'
     end
   end
-  
+
   describe 'Synonym correcting_to ' do
     it 'removes it from the list' do
       the_class.add('a mistake', 'a correction')
@@ -98,7 +98,9 @@ describe 'loading Synoyms from an index' do
       `rm -rdf #{the_temp_path}`
     end
     before(:all) do
-      silently { Indexes::Storage::Base::PATH = the_temp_path }
+      OmniSearch.configure {|config|
+        config.path_to_index_files = the_temp_path
+      }
       create_storage
     end
     after(:all) do
