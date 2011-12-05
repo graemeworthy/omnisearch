@@ -46,16 +46,46 @@ module OmniSearch
   ##
   class Indexes
     @@list = Hash.new()
+    @@lazy_loaded = false
+
+
+    def self.build
+      instance = self.new
+      instance.build
+    end
 
     def self.list
-      @@list[self.to_s] ||= []
+      instance = self.new
+      instance.list
     end
+
+    def self.list_all
+      instance = self.new
+      instance.list_all
+    end
+
+
     def list
       @@list[self.class.to_s] ||= []
     end
 
+    def list_all
+      @@list
+    end
+
     def initialize
       @contents = {}
+      lazy_load unless lazy_loaded?
+
+    end
+
+    def lazy_load
+      Indexes::Lazy.load
+      @@lazy_loaded = true
+    end
+
+    def lazy_loaded?
+      @@lazy_loaded
     end
 
     def contents
@@ -72,10 +102,6 @@ module OmniSearch
       }
     end
 
-    def self.build
-      instance = self.new
-      instance.build
-    end
   end
 
   class Indexes::Plaintext < OmniSearch::Indexes
@@ -83,6 +109,7 @@ module OmniSearch
 
   class Indexes::Trigram < OmniSearch::Indexes
   end
+
 
 end
 

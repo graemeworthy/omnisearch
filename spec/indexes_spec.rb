@@ -32,7 +32,7 @@ describe Indexes do
 
       the_class.list << @a_builder
       the_class.list << @b_builder
-      
+
     end
     it '#build calls :build on everything in @@list' do
 
@@ -65,6 +65,24 @@ describe Indexes do
      the_class.list << 'Something'
      Class.new(the_class).list.should == []
    end
+  end
+  describe "LazyLoading" do
+    it 'calls LazyLoad on new if lazy_loaded? is false' do
+      the_class.class_variable_set(:@@lazy_loaded, false)
+      Indexes::Lazy.should_receive(:load)
+      the_class.new
+    end
+    it "doesn't call LazyLoad on new if lazy_loaded? is true" do
+      the_class.class_variable_set(:@@lazy_loaded, true)
+      Indexes::Lazy.should_not_receive(:load)
+      the_class.new
+    end
+    it "doesn't call LazyLoad twice" do
+      the_class.class_variable_set(:@@lazy_loaded, false)
+      Indexes::Lazy.should_receive(:load)
+      the_class.new
+      the_class.new
+    end
 
   end
 

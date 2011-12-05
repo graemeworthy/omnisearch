@@ -1,5 +1,4 @@
 module OmniSearch
-class Indexes
   ##
   ##
   #
@@ -7,6 +6,7 @@ class Indexes
   # =================
   # for saving and retrieving records to a file specified by the argment
   # nothing that important really, just that
+  #
   # I've made two Flavours
   #  Storage::Plaintext
   #  Storage::Trigram
@@ -28,14 +28,13 @@ class Indexes
   ##
 
 
-module Storage
+module Indexes::Storage
 
   class Base
     attr_accessor :records
     attr_reader   :index_name
 
     BASE_FILENAME = 'omnisearch_index'
-    PATH = '/tmp/omnisearch/'
 
     def initialize(name = nil)
       @index_name = name
@@ -52,10 +51,9 @@ module Storage
       YAML::load_file(file_path)
     end
 
-    protected
 
     def filename
-      if @index_name        
+      if @index_name
        self.class::BASE_FILENAME + "_" + @index_name
      else
        self.class::BASE_FILENAME
@@ -63,13 +61,19 @@ module Storage
     end
 
     def file_path
-       File.join(self.class::PATH, filename)
+       File.join(root_path, filename)
     end
 
+    protected
+
     def mkdir
-      unless File.exists?(self.class::PATH) and File.directory?(self.class::PATH)
-       Dir.mkdir(self.class::PATH)
+      unless File.exists?(root_path) and File.directory?(root_path)
+       Dir.mkdir(root_path)
       end
+    end
+
+    def root_path
+      OmniSearch.configuration.path_to_index_files
     end
 
   end
@@ -86,9 +90,7 @@ module Storage
 
   class Synonyms < Base
     BASE_FILENAME = 'omnisearch_synonym_index'
-    
   end
 
-end
 end
 end

@@ -24,8 +24,12 @@ end
       # this sets up the storage locations
     class DemoIndex::Storage < OmniSearch::Indexes::Storage::Plaintext
       BASE_FILENAME = 'omnisearch_demo_index'
-      PATH = './spec/examples/'
     end
+
+    OmniSearch.configure {|config|
+      config.path_to_index_files = './spec/examples/'
+    }
+
       # this links the storage and the master index
     module DemoIndex::Builder
       include OmniSearch::Indexes::Builder::Base

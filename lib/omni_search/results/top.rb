@@ -1,5 +1,4 @@
 module OmniSearch
-class Results
 
   # given a set of results
   # in the form { 
@@ -25,7 +24,7 @@ class Results
   # Results::Top.find(results)
   # {:score => 120}
   # 
-  class Top
+class Results::Top
     attr_accessor :top
     def self.find(results)
       instance = self.new(results)
@@ -51,5 +50,4 @@ class Results
         end
     end
   end
-end
 end

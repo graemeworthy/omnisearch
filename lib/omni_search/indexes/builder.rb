@@ -1,6 +1,5 @@
 module OmniSearch
-class Indexes
-  module Builder
+module Indexes::Builder
 
   ##
   ##
@@ -55,10 +54,10 @@ class Indexes
       def included(base)
         class_exec(base){|including|
           self::MASTER_INDEX.list << including
-          self::MASTER_INDEX.list.uniq!          
+          self::MASTER_INDEX.list.uniq!
         }
         base.extend ClassMethods
-        
+
       end
 
     end
@@ -71,18 +70,18 @@ class Indexes
         if @index_name == nil
            raise NotImplementedError, "#{self.class} needs to declare indexes()"
         end
-        
+
         @index_name.to_s
-      end      
+      end
     end
-    
+
     def index_name
       self.class.index_name
     end
     def indexed_class
       index_name.camelize.constantize
     end
-    
+
     def collection
       raise NotImplementedError, "#{self.class} needs to implement collection"
     end
@@ -96,6 +95,7 @@ class Indexes
     end
 
     def build
+      puts "building index for #{self.class} at #{file.file_path}"
       file.save(build_records)
     end
 
@@ -131,7 +131,6 @@ class Indexes
     MASTER_INDEX   = OmniSearch::Indexes::Plaintext
   end
 
-end
 end
 end
 

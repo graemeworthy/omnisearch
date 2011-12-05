@@ -1,5 +1,4 @@
 module OmniSearch
-class Results
  
 # Extended Results
  # ------------------------------------
@@ -7,7 +6,7 @@ class Results
  # special reward for having only one result!
  # these are specified in the model, and may be subject to caching
  # you know, for extra 'speed'
- class Extended
+ class Results::Extended
    def self.find(results)     
      instance = self.new(results)
      instance.extended_results
@@ -29,8 +28,6 @@ class Results
    end
    def extended_results
      return default_result unless winner?
-     puts "results #{@results}"
-     puts "winner_index #{winner_index}"
      begin
       index = winner_index.new
       index.extended_results_for(winner)
@@ -39,5 +36,4 @@ class Results
      end
    end
  end
-end
 end

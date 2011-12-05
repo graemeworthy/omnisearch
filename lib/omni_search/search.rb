@@ -13,6 +13,7 @@ class Search
     end
 
     def initialize(query = nil)
+      query = query.downcase.strip
       @query = query
       @term =  query
       @synonym = false
