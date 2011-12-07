@@ -22,7 +22,7 @@ class Search
     end
  
     def find
-      @results =  search_all_indexes
+      @results = score_all_indexes
       @results.searching_as = {:mistake => @query, :correction => @term} if @synonym
       @results
     end
@@ -31,14 +31,16 @@ class Search
       @results
     end
 
-    def search_all_indexes
-      a = Time.now
-      results = Results.new OmniSearch::Engines::Regex.new(@term).results
+    def score_all_indexes
+      a = Time.now      
+      scores = ScoreIndex.new(Indexes::Plaintext, Engines::Regex, @term, 0.6).results
+      results = Results.new(scores)
       b = Time.now
       puts "searched regex in: #{b-a} seconds"
       return results if results.top
       a = Time.now
-      results = Results.new OmniSearch::Engines::StartDistance.new(@term).results
+      scores = ScoreIndex.new(Indexes::Plaintext, Engines::StartDistance, @term, 0.6).results
+      results = Results.new(scores)
       b = Time.now
       puts "searched startdist in: #{b-a} seconds"
       results

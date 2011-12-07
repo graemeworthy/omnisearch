@@ -61,9 +61,6 @@ end
            'location'
        end
      end
-     # the search tools have to be configured to use the demo indexes
-     # silently
-     silently {OmniSearch::Engines::Plaintext::INDEX = DemoIndex}
   end
   it 'has a list of indexes' do
     DemoIndex.list.length.should == 3
@@ -79,7 +76,7 @@ end
   end
   it 'can search those indexes' do
     # the demo indexes contain ten items each
-    OmniSearch::Engines::Regex.new('abcde').results.should ==
+    ScoreIndex.new(DemoIndex, Engines::Regex, 'abcde', 1).results.should ==
       { PhysicianIndex=>[],
         ServiceIndex=>[],
         LocationIndex=>[
@@ -93,13 +90,22 @@ end
       v.length.should == 10
      }
   end
-  it "Can search from OmniSearch::Search" do
-    OmniSearch::Search.find('bruff').results.should be_a Hash
-  end
-  it "Calculates a top from the results" do
-    OmniSearch::Search.find('bruff').top.should be_a Hash
-  end
-  it "Gathers Extended Results, but there's no winner, so doesn't return them" do
-    OmniSearch::Search.find('bruff').extended_results.should == []
-  end
+
+   it "Can search from OmniSearch::Search" do
+     scores = ScoreIndex.new(DemoIndex, Engines::Regex, 'bruff', 1).results
+     results = Results.new(scores)
+     results.results.should be_a Hash
+    end
+
+   it "Calculates a top from the results" do
+     scores = ScoreIndex.new(DemoIndex, Engines::Regex, 'bruff', 1).results
+     results = Results.new(scores)
+     results.top.should be_a Hash
+   end
+
+   it "Gathers Extended Results, but there's no winner, so doesn't return them" do
+     scores = ScoreIndex.new(DemoIndex, Engines::Regex, 'bruff', 1).results
+     results = Results.new(scores)
+     results.extended_results.should == []
+   end
 end

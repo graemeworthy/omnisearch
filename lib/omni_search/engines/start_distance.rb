@@ -1,17 +1,15 @@
 module OmniSearch::Engines
 
-class StartDistance < Plaintext::Base
-  def cutoff
-    0.6
-  end
+class StartDistance < Base
 
   def score(item)
-    list_item = item.downcase
+#    puts "scoring #{item}"
+    list_item = item[:value].downcase
     list_item.strip!
     return 0 if list_item == ""
     list_item_words = list_item.split(" ")
-    search_string = @string.downcase
-    search_string_words = @string.split(" ")
+    search_string = @term.downcase
+    search_string_words = @term.split(" ")
     my_scores = search_string_words.collect{|ss|
         scores = score_words(list_item_words, ss)
         scores.sort.pop
@@ -40,7 +38,7 @@ class StartDistance < Plaintext::Base
   end
 
   def out_of_order_penalty
-        
+
   end
 
   def word_score(search_word, list_word)
