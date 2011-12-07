@@ -16,7 +16,7 @@ module OmniSearch
     end
 
     def indexes_path
-      @config.path_to_autoload_search_classes_from
+      @config.path_to_autoload_search_classes_from.to_s
     end
   end
 end

@@ -75,7 +75,7 @@ module Indexes::Storage
     end
 
     def root_path
-      OmniSearch.configuration.path_to_index_files
+      OmniSearch.configuration.path_to_index_files.to_s
     end
 
   end
