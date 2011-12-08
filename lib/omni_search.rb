@@ -19,6 +19,8 @@ require 'omni_search/engines'
 require 'omni_search/engines/base'
 require 'omni_search/engines/regex'
 require 'omni_search/engines/start_distance'
-require 'omni_search/synonym'
+require 'omni_search/auto_correct'
+require 'omni_search/correction'
+
 
 

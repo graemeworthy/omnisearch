@@ -1,8 +1,8 @@
 require './spec/spec_helper'
 
-describe Synonym do
-  let (:the_class) {Synonym}
-  let (:the_instance) {Synonym.new({})}
+describe AutoCorrect do
+  let (:the_class) {AutoCorrect}
+  let (:the_instance) {AutoCorrect.new({})}
 
   describe 'Class Methods' do
     subject {the_class}
@@ -40,25 +40,25 @@ describe Synonym do
 
     it 'adds a term to the list' do
       the_class.add('a mistake', 'a correction')
-      the_class.for('a mistake').should == 'a correction'
+      the_class.for('a mistake').replacement.should == 'a correction'
     end
 
     it 'raises AlreadyExists if its a duplicate' do
       the_class.add('a mistake', 'a correction')
       expect {the_class.add('a mistake', 'another correction')}.
-      to raise_error Synonym::AlreadyExists
+      to raise_error AutoCorrect::AlreadyExists
     end
 
     it 'doesnt raise AlreadyExists if its an exact duplicate' do
       the_class.add('a mistake', 'a correction')
       expect {the_class.add('a mistake', 'a correction')}.
-      to_not raise_error Synonym::AlreadyExists
+      to_not raise_error AutoCorrect::AlreadyExists
     end
 
     it 'raises CircularReference if it is one' do
       the_class.add('mistake_a', 'correction')
       expect {the_class.add('mistake_c', 'mistake_a')}.
-      to raise_error Synonym::CircularReference
+      to raise_error AutoCorrect::CircularReference
     end
 
   end
@@ -71,15 +71,29 @@ describe Synonym do
     end
   end
 
-  describe 'Synonym for' do
-    it 'removes it from the list' do
+  describe 'AutoCorrect for' do
+    before(:each) do
       the_class.add('a mistake', 'a correction')
-      the_class.for('a mistake').should == 'a correction'
     end
+    
+    it 'returns a "Correction" object' do
+      the_class.for('a mistake').should be_a Correction
+    end
+    it 'the corrections object has an "original" and a "replacement"' do
+      correction = the_class.for('a mistake')
+      correction.original    = 'a mistake'
+      correction.replacement = 'a correction'
+    end
+
+    it 'returns nil if there is no correction' do
+      the_class.remove("a mistake")
+      the_class.for('a mistake').should be nil
+    end
+
   end
 
-  describe 'Synonym correcting_to ' do
-    it 'removes it from the list' do
+  describe 'AutoCorrect correcting_to ' do
+    it 'returns an array of the pointers' do
       the_class.add('a mistake', 'a correction')
       the_class.add('another mistake', 'a correction')
       the_class.add('unrelated', 'completely')

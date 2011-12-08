@@ -1,34 +1,35 @@
 module OmniSearch
-class Synonym
+
+class AutoCorrect
    
   # Usage
   # ========================
-  # Synonym.for('Sweets') => 'Sugar'
-  # Synonym.for('Honey')  => 'Sugar'
+  # AutoCorrect.for('Sweets') => Correction.new('Sweets', 'Sugar')
+  # AutoCorrect.for('Honey')  => 'Correction.new('Honey', Sugar')
   # 
   # every 'mistake' should have one and only one 'correction'
   # no correction may also be a mistake
   #
   # Only one correction for a given mistake 
-  # Synonym.add('mistake', 'correction')
-  # Synonym.add('mistake', 'alt correction') #=> raises AlreadyExists
+  # AutoCorrect.add('mistake', 'correction')
+  # AutoCorrect.add('mistake', 'alt correction') #=> raises AlreadyExists
   #
   # Many mistakes for any correction
-  # Synonym.add('bad', 'good')
-  # Synonym.add('soo bad', 'good')
+  # AutoCorrect.add('bad', 'good')
+  # AutoCorrect.add('soo bad', 'good')
   #
   # No corrections that are also mistakes!
-  # Synonym.add('treat',  'cookie')
-  # Synonym.add('cookie', 'scone') #=> raises CircularReference
+  # AutoCorrect.add('treat',  'cookie')
+  # AutoCorrect.add('cookie', 'scone') #=> raises CircularReference
   #
   # If you want to change something, 
-  attr_accessor :synonym_list
+  attr_accessor :autocorrect_list
   
-  STORAGE_ENGINE = OmniSearch::Indexes::Storage::Synonyms
+  STORAGE_ENGINE = OmniSearch::Indexes::Storage::AutoCorrect
   #pile of errors
-  SynonymError      = Class.new(StandardError)
-  AlreadyExists     = Class.new(SynonymError)
-  CircularReference = Class.new(SynonymError)
+  AutoCorrectError      = Class.new(StandardError)
+  AlreadyExists     = Class.new(AutoCorrectError)
+  CircularReference = Class.new(AutoCorrectError)
 
   ## Exposed Class Methods
   def self.for(mistake)
@@ -55,11 +56,15 @@ class Synonym
   def initialize(mistake = nil, correction = nil)
     @mistake = mistake
     @correction = correction
-  end
-  
+  end  
   
   def for
-     list[@mistake]    
+     @correction = list[@mistake]
+     if @correction
+       return Correction.new(@mistake, @correction)
+     else
+       nil
+     end
   end
 
   def add

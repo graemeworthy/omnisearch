@@ -1,8 +1,6 @@
 module OmniSearch
-  ##
-  ##
   #
-  # IndexFile
+  # Storage
   # =================
   # for saving and retrieving records to a file specified by the argment
   # nothing that important really, just that
@@ -90,8 +88,8 @@ module Indexes::Storage
     BASE_FILENAME = 'omnisearch_trigram_index'
   end
 
-  class Synonyms < Base
-    BASE_FILENAME = 'omnisearch_synonym_index'
+  class AutoCorrect < Base
+    BASE_FILENAME = 'omnisearch_autocorrect_index'
   end
 
 end
