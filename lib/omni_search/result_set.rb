@@ -8,12 +8,15 @@ module OmniSearch
   class ResultSet
     attr_accessor :results
     attr_accessor :klass
+    attr_accessor :label
 
 
     def initialize(klass, results_list, top_hit=false)
       @klass = klass
+      @label = 
       @results = results_list
       @top_hit = top_hit
+      return if top_hit
       sort_list
       trim_list
       brand_list
@@ -40,13 +43,17 @@ module OmniSearch
     end
 
     def brand_list
-      @results.each {|item| item.klass = @klass}
+      @results.each {|item| item.klass = indexed_klass}
     end
     
     protected
     
     def klass_name
-      klass.to_s.gsub(/Index/,'s')
+      klass.index_name.pluralize.titleize
+    end
+
+    def indexed_klass
+      klass.index_name.classify.constantize
     end
 
   end

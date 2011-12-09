@@ -1,6 +1,11 @@
 require './spec/spec_helper'
 
+class PhysicianDemo
+end
 class PhysicianDemoIndex
+  include OmniSearch::Indexes::Builder::Plaintext
+  indexes     :physician_demo
+
   def extended_results_for(winner)
     [{:id => 1, :label => 'i am an extended result'}]
   end

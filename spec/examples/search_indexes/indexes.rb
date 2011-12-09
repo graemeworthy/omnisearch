@@ -1,20 +1,20 @@
+class Physician
+end
+class Service
+end
+class Location
+end
 class PhysicianIndex
   include OmniSearch::Indexes::Builder::Plaintext
-  def index_name
-      'physician'
-  end
+  indexes :physician
 end
 
 class LocationIndex
   include OmniSearch::Indexes::Builder::Plaintext
-  def index_name
-      'location'
-  end
+  indexes :location
 end
 
 class ServiceIndex
   include OmniSearch::Indexes::Builder::Plaintext
-  def index_name
-      'service'
-  end
+  indexes :service
 end

@@ -1,4 +1,5 @@
 require './spec/spec_helper'
+
 class PizzaIndex; end
 class PantherIndex; end
 class PredatorIndex; end
@@ -8,19 +9,19 @@ describe ResultSet::Extended do
   let(:top) {Result.new(:id => 1, :value => 'something', :score => 120)}
   let(:example_results) {
     [
-      ResultSet.new(PizzaIndex,
+      ResultSet.new(PhysicianIndex,
       [
         Result.new(:id => 1, :value => 'something', :score => 12),
         Result.new(:id => 1, :value => 'something', :score => 10),
       ]
       ),
-      ResultSet.new(PantherIndex,
+      ResultSet.new(LocationIndex,
       [
         top,
         Result.new(:id => 1, :value => 'something', :score => 11),
       ]
       ),
-      ResultSet.new(PredatorIndex,
+      ResultSet.new(ServiceIndex,
       [
         Result.new(:id => 1, :value => 'something', :score => 13),
         Result.new(:id => 1, :value => 'something', :score => 12),

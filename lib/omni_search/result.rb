@@ -2,9 +2,9 @@ module OmniSearch
 
   class Result
     attr_accessor :id
-    attr_accessor :klass
     attr_accessor :value
     attr_accessor :img
+    attr_accessor :klass
     attr_accessor :raw_data
     attr_accessor :score
 
@@ -16,6 +16,7 @@ module OmniSearch
       @value = data[:label]
       @id    = data[:id]
       @img   = data[:img]
+      @klass = data[:klass]
     end
 
   end
