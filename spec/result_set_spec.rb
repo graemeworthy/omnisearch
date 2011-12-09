@@ -13,8 +13,8 @@ describe ResultSet do
     subject.klass.should be PhysicianIndex
   end
   
-  it "should have a label" do
-    subject.label.should eq 'Physician'
+  it "should have a label which is pluralized class name" do
+    subject.label.should eq 'Physicians'
   end
 
   it 'should have an array of Results under results' do

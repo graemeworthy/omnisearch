@@ -46,7 +46,7 @@ module OmniSearch
     protected
     
     def klass_name
-      klass.to_s.gsub(/Index/,'')
+      klass.to_s.gsub(/Index/,'s')
     end
 
   end
