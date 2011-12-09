@@ -67,7 +67,7 @@ module Indexes::Storage
     def mkdir
 
       unless File.exists?(root_path) and File.directory?(root_path)
-       puts "creating directories" 
+       puts "creating directories"
        puts `mkdir -p -v #{root_path}`
       end
     end

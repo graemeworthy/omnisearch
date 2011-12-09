@@ -1,32 +1,33 @@
 module OmniSearch
- 
+
 # Extended Results
  # ------------------------------------
  # extended results are a set of extra, linked records that are shown as a
  # special reward for having only one result!
  # these are specified in the model, and may be subject to caching
  # you know, for extra 'speed'
- class Results::Extended
 
-   def self.find(results)     
+class ResultSet::Extended
+
+   def self.find(results)
      instance = self.new(results)
      instance.extended_results
    end
 
-   def initialize(results)
-     @results = results
+   def initialize(result_sets)
+     @result_sets = result_sets
    end
 
    def winner
-     @results[winner_index].first
+      @result_sets.collect{|set| set.results}.flatten.first if winner?
    end
 
    def winner?
-     @results.collect{|k, v| v}.flatten.length == 1
+     @result_sets.collect{|set| set.results}.flatten.length == 1
    end
 
    def winner_index
-     @results.select{|k, v|  v.length == 1}.keys.first
+     @result_sets.first.klass
    end
 
    def default_result
@@ -40,11 +41,11 @@ module OmniSearch
       index = winner_index.new
       index.extended_results_for(winner)
 
-     rescue NotImplementedError 
+     rescue NotImplementedError
        default_result
 
      end
    end
 
- end
+end
 end

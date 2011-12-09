@@ -1,8 +1,5 @@
 module OmniSearch
 module Indexes::Builder
-
-  ##
-  ##
   #
   # Plaintext Index Builder -- Module
   # ====================
@@ -46,6 +43,7 @@ module Indexes::Builder
     #   we add all ClassMethods as class methods (hence no self.xxx)
     # then when Plaintext, (or Trigram) are included we're already safe, and this doesn't happen again..
     #
+
     def self.included(base)
         base.extend InheritedMethods
     end

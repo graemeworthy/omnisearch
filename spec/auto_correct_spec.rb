@@ -25,6 +25,10 @@ describe AutoCorrect do
   before(:each) do
     the_class.list.clear
   end
+  after(:all) do 
+    the_class.list.clear
+    
+  end
 
   describe 'adding terms' do
 
@@ -75,7 +79,7 @@ describe AutoCorrect do
     before(:each) do
       the_class.add('a mistake', 'a correction')
     end
-    
+
     it 'returns a "Correction" object' do
       the_class.for('a mistake').should be_a Correction
     end
@@ -119,6 +123,10 @@ describe 'loading Synoyms from an index' do
     end
     after(:all) do
       cleanup_storage
+      OmniSearch.configure {|config|
+        config.path_to_index_files = "./spec/examples/index_path"
+      }
+
     end
 
     it 'declares a storage engines' do

@@ -1,4 +1,19 @@
 module OmniSearch
+  # Lazy Loader
+  # --------------
+  # Rails doesn't load all classes
+  # since our indexes are built by 'include'
+  # we need the indexed classes to be loaded
+  # this does that
+
+  # Usage
+  # ---------------------
+  # OmniSearch.configure {|config|
+  #  config.path_to_autoload_search_classes_from = /Some/Path
+  # }
+  # Indexes::Lazy.load
+  #   requires all *.rb files in that path
+  #
   class Indexes::Lazy
     def initialize
       @config = OmniSearch.configuration

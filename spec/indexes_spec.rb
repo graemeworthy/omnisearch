@@ -54,7 +54,7 @@ describe Indexes do
       b_contents = {:b => 'groovy_times'}
       @a_builder_instance.should_receive(:to_hash).and_return(a_contents)
       @b_builder_instance.should_receive(:to_hash).and_return(b_contents)
-      the_class.class_variable_set(:@@contents, Hash.new) 
+      the_class.class_variable_set(:@@contents, Hash.new)
       the_instance.contents.should == {:a => 'fun_times', :b => 'groovy_times'}
 
     end
@@ -111,7 +111,7 @@ describe Indexes do
 
     it 'calls to_hash on all including classes from contents' do
         Includer.any_instance.should_receive(:to_hash).and_return({})
-        the_class.class_variable_set(:@@contents, Hash.new) 
+        the_class.class_variable_set(:@@contents, Hash.new)
         Indexes::Plaintext.new.contents
     end
 

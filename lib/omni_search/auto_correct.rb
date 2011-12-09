@@ -1,16 +1,16 @@
 module OmniSearch
 
 class AutoCorrect
-   
+
   # Usage
   # ========================
   # AutoCorrect.for('Sweets') => Correction.new('Sweets', 'Sugar')
   # AutoCorrect.for('Honey')  => 'Correction.new('Honey', Sugar')
-  # 
+  #
   # every 'mistake' should have one and only one 'correction'
   # no correction may also be a mistake
   #
-  # Only one correction for a given mistake 
+  # Only one correction for a given mistake
   # AutoCorrect.add('mistake', 'correction')
   # AutoCorrect.add('mistake', 'alt correction') #=> raises AlreadyExists
   #
@@ -22,9 +22,9 @@ class AutoCorrect
   # AutoCorrect.add('treat',  'cookie')
   # AutoCorrect.add('cookie', 'scone') #=> raises CircularReference
   #
-  # If you want to change something, 
+  # If you want to change something,
   attr_accessor :autocorrect_list
-  
+
   STORAGE_ENGINE = OmniSearch::Indexes::Storage::AutoCorrect
   #pile of errors
   AutoCorrectError      = Class.new(StandardError)
@@ -43,21 +43,21 @@ class AutoCorrect
   def self.remove(mistake)
     self.new(mistake).remove
   end
-    
+
   def self.correcting_to(correction)
      self.new(nil, correction).correcting_to
   end
-  
+
   def self.list
     self.new.list
   end
-  
+
 
   def initialize(mistake = nil, correction = nil)
     @mistake = mistake
     @correction = correction
-  end  
-  
+  end
+
   def for
      @correction = list[@mistake]
      if @correction
@@ -76,7 +76,7 @@ class AutoCorrect
   def remove
     list.delete(@mistake)
   end
-    
+
   def correcting_to
     list.select{ |k,v| v == @correction }.keys
   end
@@ -98,8 +98,8 @@ class AutoCorrect
     self.class::STORAGE_ENGINE.new()
   end
 
-  protected 
-  
+  protected
+
   def validate
      existing?
      circular?
@@ -107,8 +107,8 @@ class AutoCorrect
 
   def existing?
     if list[@mistake] && list[@mistake] != @correction
-      raise AlreadyExists, 
-      "#{@mistake} already exists in this index, " + 
+      raise AlreadyExists,
+      "#{@mistake} already exists in this index, " +
       "it is currently corrected to #{send(:for)}"
     end
   end
@@ -119,7 +119,7 @@ class AutoCorrect
     end
   end
 
-  
+
 end
 end
 

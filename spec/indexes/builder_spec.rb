@@ -32,6 +32,7 @@ describe Indexes::Builder::Plaintext do
 
     after(:all) do
       Indexes::Plaintext.list.clear
+      Indexes::Lazy.load
     end
 
     it 'adds itself to some Index#list when included' do
@@ -118,5 +119,4 @@ describe Indexes::Builder::Plaintext do
 
   end
 end
-
 

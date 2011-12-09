@@ -7,48 +7,51 @@ module OmniSearch
    # if it finds a 'perfect' match, the intellegent results are also returned
 class Search
 
-    def self.find(query = nil)
-      instance = self.new(query)
-      instance.find
+    attr_accessor :original
+    attr_accessor :term
+    attr_accessor :correction
+    attr_accessor :result_sets
+    attr_accessor :extended_result_sets
+
+    def initialize(term)
+        @original = term
+        @term     = term
+        @result_sets = []
+        @extended_result_sets = []
+
+        auto_correct
+        build_results
+        
     end
 
-    def initialize(query = nil)
-      query = query.downcase.strip
-      @query = query
-      @term =  query
-      @synonym = false
-      
-      check_synonyms
-    end
- 
-    def find
-      @results = score_all_indexes
-      @results.searching_as = {:mistake => @query, :correction => @term} if @synonym
-      @results
-    end
-  
-    def results
-      @results
+    protected
+
+    def auto_correct
+      @correction = AutoCorrect.for(@original)
+      @term       = @correction.replacement if @correction
     end
 
-    def score_all_indexes
-      a = Time.now      
-      scores = ScoreIndex.new(Indexes::Plaintext, Engines::Regex, @term, 0.6).results
-      results = Results.new(scores)
-      b = Time.now
-      puts "searched regex in: #{b-a} seconds"
-      return results if results.top
-      a = Time.now
-      scores = ScoreIndex.new(Indexes::Plaintext, Engines::StartDistance, @term, 0.6).results
-      results = Results.new(scores)
-      b = Time.now
-      puts "searched startdist in: #{b-a} seconds"
-      results
-    end
-    
-    def check_synonyms
-      @synonym = Synonym.for(@term)
-      @term = @synonym if @synonym
+    def build_results
+      @result_sets          = Search::Strategy.run(@term)
+      return if @result_sets == []
+      @extended_result_sets = ResultSet::Extended.find(@result_sets)
+      @top                  = ResultSet::Top.find(@result_sets)
+      @result_sets.unshift @top
     end
 end
+
+
+class Search::Strategy
+  def self.run(term)
+    results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::Regex, term, 0)
+    if results == []
+    results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StartDistance, term, 0)
+    end
+    results
+  end
 end
+
+end
+
+
+

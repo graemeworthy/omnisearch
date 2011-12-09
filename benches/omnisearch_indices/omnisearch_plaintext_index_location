@@ -1,0 +1,118 @@
+--- 
+- :id: 1
+  :value: Hospitals
+  :label: Hospitals
+- :id: 3
+  :value: Scripps Green Hospital
+  :label: Scripps Green Hospital
+- :id: 4
+  :value: Scripps Memorial Hospital Encinitas
+  :label: Scripps Memorial Hospital Encinitas
+- :id: 8
+  :value: Scripps Memorial Hospital La Jolla
+  :label: Scripps Memorial Hospital La Jolla
+- :id: 21
+  :value: Scripps Mercy Hospital
+  :label: Scripps Mercy Hospital
+- :id: 2
+  :value: Scripps Clinic
+  :label: Scripps Clinic
+- :id: 72
+  :value: Locations
+  :label: Locations
+- :id: 57
+  :value: Scripps Clinic Carmel Valley
+  :label: Scripps Clinic Carmel Valley
+- :id: 67
+  :value: Scripps Clinic Division of Dermatology
+  :label: Scripps Clinic Division of Dermatology
+- :id: 66
+  :value: Scripps Clinic Del Mar
+  :label: Scripps Clinic Del Mar
+- :id: 58
+  :value: Scripps Clinic Encinitas
+  :label: Scripps Clinic Encinitas
+- :id: 68
+  :value: "Scripps Clinic La Jolla "
+  :label: "Scripps Clinic La Jolla "
+- :id: 59
+  :value: Scripps Clinic Mission Valley
+  :label: Scripps Clinic Mission Valley
+- :id: 61
+  :value: Scripps Clinic Rancho Bernardo
+  :label: Scripps Clinic Rancho Bernardo
+- :id: 62
+  :value: "Scripps Clinic Rancho San Diego "
+  :label: "Scripps Clinic Rancho San Diego "
+- :id: 63
+  :value: Scripps Clinic Santee
+  :label: Scripps Clinic Santee
+- :id: 64
+  :value: Scripps Clinic Torrey Pines
+  :label: Scripps Clinic Torrey Pines
+- :id: 98
+  :value: Scripps Coastal Medical Center
+  :label: Scripps Coastal Medical Center
+- :id: 112
+  :value: Locations
+  :label: Locations
+- :id: 113
+  :value: Bonita
+  :label: Bonita
+- :id: 119
+  :value: Carlsbad
+  :label: Carlsbad
+- :id: 126
+  :value: Del Mar
+  :label: Del Mar
+- :id: 120
+  :value: Eastlake
+  :label: Eastlake
+- :id: 114
+  :value: Encinitas
+  :label: Encinitas
+- :id: 121
+  :value: Escondido
+  :label: Escondido
+- :id: 115
+  :value: Fallbrook
+  :label: Fallbrook
+- :id: 116
+  :value: Hillcrest
+  :label: Hillcrest
+- :id: 117
+  :value: Oceanside
+  :label: Oceanside
+- :id: 118
+  :value: Vista
+  :label: Vista
+- :id: 24
+  :value: Medical Groups
+  :label: Medical Groups
+- :id: 28
+  :value: Scripps Mercy Medical Group
+  :label: Scripps Mercy Medical Group
+- :id: 45
+  :value: Scripps XiMED Ambulatory Surgery Center
+  :label: Scripps XiMED Ambulatory Surgery Center
+- :id: 29
+  :value: Well Being Centers
+  :label: Well Being Centers
+- :id: 74
+  :value: Scripps Well Being Center, Chula Vista
+  :label: Scripps Well Being Center, Chula Vista
+- :id: 77
+  :value: City Heights Wellness Center
+  :label: City Heights Wellness Center
+- :id: 75
+  :value: Scripps Well Being Center, Encinitas
+  :label: Scripps Well Being Center, Encinitas
+- :id: 76
+  :value: Scripps Mende Well Being Center, La Jolla
+  :label: Scripps Mende Well Being Center, La Jolla
+- :id: 78
+  :value: Urgent Care and Emergency
+  :label: Urgent Care and Emergency
+- :id: 122
+  :value: Corporate Office
+  :label: Corporate Office

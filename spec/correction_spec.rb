@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 describe Correction do
   it 'takes two arguments' do
     Correction.new('a', 'b')

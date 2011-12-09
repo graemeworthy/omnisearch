@@ -1,6 +1,6 @@
 require './spec/spec_helper'
 
-describe Results do
+describe Indexes::Lazy do
   let (:the_class) {Indexes::Lazy}
   let (:the_instance) {Indexes::Lazy.new()}
   describe 'Class Methods' do
@@ -14,7 +14,7 @@ describe Results do
   end
 
   describe 'the function' do
-    it 'needs some configuration' do
+    before(:all) do
       OmniSearch.configure{|config|
         config.path_to_autoload_search_classes_from = "./spec/examples/index_path"
       }
@@ -30,3 +30,10 @@ describe Results do
     end    
   end
 end
+
+puts "Cleanup"
+OmniSearch.configure{|config|
+  config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
+}
+puts OmniSearch::Indexes::Lazy.load
+puts OmniSearch::Indexes.class_variable_get(:@@list)

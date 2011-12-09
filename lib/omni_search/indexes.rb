@@ -60,11 +60,15 @@ module OmniSearch
       instance.list
     end
 
+
     def self.list_all
       instance = self.new
       instance.list_all
     end
 
+    def initialize
+      lazy_load unless lazy_loaded?
+    end
 
     def list
       @@list[self.class.to_s] ||= []
@@ -74,10 +78,6 @@ module OmniSearch
       @@list
     end
 
-    def initialize
-      lazy_load unless lazy_loaded?
-
-    end
 
     def lazy_load
       Indexes::Lazy.load
@@ -91,26 +91,14 @@ module OmniSearch
     #either fetches and builds the index.. or returns a copy
     def contents
        these_contents = @@contents[self.class.to_s]
-       return deep_copy(these_contents) if these_contents
+       return these_contents if these_contents
        @@contents[self.class.to_s] = Hash.new
        list.each {|index|
           @@contents[self.class.to_s].merge! index.new.to_hash
        }
        these_contents = @@contents[self.class.to_s]
-       return deep_copy(these_contents)
     end
 
-    # clone and dup produce shallow copies
-    # the operations of the engines are destructive( they score, they trim)
-    # and shallow copies get scored and trimmed, rather frustratingly
-    def deep_copy(hash)
-      new_hash = {}
-      old_hash = hash
-      old_hash.each {|k, v|
-        new_hash[k] = v.dup
-        }
-      new_hash
-    end
     def build
       list.each {|index|
         index.new.build
