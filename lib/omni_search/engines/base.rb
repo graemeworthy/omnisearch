@@ -11,10 +11,10 @@ module OmniSearch
 
       def score_list
         @list.each{|item|
-          item_score = score(item)
           item ||= {}
-          item.merge!(:score => item_score)
-          @results << Result.new(item) if item_score > @cutoff
+          item_score = score(item)
+          scored_item = item.merge(:score => item_score)
+          @results << Result.new(scored_item) if item_score > @cutoff
         }
         @results
       end
