@@ -7,15 +7,15 @@ class PhysicianDemoIndex
 end
 
 describe ResultSet::Extended do
-  let (:demo_index) {PhysicianDemoIndex}
-  let (:example_set) {
+  let(:demo_index) {PhysicianDemoIndex}
+  let(:example_set) {
     ResultSet.new(PhysicianDemoIndex, [example_result])
   }
-  let (:example_result)  {Result.new({:id => 1, :value => 'something'}, 1)}
-  let (:example_results) {[example_set]}
+  let(:example_result)  {Result.new(:id => 1, :value => 'something', :score => 1)}
+  let(:example_results) {[example_set]}
 
-  let (:the_class) {ResultSet::Extended}
-  let (:the_instance) {ResultSet::Extended.new(example_results)}
+  let(:the_class) {ResultSet::Extended}
+  let(:the_instance) {ResultSet::Extended.new(example_results)}
 
   describe 'The Constructor' do
     it 'takes an array of resultSets' do

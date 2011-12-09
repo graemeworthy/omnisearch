@@ -5,32 +5,32 @@ class PredatorIndex; end
 #
 
 describe ResultSet::Extended do
-  let (:top) {Result.new({:id => 1, :value => 'something'}, 120)}
-  let (:example_results) {
+  let(:top) {Result.new(:id => 1, :value => 'something', :score => 120)}
+  let(:example_results) {
     [
       ResultSet.new(PizzaIndex,
       [
-        Result.new({:id => 1, :value => 'something'}, 12),
-        Result.new({:id => 1, :value => 'something'}, 10),
+        Result.new(:id => 1, :value => 'something', :score => 12),
+        Result.new(:id => 1, :value => 'something', :score => 10),
       ]
       ),
       ResultSet.new(PantherIndex,
       [
         top,
-        Result.new({:id => 1, :value => 'something'}, 11),
+        Result.new(:id => 1, :value => 'something', :score => 11),
       ]
       ),
       ResultSet.new(PredatorIndex,
       [
-        Result.new({:id => 1, :value => 'something'}, 13),
-        Result.new({:id => 1, :value => 'something'}, 12),
+        Result.new(:id => 1, :value => 'something', :score => 13),
+        Result.new(:id => 1, :value => 'something', :score => 12),
       ]
       )
     ]
   }
 
-  let (:the_class) {ResultSet::Top}
-  let (:the_instance) {ResultSet::Top.new(example_results)}
+  let(:the_class) {ResultSet::Top}
+  let(:the_instance) {ResultSet::Top.new(example_results)}
 
   it 'sorts through them and grabs the best one' do
     the_class.find(example_results).results.should ==  [top]

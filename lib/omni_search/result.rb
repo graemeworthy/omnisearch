@@ -7,25 +7,16 @@ module OmniSearch
     attr_accessor :img
     attr_accessor :raw_data
     attr_accessor :score
-    
+
     alias_method :label, :value
 
-    def initialize(raw_data, score)
-     raw = raw_data
-     @score = score
-     @value = raw[:label]
-     @id    = raw[:id]
-     @img   = raw[:img]
+    def initialize(data={})
+      @raw_data = data
+      @score = data[:score]
+      @value = data[:label]
+      @id    = data[:id]
+      @img   = data[:img]
     end
-    
-    def raw=(raw)
-      p "raw = #{raw}"
-      @raw_data = raw
-    end
-    
-    def raw
-      @raw_data
-    end
-    
+
   end
 end

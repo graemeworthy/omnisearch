@@ -25,7 +25,6 @@ describe ResultSet::Factory do
   it 'should not return an empty ResultSets' do
     sets = ResultSet::Factory.sets(Indexes::Plaintext, Engines::Regex, 'alb', 0)
     sets.length.should be 1
-
   end
 
 
