@@ -20,6 +20,7 @@ module OmniSearch
     end
 
     def label
+      top_hit? ? "Top Hit" : klass_name
     end
 
     def count
@@ -40,6 +41,12 @@ module OmniSearch
 
     def brand_list
       @results.each {|item| item.klass = @klass}
+    end
+    
+    protected
+    
+    def klass_name
+      klass.to_s.gsub(/Index/,'')
     end
 
   end

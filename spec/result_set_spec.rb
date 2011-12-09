@@ -12,6 +12,10 @@ describe ResultSet do
     # bad test
     subject.klass.should be PhysicianIndex
   end
+  
+  it "should have a label" do
+    subject.label.should eq 'Physician'
+  end
 
   it 'should have an array of Results under results' do
     subject.results.should be_an Array
