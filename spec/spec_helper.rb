@@ -1,12 +1,11 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/spec/"
+end
+
 require 'rails'
 
 require './lib/omni_search'
-OmniSearch.configure {|config|
-  config.path_to_index_files                   = "./spec/examples/index_path"
-  config.path_to_autoload_search_classes_from  = "./spec/examples/search_indexes"
-}
 include OmniSearch
 
 

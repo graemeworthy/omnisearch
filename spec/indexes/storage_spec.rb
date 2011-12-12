@@ -21,10 +21,10 @@ describe Indexes::Storage::Base do
 
   after(:all) do
     cleanup_storage
-      OmniSearch.configure {|config|
-        config.path_to_index_files                   = "./spec/examples/index_path"
-        config.path_to_autoload_search_classes_from  = "./spec/examples/search_indexes"
-      }
+    OmniSearch.configure {|config|
+      config.path_to_index_files                   = "./spec/examples/index_path"
+      config.path_to_autoload_search_classes_from  = "./spec/examples/search_indexes"
+    }
   end
 
   describe "Constants" do

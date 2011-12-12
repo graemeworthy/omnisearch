@@ -10,10 +10,8 @@ module OmniSearch
     attr_accessor :klass
     attr_accessor :label
 
-
     def initialize(klass, results_list, top_hit=false)
       @klass = klass
-      @label = 
       @results = results_list
       @top_hit = top_hit
       return if top_hit
@@ -23,7 +21,7 @@ module OmniSearch
     end
 
     def label
-      top_hit? ? "Top Hit" : klass_name
+      top_hit? ? "Top Hit" : set_name
     end
 
     def count
@@ -45,15 +43,19 @@ module OmniSearch
     def brand_list
       @results.each {|item| item.klass = indexed_klass}
     end
-    
+
+    def set_name
+      indexed_klass.pluralize.titleize
+    end
+
     protected
-    
-    def klass_name
-      klass.index_name.pluralize.titleize
+    def klass_is_index?
+      klass.respond_to? :index_name
+
     end
 
     def indexed_klass
-      klass.index_name.classify.constantize
+      klass_is_index? ? klass.index_name.titleize : klass
     end
 
   end

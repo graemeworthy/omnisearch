@@ -27,23 +27,47 @@ describe ResultSet::Extended do
       the_class.new(example_results)
     end
   end
+  describe 'Class Methods' do
+    it '#find proxies .new(args).extended_results' do
+      instance = double()
+      args = ['something']
+      the_class.should_receive(:new).with(args).and_return(instance)
+      instance.should_receive(:extended_results)
+
+      the_class.find(args)
+    end
+  end
+
   describe 'Instance Methods' do
     it 'winner? is true if there is only one result' do
       the_instance.winner?.should == true
     end
+
     it 'winner? is false if there is more than one result' do
       no_winner_instance = the_class.new([example_set, example_set])
       no_winner_instance.winner?.should == false
     end
+
     it 'winner should return the winner' do
       the_instance.winner.should == example_result
     end
+
     it 'winner should return nil, if no winner' do
       no_winner_instance = the_class.new([example_set, example_set])
       no_winner_instance.winner.should be nil
     end
 
+    it 'extended_results should return default_result, if no winner' do
+      no_winner_instance = the_class.new([example_set, example_set])
+      no_winner_instance.extended_results.should == no_winner_instance.default_result
+    end
+
+    it 'default result should be []' do
+      the_instance.default_result.should == []
+    end
+
   end
+
 
   #the results of these are indexed in a funny way, they use a 'name'
   # why not use a constant as the key!?

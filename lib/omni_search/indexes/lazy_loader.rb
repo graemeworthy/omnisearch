@@ -20,13 +20,13 @@ module OmniSearch
     end
 
     def self.load
-     instance = self.new
-     instance.load
+      instance = self.new
+      instance.load
     end
 
     def load
       if indexes_path
-       Dir[indexes_path + '/*.rb'].each {|file| require file }
+        Dir[indexes_path + '/*.rb'].each {|file| require file }
       end
     end
 

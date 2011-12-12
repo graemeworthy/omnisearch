@@ -1,8 +1,8 @@
 require './spec/spec_helper'
 
 describe AutoCorrect do
-  let (:the_class) {AutoCorrect}
-  let (:the_instance) {AutoCorrect.new({})}
+  let(:the_class) {AutoCorrect}
+  let(:the_instance) {AutoCorrect.new({})}
 
   describe 'Class Methods' do
     subject {the_class}
@@ -25,21 +25,21 @@ describe AutoCorrect do
   before(:each) do
     the_class.list.clear
   end
-  after(:all) do 
+  after(:all) do
     the_class.list.clear
-    
+
   end
 
   describe 'adding terms' do
 
     it 'takes two arguments' do
       expect {the_class.add('some mistake', 'some correction')}.
-      to_not raise_error ArgumentError
+        to_not raise_error ArgumentError
     end
 
     it 'doesnt take one arguments' do
       expect {the_class.add('mistake')}.
-      to raise_error ArgumentError
+        to raise_error ArgumentError
     end
 
     it 'adds a term to the list' do
@@ -50,19 +50,19 @@ describe AutoCorrect do
     it 'raises AlreadyExists if its a duplicate' do
       the_class.add('a mistake', 'a correction')
       expect {the_class.add('a mistake', 'another correction')}.
-      to raise_error AutoCorrect::AlreadyExists
+        to raise_error AutoCorrect::AlreadyExists
     end
 
     it 'doesnt raise AlreadyExists if its an exact duplicate' do
       the_class.add('a mistake', 'a correction')
       expect {the_class.add('a mistake', 'a correction')}.
-      to_not raise_error AutoCorrect::AlreadyExists
+        to_not raise_error AutoCorrect::AlreadyExists
     end
 
     it 'raises CircularReference if it is one' do
       the_class.add('mistake_a', 'correction')
       expect {the_class.add('mistake_c', 'mistake_a')}.
-      to raise_error AutoCorrect::CircularReference
+        to raise_error AutoCorrect::CircularReference
     end
 
   end
@@ -107,7 +107,7 @@ describe AutoCorrect do
   end
 
 
-describe 'loading Synoyms from an index' do
+  describe 'loading Synoyms from an index' do
     let(:the_temp_path){"./test_tmp"}
     def create_storage
       `mkdir #{the_temp_path}`
@@ -155,6 +155,6 @@ describe 'loading Synoyms from an index' do
       the_class.list.should == {'to save' => 'the saved'}
     end
 
-end
+  end
 
 end

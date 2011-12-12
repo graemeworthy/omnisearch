@@ -1,12 +1,20 @@
 require './spec/spec_helper'
 
 describe Indexes do
+  let(:dummy_list)  {{Indexes.to_s => ['cats']}}
   let(:the_class) {Indexes}
   let(:the_instance){Indexes.new()}
 
   describe "Class Methods" do
-    it '##list exposes @@list ' do
-      the_class.list.should == []
+
+    it 'class#list exposes instance#list ' do
+      the_class.class_variable_set(:@@list, dummy_list)
+      the_class.list.should eql ['cats']
+    end
+
+    it 'class#list_all exposes instance#list ' do
+      the_class.class_variable_set(:@@list, dummy_list)
+      the_class.list_all.should == dummy_list
     end
 
     it '##build calls :new and :build' do
@@ -44,8 +52,8 @@ describe Indexes do
     end
 
     it '#contents calls :to_hash on everything in @@list' do
-       @a_builder_instance.should_receive(:to_hash).and_return({})
-       @b_builder_instance.should_receive(:to_hash).and_return({})
+      @a_builder_instance.should_receive(:to_hash).and_return({})
+      @b_builder_instance.should_receive(:to_hash).and_return({})
 
       the_instance.contents
     end
@@ -61,10 +69,10 @@ describe Indexes do
   end
 
   describe "Subclasses" do
-   it 'keeps its own @@list separate from parent' do
-     the_class.list << 'Something'
-     Class.new(the_class).list.should == []
-   end
+    it 'keeps its own @@list separate from parent' do
+      the_class.list << 'Something'
+      Class.new(the_class).list.should == []
+    end
   end
   describe "LazyLoading" do
     it 'calls LazyLoad on new if lazy_loaded? is false' do
@@ -88,6 +96,7 @@ describe Indexes do
 
 
   describe "The Big Picture, how it works with Builder for Indexes::Plaintext" do
+
     before(:all) do
       Indexes::Plaintext.list.clear
       class Includer
@@ -110,9 +119,9 @@ describe Indexes do
     end
 
     it 'calls to_hash on all including classes from contents' do
-        Includer.any_instance.should_receive(:to_hash).and_return({})
-        the_class.class_variable_set(:@@contents, Hash.new)
-        Indexes::Plaintext.new.contents
+      Includer.any_instance.should_receive(:to_hash).and_return({})
+      the_class.class_variable_set(:@@contents, Hash.new)
+      Indexes::Plaintext.new.contents
     end
 
   end

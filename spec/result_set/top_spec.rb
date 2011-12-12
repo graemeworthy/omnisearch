@@ -10,23 +10,23 @@ describe ResultSet::Extended do
   let(:example_results) {
     [
       ResultSet.new(PhysicianIndex,
-      [
-        Result.new(:id => 1, :value => 'something', :score => 12),
-        Result.new(:id => 1, :value => 'something', :score => 10),
-      ]
-      ),
+                    [
+                      Result.new(:id => 1, :value => 'something', :score => 12),
+                      Result.new(:id => 1, :value => 'something', :score => 10),
+                    ]
+                    ),
       ResultSet.new(LocationIndex,
-      [
-        top,
-        Result.new(:id => 1, :value => 'something', :score => 11),
-      ]
-      ),
+                    [
+                      top,
+                      Result.new(:id => 1, :value => 'something', :score => 11),
+                    ]
+                    ),
       ResultSet.new(ServiceIndex,
-      [
-        Result.new(:id => 1, :value => 'something', :score => 13),
-        Result.new(:id => 1, :value => 'something', :score => 12),
-      ]
-      )
+                    [
+                      Result.new(:id => 1, :value => 'something', :score => 13),
+                      Result.new(:id => 1, :value => 'something', :score => 12),
+                    ]
+                    )
     ]
   }
 

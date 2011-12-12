@@ -1,8 +1,8 @@
 module OmniSearch
 
-# Finds the top result in a set of ResultSets
-# Returns a new special resultset, 'TopHit'
-class ResultSet::Top
+  # Finds the top result in a set of ResultSets
+  # Returns a new special resultset, 'TopHit'
+  class ResultSet::Top
 
     attr_accessor :top
 
@@ -17,10 +17,6 @@ class ResultSet::Top
       @result_sets = result_sets
       @top     = nil
       @top_score = 0
-    end
-
-    def inspect
-      @top
     end
 
     #they're sorted, we just pick the top one from each hash

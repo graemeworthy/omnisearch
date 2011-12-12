@@ -24,6 +24,7 @@ describe Indexes::Builder::Plaintext do
 
   describe "Including" do
     before(:all) do
+      Indexes::Plaintext.class_variable_set(:@@lazy_loaded, true)
       Indexes::Plaintext.list.clear
       class Something
         include Indexes::Builder::Plaintext
@@ -32,7 +33,6 @@ describe Indexes::Builder::Plaintext do
 
     after(:all) do
       Indexes::Plaintext.list.clear
-      Indexes::Lazy.load
     end
 
     it 'adds itself to some Index#list when included' do
@@ -42,21 +42,21 @@ describe Indexes::Builder::Plaintext do
     describe "Required Implementations" do
       let(:host_class) {Something}
       let(:host_instance) {host_class.new}
-      
+
       it 'raises unless indexes() is declared' do
-        expect { host_instance.index_name }.to raise_error
+        expect { host_instance.index_name }.to raise_error(NotImplementedError)
       end
 
       it 'raises unless #collection is defined' do
-        expect { host_instance.collection }.to raise_error
+        expect { host_instance.collection }.to raise_error(NotImplementedError)
       end
 
       it 'raises unless #record_template is defined' do
-        expect { host_instance.record_template('') }.to raise_error
+        expect { host_instance.record_template('') }.to raise_error(NotImplementedError)
       end
 
       it 'raises unless #extended_results is defined' do
-        expect { host_instance.extended_results('') }.to raise_error
+        expect { host_instance.extended_results_for('') }.to raise_error(NotImplementedError)
       end
 
     end
@@ -66,6 +66,9 @@ describe Indexes::Builder::Plaintext do
       let(:host_class) {Something}
       let(:host_instance) {host_class.new}
 
+      it "#defines_index? returns true" do
+        host_instance.defines_index?
+      end
 
       it '#file, holds a storage engine, named after this class' do
         host_class.send(:define_method, :index_name) {'test'}
@@ -104,9 +107,9 @@ describe Indexes::Builder::Plaintext do
 
       it '#records memoizes #load' do
         host_instance.stub(:load){"original"}
-        host_instance.records.should == 'original'
+        host_instance.records.should eql 'original'
         host_instance.stub(:load){"changed"}
-        host_instance.records.should == 'original'
+        host_instance.records.should eql 'original'
       end
 
       it '#to_hash creates a simple hash for merging upstream' do
@@ -115,8 +118,27 @@ describe Indexes::Builder::Plaintext do
         host_instance.to_hash.should == {Something => ['canadians']}
       end
 
+      describe "References to index" do
+        before do
+          class Peanuts; end
+          class SomethingElse
+            include Indexes::Builder::Plaintext
+            indexes :peanuts
+          end          
+        end
+
+        it '#index_name is set by indexes' do
+
+          SomethingElse.new.index_name.should == "peanuts"
+        end
+
+        it '#indexed_class returns a camel constant of the index_name ' do
+          SomethingElse.new.indexed_class.should == Peanuts
+        end
+      end
+
+
     end
 
   end
 end
-

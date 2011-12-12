@@ -1,8 +1,9 @@
 require './spec/spec_helper'
 
 describe Indexes::Lazy do
-  let (:the_class) {Indexes::Lazy}
-  let (:the_instance) {Indexes::Lazy.new()}
+  let(:the_class) {Indexes::Lazy}
+  let(:the_instance) {Indexes::Lazy.new()}
+  
   describe 'Class Methods' do
     subject {the_class}
     it {should respond_to :load}
@@ -27,7 +28,7 @@ describe Indexes::Lazy do
     it 'should be defined once Lazy.load has happend!' do
       Indexes::Lazy.load
       defined?(SomeClass).should == 'constant'
-    end    
+    end
   end
 end
 

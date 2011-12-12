@@ -20,40 +20,40 @@ module OmniSearch
   # returns an Array of <#ResultSet>s
   #
   class ResultSet::Factory
-      def self.sets(*args)
-        instance = self.new(*args)
-        instance.result_sets
-      end
+    def self.sets(*args)
+      instance = self.new(*args)
+      instance.result_sets
+    end
 
-      def initialize(index, engine, term, cutoff = 0)
-        @engine = engine
-        @index  = index
-        @term   = term
-        @cutoff = cutoff
-        @result_sets = nil
-      end
+    def initialize(index, engine, term, cutoff = 0)
+      @engine = engine
+      @index  = index
+      @term   = term
+      @cutoff = cutoff
+      @result_sets = nil
+    end
 
-      def index
-        @index.new.contents
-      end
+    def index
+      @index.new
+    end
 
-      def result_sets
-        @result_sets ||= build_result_sets
-      end
+    def index_contents
+      index.contents
+    end
 
-      def build_result_sets
-        @result_sets = []
-        index.each do |category, items|
-          scored_list = score_list(items)
-          next if scored_list == []
-          @result_sets << ResultSet.new(category, scored_list)
-        end
-        @result_sets
+    def result_sets
+      @result_sets = []
+      index_contents.each do |category, items|
+        scored_list = score_list(items)
+        next if scored_list == []
+        @result_sets << ResultSet.new(category, scored_list)
       end
+      @result_sets
+    end
 
-      def score_list(list)
-        @engine.new(list, @term, @cutoff).score_list
-      end
+    def score_list(list)
+      @engine.score(list, @term, @cutoff)
+    end
+
   end
-
 end

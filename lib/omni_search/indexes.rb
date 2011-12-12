@@ -90,13 +90,13 @@ module OmniSearch
 
     #either fetches and builds the index.. or returns a copy
     def contents
-       these_contents = @@contents[self.class.to_s]
-       return these_contents if these_contents
-       @@contents[self.class.to_s] = Hash.new
-       list.each {|index|
-          @@contents[self.class.to_s].merge! index.new.to_hash
-       }
-       these_contents = @@contents[self.class.to_s]
+      these_contents = @@contents[self.class.to_s]
+      return these_contents if these_contents
+      @@contents[self.class.to_s] = Hash.new
+      list.each {|index|
+        @@contents[self.class.to_s].merge! index.new.to_hash
+      }
+      these_contents = @@contents[self.class.to_s]
     end
 
     def build
@@ -115,4 +115,3 @@ module OmniSearch
 
 
 end
-

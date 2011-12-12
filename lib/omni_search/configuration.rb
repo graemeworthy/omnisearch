@@ -22,8 +22,8 @@ module OmniSearch
     attr_accessor :path_to_autoload_search_classes_from
 
     DEFAULTS = {
-       :path_to_index_files => '/tmp/omnisearch/',
-       :path_to_autoload_search_classes_from => nil
+      :path_to_index_files => '/tmp/omnisearch/',
+      :path_to_autoload_search_classes_from => nil
     }
 
     def initialize(options={})

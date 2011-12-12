@@ -26,71 +26,71 @@ module OmniSearch
   ##
 
 
-module Indexes::Storage
+  module Indexes::Storage
 
-  class Base
-    attr_accessor :records
-    attr_reader   :index_name
+    class Base
+      attr_accessor :records
+      attr_reader   :index_name
 
-    BASE_FILENAME = 'omnisearch_index'
+      BASE_FILENAME = 'omnisearch_index'
 
-    def initialize(name = nil)
-      @index_name = name
-    end
+      def initialize(name = nil)
+        @index_name = name
+      end
 
-    def save(records)
-      mkdir
-      File.open(file_path, 'w') do |f|
+      def save(records)
+        mkdir
+        File.open(file_path, 'w') do |f|
           YAML.dump(records, f)
+        end
       end
-    end
 
-    def load
-      YAML::load_file(file_path)
-    end
-
-
-    def filename
-      if @index_name
-       self.class::BASE_FILENAME + "_" + @index_name
-     else
-       self.class::BASE_FILENAME
+      def load
+        YAML::load_file(file_path)
       end
-    end
 
-    def file_path
-       File.join(root_path, filename)
-    end
 
-    protected
-
-    def mkdir
-
-      unless File.exists?(root_path) and File.directory?(root_path)
-       puts "creating directories"
-       puts `mkdir -p -v #{root_path}`
+      def filename
+        if @index_name
+          self.class::BASE_FILENAME + "_" + @index_name
+        else
+          self.class::BASE_FILENAME
+        end
       end
+
+      def file_path
+        File.join(root_path, filename)
+      end
+
+      protected
+
+      def mkdir
+
+        unless File.exists?(root_path) and File.directory?(root_path)
+          puts "creating directories"
+          puts `mkdir -p -v #{root_path}`
+        end
+      end
+
+      def root_path
+        OmniSearch.configuration.path_to_index_files.to_s
+      end
+
     end
 
-    def root_path
-      OmniSearch.configuration.path_to_index_files.to_s
+    # same as the base index, but with a different save location
+    class Plaintext < Base
+      BASE_FILENAME = 'omnisearch_plaintext_index'
+    end
+
+    # Same as base index, but with a different save location
+    class Trigram < Base
+      BASE_FILENAME = 'omnisearch_trigram_index'
+    end
+
+    class AutoCorrect < Base
+      BASE_FILENAME = 'omnisearch_autocorrect_index'
     end
 
   end
-
-  # same as the base index, but with a different save location
-  class Plaintext < Base
-    BASE_FILENAME = 'omnisearch_plaintext_index'
-  end
-
-  # Same as base index, but with a different save location
-  class Trigram < Base
-    BASE_FILENAME = 'omnisearch_trigram_index'
-  end
-
-  class AutoCorrect < Base
-    BASE_FILENAME = 'omnisearch_autocorrect_index'
-  end
-
-end
 end

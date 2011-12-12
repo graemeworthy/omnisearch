@@ -40,7 +40,6 @@ describe Search do
   end
 
   describe 'Result Sets' do
-
     it 'should return an array for result_sets' do
       the_instance.result_sets.should be_an Array
     end
@@ -48,7 +47,36 @@ describe Search do
     it 'should return an array for extended_result_sets' do
       the_instance.extended_result_sets.should be_an Array
     end
-
   end
-end
 
+  describe 'Running a Strategy' do
+    it 'calls Search::Strategy.run  with @term' do
+      Search::Strategy.should_receive(:run).with(the_term).and_return([])
+      Search.new(the_term)
+    end
+  end
+
+  describe 'Top and Extended Results' do
+    let(:dummy_results) {['an array of', 'something']}
+
+    before do
+      Search::Strategy.stub(:run) {dummy_results}
+    end
+
+    it 'if there are any results, call extended and top results' do
+      ResultSet::Extended.should_receive(:find).with(dummy_results)
+      ResultSet::Top.should_receive(:find).with(dummy_results)
+
+      Search.new(the_term)
+    end
+
+    it 'put the return value of top results, on top' do
+      top_dummy = ['i am first']
+      ResultSet::Extended.should_receive(:find).with(dummy_results)
+      ResultSet::Top.should_receive(:find).with(dummy_results).and_return(top_dummy)
+      Search.new(the_term).result_sets.first.should be top_dummy
+
+    end
+  end
+
+end
