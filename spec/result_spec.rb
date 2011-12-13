@@ -7,7 +7,6 @@ describe Result do
   describe "Instance Methods" do
     it {should respond_to :id}
     it {should respond_to :klass}
-    it {should respond_to :thumbnail}
     it {should respond_to :raw_data}
     it {should respond_to :score}
     it {should respond_to :value}
@@ -20,18 +19,16 @@ describe Result do
   it 'exposes a lot of passed arguments' do
     the_class.new({:id => 'this'}).id.should eq 'this'
     the_class.new({:klass => 'this'}).klass.should eq 'this'
-    the_class.new({:thumbnail => 'this'}).thumbnail.should eq 'this'
     the_class.new({:score => 'this'}).score.should eq 'this'
   end
 
   it 'exposes hash[:label] as value, on purpose' do
-    the_class.new({:label => 'this', :value => 'that'}).value.
-      should == 'this'
-    the_class.new({:label => 'this', :value => 'that'}).label.
-      should == 'this'
+    the_class.new({:label => 'this', :value => 'that'}).value.should eq 'this'
+    the_class.new({:label => 'this', :value => 'that'}).label.should eq 'this'
   end
 
-  it 'should have a label' do
-    subject.label.should eq "A result"
+  it 'passes any other .something calls down to the raw_data' do
+    the_class.new({:thumbnail => 'this'}).thumbnail.should eq 'this'
   end
+
 end
