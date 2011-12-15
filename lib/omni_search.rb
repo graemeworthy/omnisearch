@@ -11,6 +11,7 @@ $: << here
 #require 'omni_search/railtie'
 
 require 'omni_search/search'
+require 'omni_search/search_strategy'
 
 require 'omni_search/result'
 require 'omni_search/result_set'

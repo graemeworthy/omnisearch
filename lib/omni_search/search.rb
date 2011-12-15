@@ -39,19 +39,4 @@ module OmniSearch
     end
   end
 
-  class Search::Strategy
-
-    def self.run(term)
-      results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::Regex, term, 0)
-      if results == []
-        results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StartDistance, term, 0)
-      end
-      if results == []
-        results = ResultSet::Factory.sets(Indexes::Trigram, Engines::Triscore, term, 0.2)
-      end
-
-      results
-    end
-
-  end
 end
