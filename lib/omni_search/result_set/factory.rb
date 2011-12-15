@@ -38,7 +38,7 @@ module OmniSearch
       Indexes.list.each do |index_class|
         records = get_records(index_class)
         results = get_results(records, index_class)
-        next unless results.length > 1
+        next unless results.length > 0
         @result_sets << ResultSet.new(index_class, results)
       end
       @result_sets
