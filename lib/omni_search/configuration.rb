@@ -21,9 +21,18 @@ module OmniSearch
     # search classes from somewhere, this is where we will look
     attr_accessor :path_to_autoload_search_classes_from
 
+    # currently there are two types of indicies
+    # trigram and plain
+    # you may add another index type by adding it to this array
+    attr_accessor :index_types
+
     DEFAULTS = {
       :path_to_index_files => '/tmp/omnisearch/',
-      :path_to_autoload_search_classes_from => nil
+      :path_to_autoload_search_classes_from => nil,
+      :index_types => [
+        Indexes::Plaintext,
+        Indexes::Trigram
+      ]
     }
 
     def initialize(options={})
@@ -34,10 +43,9 @@ module OmniSearch
   end
 
   # inject the attr_accessor into the class/module, yah.
-  class << self
-    attr_accessor :configuration
+  def self.configuration
+    @configuration ||= Configuration.new
   end
-
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)

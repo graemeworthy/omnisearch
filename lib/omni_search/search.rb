@@ -46,6 +46,10 @@ module OmniSearch
       if results == []
         results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StartDistance, term, 0)
       end
+      if results == []
+        results = ResultSet::Factory.sets(Indexes::Trigram, Engines::Triscore, term, 0.2)
+      end
+
       results
     end
 

@@ -20,6 +20,12 @@ describe Indexes::Lazy do
         config.path_to_autoload_search_classes_from = "./spec/examples/index_path"
       }
     end
+    after(:all) do
+      OmniSearch.configure{|config|
+        config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
+      }
+       OmniSearch::Indexes.se
+    end
 
     it 'should not have "SomeClass" defined' do
       defined?(SomeClass).should == nil
@@ -31,10 +37,3 @@ describe Indexes::Lazy do
     end
   end
 end
-
-puts "Cleanup"
-OmniSearch.configure{|config|
-  config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
-}
-puts OmniSearch::Indexes::Lazy.load
-puts OmniSearch::Indexes.class_variable_get(:@@list)

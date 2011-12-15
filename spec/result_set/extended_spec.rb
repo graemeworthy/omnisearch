@@ -3,7 +3,7 @@ require './spec/spec_helper'
 class PhysicianDemo
 end
 class PhysicianDemoIndex
-  include OmniSearch::Indexes::Builder::Plaintext
+  include OmniSearch::Indexes::Register
   indexes     :physician_demo
 
   def extended_results_for(winner)

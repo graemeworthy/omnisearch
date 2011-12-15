@@ -4,9 +4,6 @@ module OmniSearch
   ##
   # Indexes
   # ------------------
-  # two Flavours:
-  #   PlaintextIndex
-  #   TrigramIndex
   #
   # Indexes are added to these master classes through 'includes' on anything indexable
   #
@@ -24,7 +21,7 @@ module OmniSearch
   # to add any class to the index:
   #
   #   class SomeClass
-  #      include PlaintextIndexBuilder
+  #      include OmniSearch::Indexes::Register
   #      def index_name
   #         'some_class'
   #      end
@@ -45,8 +42,7 @@ module OmniSearch
   ##
   ##
   class Indexes
-    @@list = Hash.new
-    @@contents = Hash.new
+    @@list = []
     @@lazy_loaded = false
 
 
@@ -60,22 +56,12 @@ module OmniSearch
       instance.list
     end
 
-
-    def self.list_all
-      instance = self.new
-      instance.list_all
-    end
-
     def initialize
       lazy_load unless lazy_loaded?
     end
 
     def list
-      @@list[self.class.to_s] ||= []
-    end
-
-    def list_all
-      @@list
+      @@list ||= []
     end
 
 
@@ -88,30 +74,17 @@ module OmniSearch
       @@lazy_loaded
     end
 
-    #either fetches and builds the index.. or returns a copy
-    def contents
-      these_contents = @@contents[self.class.to_s]
-      return these_contents if these_contents
-      @@contents[self.class.to_s] = Hash.new
-      list.each {|index|
-        @@contents[self.class.to_s].merge! index.new.to_hash
-      }
-      these_contents = @@contents[self.class.to_s]
-    end
-
     def build
-      list.each {|index|
-        index.new.build
-      }
+      index_types   = OmniSearch.configuration.index_types
+      index_classes = list
+
+      index_classes.each do |index_class|
+        index_types.each do |index_type|
+          Indexes::Builder.new(index_class, index_type).save
+        end
+      end
     end
 
   end
-
-  class Indexes::Plaintext < OmniSearch::Indexes
-  end
-
-  # class Indexes::Trigram < OmniSearch::Indexes
-  # end
-
 
 end

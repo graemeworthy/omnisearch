@@ -3,7 +3,6 @@ module OmniSearch::Engines
   class StartDistance < Base
 
     def score(item)
-      #    puts "scoring #{item}"
       list_item = item[:value].downcase
       list_item.strip!
       return 0 if list_item == ""
@@ -33,7 +32,7 @@ module OmniSearch::Engines
     def offset_penalty(search_word, list_word)
       index = list_word.index(search_word)
       return 0 if index == nil
-      penalty = 0.01 * index
+      penalty = 0.1 * index
       penalty
     end
 

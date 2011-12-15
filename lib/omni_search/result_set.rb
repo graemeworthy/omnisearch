@@ -1,3 +1,4 @@
+
 module OmniSearch
   #
   # A container for the results from a specific index

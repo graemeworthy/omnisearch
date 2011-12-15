@@ -52,7 +52,6 @@ module OmniSearch
       self.new.list
     end
 
-
     def initialize(mistake = nil, correction = nil)
       @mistake = mistake
       @correction = correction
@@ -92,7 +91,6 @@ module OmniSearch
     def save
       file.save(list)
     end
-
 
     def file
       self.class::STORAGE_ENGINE.new()

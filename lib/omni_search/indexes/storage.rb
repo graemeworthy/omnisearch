@@ -5,9 +5,11 @@ module OmniSearch
   # for saving and retrieving records to a file specified by the argment
   # nothing that important really, just that
   #
-  # I've made two Flavours
+  # I've made three Flavours
   #  Storage::Plaintext
   #  Storage::Trigram
+  #  Storage::AutoCorrect
+  #
   #
   # Usage:
   # ------------------
@@ -83,7 +85,7 @@ module OmniSearch
       BASE_FILENAME = 'omnisearch_plaintext_index'
     end
 
-    # Same as base index, but with a different save location
+
     class Trigram < Base
       BASE_FILENAME = 'omnisearch_trigram_index'
     end

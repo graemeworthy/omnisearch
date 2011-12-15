@@ -1,9 +1,10 @@
 require './spec/spec_helper'
 
-class PizzaIndex; end
-class PantherIndex; end
-class PredatorIndex; end
-#
+#FIXME
+OmniSearch.configure{|config|
+  config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
+}
+OmniSearch::Indexes.class_variable_set(:@@lazy_loaded,  false)
 
 describe ResultSet::Extended do
   let(:top) {Result.new(:id => 1, :value => 'something', :score => 120)}

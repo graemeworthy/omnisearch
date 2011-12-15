@@ -5,6 +5,8 @@ pkg/*
 .rvmrc
 .autotest
 .rspec
+.metrics
+tmp
 coverage
 benches
 

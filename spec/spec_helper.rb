@@ -3,7 +3,7 @@ SimpleCov.start do
   add_filter "/spec/"
 end
 
-require 'rails'
+require 'rails' #fixme
 
 require './lib/omni_search'
 include OmniSearch

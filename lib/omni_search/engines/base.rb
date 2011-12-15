@@ -22,6 +22,7 @@ module OmniSearch
   #
   module Engines
     class Base
+
       # Public: scores an array, using the #score method
       # Returns an array of Results
       def self.score(*args)
@@ -29,11 +30,12 @@ module OmniSearch
         instance.score_list
       end
 
-      def initialize(list, term, cutoff = 0)
+      def initialize(list, term, cutoff = 0, backmap = nil)
         @list = list
         @term = term
         @results = []
         @cutoff = cutoff
+        @backmap = backmap
       end
 
       def score_list

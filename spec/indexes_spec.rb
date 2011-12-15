@@ -1,7 +1,7 @@
 require './spec/spec_helper'
 
 describe Indexes do
-  let(:dummy_list)  {{Indexes.to_s => ['cats']}}
+  let(:dummy_list)  {['cats']}
   let(:the_class) {Indexes}
   let(:the_instance){Indexes.new()}
 
@@ -10,11 +10,6 @@ describe Indexes do
     it 'class#list exposes instance#list ' do
       the_class.class_variable_set(:@@list, dummy_list)
       the_class.list.should eql ['cats']
-    end
-
-    it 'class#list_all exposes instance#list ' do
-      the_class.class_variable_set(:@@list, dummy_list)
-      the_class.list_all.should == dummy_list
     end
 
     it '##build calls :new and :build' do
@@ -30,50 +25,23 @@ describe Indexes do
   describe "Instance Methods" do
     before(:each) do
       the_class.list.clear
-      @a_builder = double()
-      @b_builder = double()
-      @a_builder_instance = double()
-      @b_builder_instance = double()
+      @a_index = double()
+      @b_index = double()
 
-      @a_builder.stub(:new){@a_builder_instance}
-      @b_builder.stub(:new){@b_builder_instance}
-
-      the_class.list << @a_builder
-      the_class.list << @b_builder
+      the_class.list << @a_index
+      the_class.list << @b_index
 
     end
     it '#build calls :build on everything in @@list' do
-
-      @a_builder_instance.should_receive(:build)
-      @b_builder_instance.should_receive(:build)
+      builder_double = double()
+      Indexes::Builder.should_receive(:new).at_least(4).times.and_return(builder_double)
+      builder_double.should_receive(:save).at_least(4).times
 
       the_class.build
 
     end
-
-    it '#contents calls :to_hash on everything in @@list' do
-      @a_builder_instance.should_receive(:to_hash).and_return({})
-      @b_builder_instance.should_receive(:to_hash).and_return({})
-
-      the_instance.contents
-    end
-    it '#contents merges @@list hashes into itself' do
-      a_contents = {:a => 'fun_times'}
-      b_contents = {:b => 'groovy_times'}
-      @a_builder_instance.should_receive(:to_hash).and_return(a_contents)
-      @b_builder_instance.should_receive(:to_hash).and_return(b_contents)
-      the_class.class_variable_set(:@@contents, Hash.new)
-      the_instance.contents.should == {:a => 'fun_times', :b => 'groovy_times'}
-
-    end
   end
 
-  describe "Subclasses" do
-    it 'keeps its own @@list separate from parent' do
-      the_class.list << 'Something'
-      Class.new(the_class).list.should == []
-    end
-  end
   describe "LazyLoading" do
     it 'calls LazyLoad on new if lazy_loaded? is false' do
       the_class.class_variable_set(:@@lazy_loaded, false)
@@ -98,32 +66,50 @@ describe Indexes do
   describe "The Big Picture, how it works with Builder for Indexes::Plaintext" do
 
     before(:all) do
-      Indexes::Plaintext.list.clear
-      class Includer
-        include Indexes::Builder::Plaintext
-        def index_name; ""; end
-        def collection; [];end
+      Indexes.list.clear
+      class Something
+        def info
+          "space"
+        end
+      end
+
+      class SomethingIndex
+        include Indexes::Register
+        indexes :something
+        def collection
+          a_collection = []
+          10.times{a_collection << Something.new}
+          a_collection
+        end
+        def record_template(item)
+          {:value => item.info}
+        end
+
+
       end
     end
-    after(:all) do
-      Indexes::Plaintext.list.clear
 
+    after(:all) do
+      Object.send(:remove_const, :Something)
+      Object.send(:remove_const, :SomethingIndex)
+      Indexes.list = Array.new
     end
+
     it 'Builder adds an instsnce of any including classes to list' do
-      Indexes::Plaintext.list.first.should be Includer
+      Indexes.list.first.should be SomethingIndex
     end
 
     it 'calls build on all including classes from build' do
-      Includer.any_instance.should_receive(:build)
-      Indexes::Plaintext.build
+      builder_double = double()
+      Indexes::Builder.should_receive(:new).
+        with(SomethingIndex, Indexes::Plaintext).
+        and_return(builder_double)
+      Indexes::Builder.should_receive(:new).
+        with(SomethingIndex, Indexes::Trigram).
+        and_return(builder_double)
+      builder_double.should_receive(:save).exactly(2).times
+      Indexes.build
     end
-
-    it 'calls to_hash on all including classes from contents' do
-      Includer.any_instance.should_receive(:to_hash).and_return({})
-      the_class.class_variable_set(:@@contents, Hash.new)
-      Indexes::Plaintext.new.contents
-    end
-
   end
 
 

@@ -25,34 +25,31 @@ module OmniSearch
       instance.result_sets
     end
 
-    def initialize(index, engine, term, cutoff = 0)
-      @engine = engine
-      @index  = index
-      @term   = term
-      @cutoff = cutoff
+    def initialize(index_type, engine, term, cutoff = 0)
+      @engine      = engine
+      @index_type  = index_type
+      @term        = term
+      @cutoff      = cutoff
       @result_sets = nil
-    end
-
-    def index
-      @index.new
-    end
-
-    def index_contents
-      index.contents
     end
 
     def result_sets
       @result_sets = []
-      index_contents.each do |category, items|
-        scored_list = score_list(items)
-        next if scored_list == []
-        @result_sets << ResultSet.new(category, scored_list)
+      Indexes.list.each do |index_class|
+        records = get_records(index_class)
+        results = get_results(records, index_class)
+        next unless results.length > 1
+        @result_sets << ResultSet.new(index_class, results)
       end
       @result_sets
     end
 
-    def score_list(list)
-      @engine.score(list, @term, @cutoff)
+    def get_records(index_class)
+      Indexes::Fetcher.new(index_class, @index_type).records
+    end
+
+    def get_results(records, index_class)
+      @engine.score(records, @term, @cutoff, index_class)
     end
 
   end
