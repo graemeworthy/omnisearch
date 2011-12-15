@@ -50,13 +50,13 @@ module OmniSearch
     end
 
     protected
+
     def klass_is_index?
       klass.respond_to? :index_name
-
     end
 
     def indexed_klass
-      klass_is_index? ? klass.index_name.titleize : klass
+      klass_is_index? ? klass.index_name.titleize : klass.to_s
     end
 
   end

@@ -27,7 +27,7 @@ module OmniSearch
     end
 
     def winner_index
-      @result_sets.first.klass
+      @result_sets.first.klass.to_s.constantize
     end
 
     def default_result
@@ -42,9 +42,10 @@ module OmniSearch
         index.extended_results_for(winner)
 
       rescue NotImplementedError
-        default_result
 
+        default_result
       end
+
     end
 
   end
