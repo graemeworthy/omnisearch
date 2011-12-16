@@ -30,7 +30,7 @@ module OmniSearch
     AutoCorrectError      = Class.new(StandardError)
     AlreadyExists     = Class.new(AutoCorrectError)
     CircularReference = Class.new(AutoCorrectError)
-
+    @@loaded = false
     ## Exposed Class Methods
     def self.for(mistake)
       self.new(mistake).for
@@ -53,6 +53,7 @@ module OmniSearch
     end
 
     def initialize(mistake = nil, correction = nil)
+      load unless @@loaded
       @mistake = mistake
       @correction = correction
     end
@@ -84,8 +85,10 @@ module OmniSearch
       @@list ||= {}
     end
 
-    def load
+    def load      
       @@list = file.load
+      @@loaded = true
+      @@list
     end
 
     def save
