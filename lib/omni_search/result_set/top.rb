@@ -10,7 +10,7 @@ module OmniSearch
       instance = self.new(result_sets)
       instance.find_top
       instance.top
-      ResultSet.new(ResultSet::Top, [instance.top], true)
+      ResultSet.new(ResultSet::Top, [instance.top], :top_hit)
     end
 
     def initialize(  result_sets)

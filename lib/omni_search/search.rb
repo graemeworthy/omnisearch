@@ -32,10 +32,16 @@ module OmniSearch
 
     def build_results
       @result_sets          = Search::Strategy.run(@term)
-      return if @result_sets == []
-      @extended_result_sets = ResultSet::Extended.find(@result_sets)
-      @top                  = ResultSet::Top.find(@result_sets)
-      @result_sets.unshift @top
+
+      unless @result_sets.empty?
+        @extended_result_sets = ResultSet::Extended.find(@result_sets)
+        @top                  = ResultSet::Top.find(@result_sets)
+        @result_sets.unshift @top
+      end
+      # always add the search link
+      @more                  = ResultSet::More.make(@term)
+      @result_sets.push @more
+
     end
   end
 

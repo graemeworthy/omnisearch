@@ -11,18 +11,26 @@ module OmniSearch
     attr_accessor :klass
     attr_accessor :label
 
-    def initialize(klass, results_list, top_hit=false)
+    def initialize(klass, results_list, special_type=false)
       @klass = klass
       @results = results_list
-      @top_hit = top_hit
-      return if top_hit
+      @special_type = special_type
+      return if top_hit?
       sort_list
       trim_list
       brand_list
     end
 
     def label
-      top_hit? ? "Top Hit" : set_name
+      label = ''
+      if top_hit?
+        label = "Top Hit"
+       elsif search_more?
+         label = "Site Search"
+       else
+         set_name
+       end
+
     end
 
     def count
@@ -30,7 +38,11 @@ module OmniSearch
     end
 
     def top_hit?
-      @top_hit
+      @special_type == :top_hit
+    end
+    
+    def search_more?
+      @special_type == :search_more
     end
 
     def sort_list

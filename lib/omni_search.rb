@@ -18,6 +18,7 @@ require 'omni_search/result_set'
 require 'omni_search/result_set/factory'
 require 'omni_search/result_set/top'
 require 'omni_search/result_set/extended'
+require 'omni_search/result_set/more'
 
 require 'omni_search/indexes'
 require 'omni_search/indexes/register'
