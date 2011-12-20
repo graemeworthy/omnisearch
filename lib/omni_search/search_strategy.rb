@@ -8,17 +8,21 @@ module OmniSearch
       puts "omnisearch regex: #{b-a}"
       if results == []
         a = Time.now
-        results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StartDistance, term, 0.6)
+        results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StringDistance, term, 0.55)
         b = Time.now
+        puts "omnisearch stringdistance: #{b-a}"
+        # a = Time.now
+        # results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::StartDistance, term, 0.55)
+        # b = Time.now
         puts "omnisearch startdistance: #{b-a}"
 
       end
-      if results == []
-        a = Time.now
-        results = ResultSet::Factory.sets(Indexes::Trigram, Engines::Triscore, term, 0.2)
-        b = Time.now
-        puts "omnisearch trigram: #{b-a}"
-      end
+      # if results == []
+      #   a = Time.now
+      #   results = ResultSet::Factory.sets(Indexes::Trigram, Engines::Triscore, term, 0.2)
+      #   b = Time.now
+      #   puts "omnisearch trigram: #{b-a}"
+      # end
 
       results
     end

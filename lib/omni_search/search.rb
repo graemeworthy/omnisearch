@@ -38,9 +38,9 @@ module OmniSearch
         @top                  = ResultSet::Top.find(@result_sets)
         @result_sets.unshift @top
       end
-      # always add the search link
-      @more                  = ResultSet::More.make(@term)
-      @result_sets.push @more
+      # always add the search link?
+      # @more                  = ResultSet::More.make(@term)
+      # @result_sets.push @more
 
     end
   end

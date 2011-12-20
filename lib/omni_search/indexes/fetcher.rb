@@ -8,7 +8,7 @@ module OmniSearch
   #
   # Usage:
   # ================================================================
-  # Indexes::Fetcher.new(SomethingIndex, Indexes::Plaintext).save
+  # Indexes::Fetcher.new(SomethingIndex, Indexes::Plaintext)
   #
 
   class Indexes::Fetcher

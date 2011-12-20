@@ -7,13 +7,15 @@ namespace :tests do
       class TestExampleStorage < OmniSearch::Indexes::Storage
         PATH = "./spec/examples"
         BASE_FILENAME = 'omnisearch_demo_index'
-      end
-      
-      
+      end            
       storage = TestExampleStorage.new
-            
-      
     end
-    
-    
+end
+
+namespace :tests do
+    desc "regression test for string matches"
+    task :string_matcher do
+      require './lib/omni_search.rb'
+      load "./string_tests.rb"
+    end
 end
