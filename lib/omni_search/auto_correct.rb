@@ -85,8 +85,10 @@ module OmniSearch
       @@list ||= {}
     end
 
-    def load      
-      @@list = file.load
+    def load
+      storage = file
+      storage.touch
+      @@list   = storage.load
       @@loaded = true
       @@list
     end

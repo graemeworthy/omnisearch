@@ -24,7 +24,6 @@ describe Indexes::Lazy do
       OmniSearch.configure{|config|
         config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
       }
-       OmniSearch::Indexes.se
     end
 
     it 'should not have "SomeClass" defined' do

@@ -40,6 +40,11 @@ module OmniSearch
         @index_name = name
       end
 
+      def touch
+        mkdir
+        `touch #{file_path}`
+      end
+
       def save(records)
         mkdir
         File.open(file_path, 'w') do |f|
