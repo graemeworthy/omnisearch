@@ -1,4 +1,8 @@
 # encoding: UTF-8
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8 # <- THIS
+Encoding.default_internal = nil # <- THIS
+
 module OmniSearch
   #
   # Storage
@@ -49,7 +53,8 @@ module OmniSearch
       def save(records)
         mkdir
         File.open(file_path, 'w') do |f|
-          YAML.dump(records, f)
+          yaml_output = records.to_yaml
+          f.puts yaml_output
         end
       end
 
