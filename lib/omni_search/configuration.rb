@@ -1,5 +1,6 @@
-# module OmniSearch
+# encoding: UTF-8
 module OmniSearch
+
   ##
   # Sets the location of
   #   file storage
@@ -12,7 +13,6 @@ module OmniSearch
   #      config.path_to_autoload_search_classes_from =  File.join(Rails.root, '/app/search_indexes')
   # }
   #
-
   class Configuration
     # we need to store indexes somewhere
     attr_accessor :path_to_index_files

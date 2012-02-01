@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module OmniSearch
 
   class Result

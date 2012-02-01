@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module OmniSearch
   #
   # Plaintext Index Register -- Module

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'yaml'
 require 'active_support'
 require 'active_support/core_ext/string/inflections'

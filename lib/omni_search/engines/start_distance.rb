@@ -1,5 +1,7 @@
+# encoding: UTF-8
 module OmniSearch::Engines
 
+  # a scoring system based on the start of a word
   class StartDistance < Base
 
     def score(item)

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module OmniSearch
 
   # Finds the top result in a set of ResultSets

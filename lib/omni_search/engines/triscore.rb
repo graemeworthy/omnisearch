@@ -1,7 +1,12 @@
-module OmniSearch
-  class Engines::Triscore < Engines::Base
+# encoding: UTF-8
+module OmniSearch::Engines
 
-
+  # a scoring system devised to match
+  # the incidence of 'trigrams' sequences of three letters
+  # doggie has a few
+  # dog ogg ggi gie
+  #
+  class Triscore < Base
     def score_list
       results = []
 

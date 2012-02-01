@@ -1,28 +1,28 @@
+# encoding: UTF-8
 module OmniSearch
 
+  # Usage
+  # ========================
+  # AutoCorrect.for('Sweets') => Correction.new('Sweets', 'Sugar')
+  # AutoCorrect.for('Honey')  => 'Correction.new('Honey', Sugar')
+  #
+  # every 'mistake' should have one and only one 'correction'
+  # no correction may also be a mistake
+  #
+  # Only one correction for a given mistake
+  # AutoCorrect.add('mistake', 'correction')
+  # AutoCorrect.add('mistake', 'alt correction') #=> raises AlreadyExists
+  #
+  # Many mistakes for any correction
+  # AutoCorrect.add('bad', 'good')
+  # AutoCorrect.add('soo bad', 'good')
+  #
+  # No corrections that are also mistakes!
+  # AutoCorrect.add('treat',  'cookie')
+  # AutoCorrect.add('cookie', 'scone') #=> raises CircularReference
+  #
   class AutoCorrect
 
-    # Usage
-    # ========================
-    # AutoCorrect.for('Sweets') => Correction.new('Sweets', 'Sugar')
-    # AutoCorrect.for('Honey')  => 'Correction.new('Honey', Sugar')
-    #
-    # every 'mistake' should have one and only one 'correction'
-    # no correction may also be a mistake
-    #
-    # Only one correction for a given mistake
-    # AutoCorrect.add('mistake', 'correction')
-    # AutoCorrect.add('mistake', 'alt correction') #=> raises AlreadyExists
-    #
-    # Many mistakes for any correction
-    # AutoCorrect.add('bad', 'good')
-    # AutoCorrect.add('soo bad', 'good')
-    #
-    # No corrections that are also mistakes!
-    # AutoCorrect.add('treat',  'cookie')
-    # AutoCorrect.add('cookie', 'scone') #=> raises CircularReference
-    #
-    # If you want to change something,
     attr_accessor :autocorrect_list
 
     STORAGE_ENGINE = OmniSearch::Indexes::Storage::AutoCorrect

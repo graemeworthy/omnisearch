@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module OmniSearch
 
   # Builds a named index

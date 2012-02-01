@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'set'
 class Trigram
   attr_reader :trigrams

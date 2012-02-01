@@ -1,5 +1,7 @@
+# encoding: UTF-8
 module OmniSearch::Engines
 
+  # a more complicated scoring system
   class StringDistance < Base
     OUT_OF_ORDER_PENALTY = 0.001
     OVERLENGTH_PENALTY   = 0.001
