@@ -10,7 +10,7 @@ here = File.expand_path( File.dirname(__FILE__))
 $: << here
 
 #require 'omni_search/railtie'
-
+require 'omni_search/errors'
 require 'omni_search/search'
 require 'omni_search/search_strategy'
 

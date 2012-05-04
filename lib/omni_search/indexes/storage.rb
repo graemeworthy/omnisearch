@@ -59,9 +59,15 @@ module OmniSearch
       end
 
       def load
+        unless exists?
+          raise MissingIndexFile, "could not file the file #(file_path)"
+        end
         YAML::load_file(file_path)
       end
 
+      def exists?
+        File.exists?(file_path)
+      end
 
       def filename
         if @index_name

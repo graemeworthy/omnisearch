@@ -47,6 +47,16 @@ describe Indexes::Storage::Base do
   describe "Instance Methods" do
     let(:data_to_save) {{:a => 'pie', :for => 'me please'}}
 
+    it '#exists? checks for existance of file' do
+      the_instance.save(data_to_save)
+      the_instance.exists?.should == true
+    end
+
+    it '#exists? checks for existance of file' do
+      cleanup_storage
+      the_instance.exists?.should == false
+    end
+
     it '#save serializes its argument to file_path, as YAML' do
       the_instance.save(data_to_save)
       stored_at = the_instance.send(:file_path)
@@ -59,7 +69,7 @@ describe Indexes::Storage::Base do
 
     it '#load raises unless that file exists' do
       cleanup_storage
-      expect { the_instance.load }.to raise_error
+      expect { the_instance.load }.to raise_error MissingIndexFile
     end
 
   end
