@@ -62,7 +62,8 @@ module OmniSearch
         unless exists?
           raise MissingIndexFile, "could not file the file #(file_path)"
         end
-        YAML::load_file(file_path)
+        file   = File.read(file_path)
+        loaded = YAML::load(file);
       end
 
       def exists?
@@ -86,8 +87,8 @@ module OmniSearch
       def mkdir
 
         unless File.exists?(root_path) and File.directory?(root_path)
-          puts "creating directories"
-          puts `mkdir -p -v #{root_path}`
+          #puts "creating directories"
+          `mkdir -p -v #{root_path}`
         end
       end
 
