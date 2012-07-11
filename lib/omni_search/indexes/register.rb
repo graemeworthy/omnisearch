@@ -23,14 +23,14 @@ module OmniSearch
   #
   #  #record_template(item)
   #    - a template, mostly just a hash.
-  # 
+  #
   #  #extended_results_for(item)
   #    - if it's a supermatch (only hit)
   #    - you can provide extra info about the item
   #
   #
   module Indexes::Register
-
+    OMNISEARCH_INDEX = true;
     def self.included(base)
       base.extend ClassMethods
     end
@@ -38,7 +38,7 @@ module OmniSearch
     module ClassMethods
       def indexes(klass_name)
         @index_name = klass_name
-        OmniSearch::Indexes.list << self        
+        OmniSearch::Indexes.list << self
       end
       def index_name
         raise NotImplementedError, "#{self.class} needs to declare indexes()" unless @index_name
@@ -49,13 +49,13 @@ module OmniSearch
     def defines_index?
       true
     end
-    
+
     def all
       collection.collect {|item|
         record_template(item)
-      }        
+      }
     end
-    
+
     def index_name
       self.class.index_name
     end
@@ -75,7 +75,7 @@ module OmniSearch
     def extended_results_for(item)
       raise NotImplementedError, "#{self.class} needs to implement extended_results_for"
     end
-    
+
 
   end
 end

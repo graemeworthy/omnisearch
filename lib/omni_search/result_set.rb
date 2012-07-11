@@ -40,7 +40,7 @@ module OmniSearch
     def top_hit?
       @special_type == :top_hit
     end
-    
+
     def search_more?
       @special_type == :search_more
     end
@@ -64,7 +64,7 @@ module OmniSearch
     protected
 
     def klass_is_index?
-      klass.respond_to? :index_name
+      klass.const_defined?(:OMNISEARCH_INDEX)
     end
 
     def indexed_klass
