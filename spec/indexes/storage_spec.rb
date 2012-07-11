@@ -104,13 +104,16 @@ describe Indexes::Storage::Base do
   end
   describe "The Big Picture" do
     before do
+      $VERBOSE = nil
       class SomeStorage < Indexes::Storage::Base
         BASE_FILENAME = 'heaven'
         def root_path
           "stairway"
         end
       end
+      $VERBOSE = 1
     end
+
     after do
       `rm -rdf stairway`
     end

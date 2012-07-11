@@ -92,7 +92,7 @@ describe Indexes do
     after(:all) do
       Object.send(:remove_const, :Something)
       Object.send(:remove_const, :SomethingIndex)
-      Indexes.list = Array.new
+      Indexes.list.clear
     end
 
     it 'Builder adds an instsnce of any including classes to list' do
