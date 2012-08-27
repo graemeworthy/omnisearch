@@ -1,6 +1,9 @@
 require './spec/spec_helper'
 
+
 describe Search do
+
+  let(:a_result) { Result.new({})}
   let(:the_term)           {'some term'}
   let(:the_correction)     {'some correction'}
   let(:the_class)    {Search}
@@ -46,6 +49,19 @@ describe Search do
 
     it 'should return an array for extended_result_sets' do
       the_instance.extended_result_sets.should be_an Array
+    end
+  end
+
+  describe 'Just' do
+    it 'should be able to get "just" one index' do
+      class SomeIndexClass; end;
+      class SomeOtherIndexClass; end;
+
+      wanted = ResultSet.new(SomeIndexClass, [a_result])
+      not_wanted = ResultSet.new(SomeOtherIndexClass, [a_result])
+      fake_results = [wanted, not_wanted]
+      the_instance.result_sets = fake_results
+      the_instance.just(SomeIndexClass).should == wanted
     end
   end
 

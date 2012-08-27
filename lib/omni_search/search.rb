@@ -24,6 +24,10 @@ module OmniSearch
       build_results
     end
 
+    def just(indexed_klass)
+      @result_sets.select{|set| set.klass == indexed_klass}[0]
+    end
+
     protected
 
     def auto_correct
