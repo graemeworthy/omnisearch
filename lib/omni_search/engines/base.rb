@@ -33,7 +33,7 @@ module OmniSearch
 
       def initialize(list, term, cutoff = 0, backmap = nil)
         @list = list
-        @term = term
+        @term = term || ""
         @results = []
         @cutoff = cutoff
         @backmap = backmap

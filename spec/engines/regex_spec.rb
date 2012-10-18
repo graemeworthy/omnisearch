@@ -15,4 +15,10 @@ describe "Engines::Regex" do
       the_class.new(fake_list, 'pup').score_list.first.id.should be 1
     end
   end
+
+  describe 'An error case, caught' do
+    it "term set to nil" do
+      lambda {the_class.new(fake_list, nil).score_list}.should_not raise_error
+    end
+  end
 end
