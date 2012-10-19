@@ -68,7 +68,7 @@ module OmniSearch
     end
 
     def indexed_klass
-      klass_is_index? ? klass.index_name.titleize : klass.to_s
+      klass_is_index? ? klass.index_name.classify : klass.to_s
     end
 
   end
