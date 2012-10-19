@@ -20,8 +20,12 @@ describe "Engines::Regex" do
     it "should tolerate term set to nil" do
       lambda {the_class.new(fake_list, nil).score_list}.should_not raise_error
     end
-    it "should excape things that mess with regexxes" do
+    it "should excape things that mess with regexxes, parens" do
       term = "eye care(op"
+      lambda {the_class.new(fake_list, term).score_list}.should_not raise_error
+    end
+    it "should excape things that mess with regexxes, squarebraces" do
+      term = "s["
       lambda {the_class.new(fake_list, term).score_list}.should_not raise_error
     end
   end
