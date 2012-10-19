@@ -16,9 +16,13 @@ describe "Engines::Regex" do
     end
   end
 
-  describe 'An error case, caught' do
-    it "term set to nil" do
+  describe 'Caught error cases' do
+    it "should tolerate term set to nil" do
       lambda {the_class.new(fake_list, nil).score_list}.should_not raise_error
+    end
+    it "should excape things that mess with regexxes" do
+      term = "eye care(op"
+      lambda {the_class.new(fake_list, term).score_list}.should_not raise_error
     end
   end
 end

@@ -7,9 +7,9 @@ module OmniSearch::Engines
     OVERLENGTH_PENALTY   = 0.001
     OFFSET_PENALTY       = 0.3
     ANCESTOR_SCORE        = 0.2
-    BASE_SCORE           = 1 
+    BASE_SCORE           = 1
     NULL_SCORE           = 0
-    
+
     def score(item)
       list_item = item[:value].downcase.strip
       search_string = @term.downcase
@@ -39,7 +39,7 @@ module OmniSearch::Engines
       penalty = OUT_OF_ORDER_PENALTY * diff
       penalty
     end
-    
+
     def overlength_penalty(search_word, list_word)
       diff = list_word.length - search_word.length
       penalty = OVERLENGTH_PENALTY * diff
@@ -69,7 +69,7 @@ module OmniSearch::Engines
     def word_score(search_word, item_word)
       index = item_word.index(search_word)
       first_letter_match = (search_word[0] == item_word[0])
-      
+
       if (index == nil) && first_letter_match
         return ancestor_score(search_word, item_word)
       elsif index == nil
