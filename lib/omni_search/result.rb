@@ -1,6 +1,7 @@
 # encoding: UTF-8
 module OmniSearch
-
+  # The results of a search.
+  # This could have been a struct.
   class Result
     attr_accessor :id
     attr_accessor :value

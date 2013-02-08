@@ -41,7 +41,8 @@ module OmniSearch
         OmniSearch::Indexes.list << self
       end
       def index_name
-        raise NotImplementedError, "#{self.class} needs to declare indexes()" unless @index_name
+        raise NotImplementedError,
+          "#{self.class} needs to declare indexes()" unless @index_name
         @index_name.to_s
       end
     end
@@ -65,15 +66,18 @@ module OmniSearch
     end
 
     def collection
-      raise NotImplementedError, "#{self.class} needs to implement collection"
+      raise NotImplementedError,
+        "#{self.class} needs to implement collection"
     end
 
     def record_template(item)
-      raise NotImplementedError, "#{self.class} needs to implement record_template"
+      raise NotImplementedError,
+        "#{self.class} needs to implement record_template"
     end
 
     def extended_results_for(item)
-      raise NotImplementedError, "#{self.class} needs to implement extended_results_for"
+      raise NotImplementedError,
+        "#{self.class} needs to implement extended_results_for"
     end
 
 

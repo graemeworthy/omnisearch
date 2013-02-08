@@ -1,27 +1,27 @@
 # encoding: UTF-8
 module OmniSearch
-  #
-  # == Engines::Base
-  #
-  # A base class for all engines
-  #
-  # Usage
-  # -----
-  # Engines::Base.new(['peanuts', 'gravy', 'catepillars'], 'search').score_list
-  #  - or -
-  # Engines::Base.score(['peanuts', 'gravy', 'catepillars'], 'search')
-  #
-  # Useful Subclasses
-  # -----------------
-  # This is just the base class
-  # Your subclasses will be where all the _real_ work is done.
-  #
-  # Interfaces
-  # --------------
-  # Define #score(item)
-  # then you'll be happy
-  #
   module Engines
+    #
+    # == Engines::Base
+    #
+    # A base class for all engines
+    #
+    # Usage
+    # -----
+    # Engines::Base.new(['peanuts', 'gravy', 'catepillars'], 'search').score_list
+    #  - or -
+    # Engines::Base.score(['peanuts', 'gravy', 'catepillars'], 'search')
+    #
+    # Useful Subclasses
+    # -----------------
+    # This is just the base class
+    # Your subclasses will be where all the _real_ work is done.
+    #
+    # Interfaces
+    # --------------
+    # Define #score(item)
+    # then you'll be happy
+    #
     class Base
 
       # Public: scores an array, using the #score method

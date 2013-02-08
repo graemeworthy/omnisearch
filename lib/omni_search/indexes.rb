@@ -5,7 +5,8 @@ module OmniSearch
   # Indexes
   # ------------------
   #
-  # Indexes are added to these master classes through 'includes' on anything indexable
+  # Indexes are added to these master classes
+  # through 'includes' on anything indexable
   #
   # Usage:
   # -----------------

@@ -10,7 +10,8 @@ module OmniSearch
   # ---------------------------------
   # OmniSearch.configuration {|config|
   #      config.path_to_index_files =  '/tmp/omnisearch_sparkle/'
-  #      config.path_to_autoload_search_classes_from =  File.join(Rails.root, '/app/search_indexes')
+  #      config.path_to_autoload_search_classes_from =
+  #        File.join(Rails.root, '/app/search_indexes')
   # }
   #
   class Configuration

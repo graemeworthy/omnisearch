@@ -11,8 +11,8 @@ module OmniSearch
   # ================================================================
   # Indexes::Fetcher.new(SomethingIndex, Indexes::Plaintext)
   #
-
   class Indexes::Fetcher
+
     # index_class holds an one of the user configurable classes.
     #  see Indexes::Register, for how an index_class is specified
     attr_accessor :index_class

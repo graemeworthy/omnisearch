@@ -4,37 +4,36 @@ Encoding.default_internal = Encoding::UTF_8 # <- THIS
 Encoding.default_internal = nil # <- THIS
 
 module OmniSearch
-  #
-  # Storage
-  # =================
-  # for saving and retrieving records to a file specified by the argment
-  # nothing that important really, just that
-  #
-  # I've made three Flavours
-  #  Storage::Plaintext
-  #  Storage::Trigram
-  #  Storage::AutoCorrect
-  #
-  #
-  # Usage:
-  # ------------------
-  # persistence = IndexFile::Base.new('subname')
-  #  saves and loads to 'omnisearch_index_subname'
-  #
-  # #save -- dumps it full of yaml-ized content
-  #   some_hash = {}
-  #   persistence.save(some_hash)
-  #
-  # #load -- loads back that same content
-  #   reloaded_hash = persistence.load
-  #   reloaded_hash == some_hash
-  #
-  ##
-  ##
-
 
   module Indexes::Storage
 
+    #
+    # Storage::Base
+    # =================
+    # for saving and retrieving records to a file specified by the argment
+    # nothing that important really, just that
+    #
+    # I've made three Flavours
+    #  Storage::Plaintext
+    #  Storage::Trigram
+    #  Storage::AutoCorrect
+    #
+    #
+    # Usage:
+    # ------------------
+    # persistence = IndexFile::Base.new('subname')
+    #  saves and loads to 'omnisearch_index_subname'
+    #
+    # #save -- dumps it full of yaml-ized content
+    #   some_hash = {}
+    #   persistence.save(some_hash)
+    #
+    # #load -- loads back that same content
+    #   reloaded_hash = persistence.load
+    #   reloaded_hash == some_hash
+    #
+    ##
+    ##
     class Base
       attr_accessor :records
       attr_reader   :index_name
@@ -64,6 +63,7 @@ module OmniSearch
         end
         file   = File.read(file_path)
         loaded = YAML::load(file);
+        return loaded
       end
 
       def exists?
@@ -85,7 +85,6 @@ module OmniSearch
       protected
 
       def mkdir
-
         unless File.exists?(root_path) and File.directory?(root_path)
           #puts "creating directories"
           `mkdir -p -v #{root_path}`
@@ -103,11 +102,12 @@ module OmniSearch
       BASE_FILENAME = 'omnisearch_plaintext_index'
     end
 
-
+    # same as the base index, but with a different save location
     class Trigram < Base
       BASE_FILENAME = 'omnisearch_trigram_index'
     end
 
+    # same as the base index, but with a different save location
     class AutoCorrect < Base
       BASE_FILENAME = 'omnisearch_autocorrect_index'
     end

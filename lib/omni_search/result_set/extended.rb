@@ -7,7 +7,6 @@ module OmniSearch
   # special reward for having only one result!
   # these are specified in the model, and may be subject to caching
   # you know, for extra 'speed'
-
   class ResultSet::Extended
 
     def self.find(results)

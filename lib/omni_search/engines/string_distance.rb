@@ -10,6 +10,7 @@ module OmniSearch::Engines
     BASE_SCORE           = 1
     NULL_SCORE           = 0
 
+
     def score(item)
       list_item = item[:value].downcase.strip
       search_string = @term.downcase

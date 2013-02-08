@@ -14,8 +14,8 @@ module OmniSearch
   # ================================================================
   # Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).save
   #
-
   class Indexes::Builder
+
     # index_class holds an one of the user configurable classes.
     #  see Indexes::Register, for how an index_class is specified
     attr_accessor :index_class
