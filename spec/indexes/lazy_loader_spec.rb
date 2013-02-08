@@ -3,7 +3,7 @@ require './spec/spec_helper'
 describe Indexes::Lazy do
   let(:the_class) {Indexes::Lazy}
   let(:the_instance) {Indexes::Lazy.new()}
-  
+
   describe 'Class Methods' do
     subject {the_class}
     it {should respond_to :load}

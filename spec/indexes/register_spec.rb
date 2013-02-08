@@ -60,16 +60,16 @@ describe Indexes::Register do
       #       host_class.send(:define_method, :index_name) {'test'}
       #       host_instance.file.should be_an Indexes::Storage::Base
       #     end
-      # 
+      #
       #     it '#build_records passes each collection member to record_template' do
       #       host_class.send(:define_method, :collection) {
       #         ['a', 'b']
       #       }
-      # 
+      #
       #       host_instance.should_receive(:record_template).with('a')
       #       host_instance.should_receive(:record_template).with('b')
       #       host_instance.build_records
-      # 
+      #
       #     end
     end
 
@@ -84,7 +84,7 @@ describe Indexes::Register do
       after do
          Object.send(:remove_const, :Peanuts)
          Object.send(:remove_const, :SomethingElse)
-        
+
       end
 
       it '#index_name is set by indexes' do

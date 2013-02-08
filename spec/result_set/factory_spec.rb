@@ -55,7 +55,7 @@ describe ResultSet::Factory do
     it "#get_results(index_class, records) passes a list off to an engine to be scored" do
       records = ['a', 'b', 'c']
       index_class = 'placeholder'
-      
+
       Engines::Base.should_receive(:score).with(records, some_term, 0, index_class)
       the_instance.get_results records, index_class
     end

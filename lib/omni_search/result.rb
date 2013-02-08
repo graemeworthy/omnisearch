@@ -16,8 +16,8 @@ module OmniSearch
       @id         = data[:id]
       @klass      = data[:klass]
     end
-    
-    def method_missing(id, *args)      
+
+    def method_missing(id, *args)
       @raw_data[id]
     end
 

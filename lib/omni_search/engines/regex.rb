@@ -2,7 +2,7 @@
 module OmniSearch::Engines
   # a simple scoring system
   class Regex < Base
-  	# binary match detector, returns a 1 or a a zero
+    # binary match detector, returns a 1 or a a zero
     def score(item)
       list_item = item[:value].downcase
       search_string = @term.downcase
