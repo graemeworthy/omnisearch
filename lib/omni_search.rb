@@ -28,6 +28,8 @@ require 'omni_search/indexes/builder'
 require 'omni_search/indexes/fetcher'
 require 'omni_search/indexes/lazy_loader'
 require 'omni_search/indexes/base'
+require 'omni_search/indexes/trigram'
+require 'omni_search/indexes/plaintext'
 
 require 'omni_search/engines'
 require 'omni_search/engines/base'
