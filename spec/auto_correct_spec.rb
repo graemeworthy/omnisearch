@@ -114,8 +114,8 @@ describe AutoCorrect do
       the_class.add('a mistake', 'a correction')
       the_class.add('another mistake', 'a correction')
       the_class.add('unrelated', 'completely')
-
-      the_class.correcting_to('a correction').should == ['a mistake', 'another mistake']
+      expected = ['a mistake', 'another mistake']
+      the_class.correcting_to('a correction').should == expected
     end
   end
 

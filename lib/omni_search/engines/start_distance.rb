@@ -9,7 +9,6 @@ module OmniSearch::Engines
       list_item.strip!
       return 0 if list_item == ""
       list_item_words = list_item.split(" ")
-      search_string = @term.downcase
       search_string_words = @term.split(" ")
       my_scores = search_string_words.collect{|ss|
         scores = score_words(list_item_words, ss)

@@ -89,7 +89,9 @@ describe Search do
     it 'put the return value of top results, on top' do
       top_dummy = ['i am first']
       ResultSet::Extended.should_receive(:find).with(dummy_results)
-      ResultSet::Top.should_receive(:find).with(dummy_results).and_return(top_dummy)
+      ResultSet::Top.should_receive(:find).
+        with(dummy_results).
+        and_return(top_dummy)
       Search.new(the_term).result_sets.first.should be top_dummy
 
     end

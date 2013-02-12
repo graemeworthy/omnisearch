@@ -35,7 +35,7 @@ module OmniSearch
   #        {
   #         :id => item.id,
   #         :value => item.full_name,
-  #         :label => "#{item.full_name} <span class='quiet'> a member of SomeClass </span>"
+  #         :label => "#{item.full_name}  a member of <b> SomeClass </b>"
   #        }
   #      end
   #

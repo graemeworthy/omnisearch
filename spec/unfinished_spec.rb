@@ -29,6 +29,7 @@ describe 'unfinished specs' do
     Object.send(:remove_const, :SomethingIndex)
     Indexes.list.clear
   end
+
   it 'should not fail while the following is happening' do
     Indexes.list #=> {"OmniSearch::Indexes"=>[SomethingIndex]}
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).index_type
@@ -63,14 +64,20 @@ describe 'unfinished specs' do
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).collection
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).records
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).save
-    `cat #{Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).storage.file_path}`
+    `cat #{Indexes::Builder.new(
+      SomethingIndex,
+      Indexes::Plaintext
+    ).storage.file_path}`
 
     p"--"
 
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).records
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).save
 
-    @records       = Indexes::Fetcher.new(SomethingIndex, Indexes::Trigram).records
+    @records       = Indexes::Fetcher.new(
+                        SomethingIndex,
+                        Indexes::Trigram
+                     ).records
     @string        = 'space'
     @results       = Trigram.search(@records, @string)
     @cutoff        = 0
@@ -79,7 +86,12 @@ describe 'unfinished specs' do
     ResultSet::Factory.sets(Indexes::Trigram, Engines::Triscore, 'spa', 0)
 
 
-    fact =  ResultSet::Factory.new(Indexes::Trigram, Engines::Triscore, 'spa', 0)
+    fact =  ResultSet::Factory.new(
+                  Indexes::Trigram,
+                  Engines::Triscore,
+                  'spa',
+                  0)
+
     fact.result_sets
 
 

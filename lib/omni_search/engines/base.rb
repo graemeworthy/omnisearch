@@ -8,8 +8,7 @@ module OmniSearch
     #
     # Usage
     # -----
-    # Engines::Base.new(['peanuts', 'gravy', 'catepillars'], 'search').score_list
-    #  - or -
+    #
     # Engines::Base.score(['peanuts', 'gravy', 'catepillars'], 'search')
     #
     # Useful Subclasses

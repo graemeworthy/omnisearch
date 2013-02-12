@@ -24,8 +24,10 @@ describe Indexes::Storage::Base do
   after(:all) do
     cleanup_storage
     OmniSearch.configure {|config|
-      config.path_to_index_files                   = "./spec/examples/index_path"
-      config.path_to_autoload_search_classes_from  = "./spec/examples/search_indexes"
+      index_path = "./spec/examples/index_path"
+      search_classes =  "./spec/examples/search_indexes"
+      config.path_to_index_files                   = index_path
+      config.path_to_autoload_search_classes_from  = search_classes
     }
   end
 
@@ -123,8 +125,9 @@ describe Indexes::Storage::Base do
     end
 
     it 'can be subclassed to use diff paths' do
-
-      SomeStorage.new('escalator').send(:file_path).should == 'stairway/heaven_escalator'
+      storage = SomeStorage.new('escalator')
+      path = storage.send(:file_path)
+      path.should == 'stairway/heaven_escalator'
 
     end
   end

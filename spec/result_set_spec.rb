@@ -64,7 +64,7 @@ describe ResultSet do
     subject.results.first.should be_a Result
   end
 
-  it 'brands all of its result children with the index_name of the indexed class' do
+  it 'brands all its result children with index_name of the indexed class' do
     a_result_set = ResultSet.new(PhysicianIndex, [a_result])
     branded_result = a_result_set.results.first
     branded_result.klass.should == "Physician"

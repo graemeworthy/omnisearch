@@ -34,8 +34,11 @@ describe Indexes do
     end
     it '#build calls :build on everything in @@list' do
       builder_double = double()
-      Indexes::Builder.should_receive(:new).at_least(4).times.and_return(builder_double)
-      builder_double.should_receive(:save).at_least(4).times
+      Indexes::Builder.should_receive(:new).
+        at_least(4).times.
+        and_return(builder_double)
+      builder_double.should_receive(:save).
+        at_least(4).times
 
       the_class.build
 
@@ -63,7 +66,7 @@ describe Indexes do
   end
 
 
-  describe "The Big Picture, how it works with Builder for Indexes::Plaintext" do
+  describe "The Big Picture,  Builder for Indexes::Plaintext" do
 
     before(:all) do
       Indexes.list.clear
@@ -95,7 +98,7 @@ describe Indexes do
       Indexes.list.clear
     end
 
-    it 'Builder adds an instsnce of any including classes to list' do
+    it 'Builder adds an instance of any including classes to list' do
       Indexes.list.first.should be SomethingIndex
     end
 

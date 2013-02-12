@@ -17,12 +17,14 @@ describe Indexes::Lazy do
   describe 'the function' do
     before(:all) do
       OmniSearch.configure{|config|
-        config.path_to_autoload_search_classes_from = "./spec/examples/index_path"
+        index_path = "./spec/examples/index_path"
+        config.path_to_autoload_search_classes_from = index_path
       }
     end
     after(:all) do
       OmniSearch.configure{|config|
-        config.path_to_autoload_search_classes_from = "./spec/examples/search_indexes"
+        search_classes =  "./spec/examples/search_indexes"
+        config.path_to_autoload_search_classes_from = search_classes
       }
     end
 

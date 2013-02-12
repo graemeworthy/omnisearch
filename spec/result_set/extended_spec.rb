@@ -16,7 +16,9 @@ describe ResultSet::Extended do
   let(:example_set) {
     ResultSet.new(PhysicianDemoIndex, [example_result])
   }
-  let(:example_result)  {Result.new(:id => 1, :value => 'something', :score => 1)}
+  let(:example_result)  {
+    Result.new(:id => 1, :value => 'something', :score => 1)
+  }
   let(:example_results) {[example_set]}
 
   let(:the_class) {ResultSet::Extended}
@@ -59,7 +61,8 @@ describe ResultSet::Extended do
 
     it 'extended_results should return default_result, if no winner' do
       no_winner_instance = the_class.new([example_set, example_set])
-      no_winner_instance.extended_results.should == no_winner_instance.default_result
+      expected = no_winner_instance.default_result
+      no_winner_instance.extended_results.should == expected
     end
 
     it 'default result should be []' do
@@ -90,7 +93,9 @@ describe ResultSet::Extended do
       the_instance.extended_results
     end
     it 'should delegate to the indexed class' do
-      the_instance.extended_results.should ==  [{:id => 1, :label => 'i am an extended result'}]
+      the_instance.extended_results.should ==  [
+        {:id => 1, :label => 'i am an extended result'}
+      ]
     end
 
     it 'should rescue a notImplemented and pass it to default' do
