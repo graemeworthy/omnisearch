@@ -25,12 +25,12 @@ module OmniSearch
     def label
       label = ''
       if top_hit?
-        label = "Top Hit"
-       elsif search_more?
-         label = "Site Search"
-       else
-         set_name
-       end
+        label = 'Top Hit'
+      elsif search_more?
+        label = 'Site Search'
+      else
+        set_name
+      end
 
     end
 
@@ -47,7 +47,7 @@ module OmniSearch
     end
 
     def sort_list
-      @results.sort!{|a, b| b.score <=> a.score }
+      @results.sort! { |a, b| b.score <=> a.score }
     end
 
     def trim_list
@@ -55,7 +55,7 @@ module OmniSearch
     end
 
     def brand_list
-      @results.each {|item| item.klass = indexed_klass}
+      @results.each { |item| item.klass = indexed_klass }
     end
 
     def set_name

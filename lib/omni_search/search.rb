@@ -25,7 +25,7 @@ module OmniSearch
     end
 
     def just(indexed_klass)
-      @result_sets.select{|set| set.klass == indexed_klass}[0]
+      @result_sets.select { |set| set.klass == indexed_klass }[0]
     end
 
     protected

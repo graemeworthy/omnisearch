@@ -78,7 +78,7 @@ module OmniSearch
     end
 
     def correcting_to
-      list.select{ |k,v| v == @correction }.keys
+      list.select { |k, v| v == @correction }.keys
     end
 
     def list

@@ -7,13 +7,13 @@ module OmniSearch::Engines
     def score(item)
       list_item = item[:value].downcase
       list_item.strip!
-      return 0 if list_item == ""
-      list_item_words = list_item.split(" ")
-      search_string_words = @term.split(" ")
-      my_scores = search_string_words.collect{|ss|
+      return 0 if list_item == ''
+      list_item_words = list_item.split(' ')
+      search_string_words = @term.split(' ')
+      my_scores = search_string_words.collect do |ss|
         scores = score_words(list_item_words, ss)
         scores.sort.pop
-      }
+      end
       score_sum = my_scores.inject(:+)
       return 0 if my_scores.length == 0
       score_sum / my_scores.length

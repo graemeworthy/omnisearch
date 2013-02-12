@@ -6,7 +6,7 @@ require 'active_support/core_ext/string/inflections'
 module OmniSearch
 end
 
-here = File.expand_path( File.dirname(__FILE__))
+here = File.expand_path(File.dirname(__FILE__))
 $: << here
 
 #require 'omni_search/railtie'
@@ -48,4 +48,4 @@ require 'tools/string_distance'
 require 'tools/word_distance'
 
 #LOAD RAKE TASKS, if you happen to be rake
-load File.join(here, "../rails/tasks.rake") if defined?(Rake)
+load File.join(here, '../rails/tasks.rake') if defined?(Rake)

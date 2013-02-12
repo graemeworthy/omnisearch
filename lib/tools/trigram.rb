@@ -45,9 +45,9 @@ class Trigram
 
     # rank and sort matching ids
     match_counts = Hash.new(0) #zomg, hash can have a default value!
-    matched.each{|match| match_counts[match] += 1}
+    matched.each { |match| match_counts[match] += 1 }
 
-    ranked_results = match_counts.sort { |y, x| x[1]<=>y[1] }
+    ranked_results = match_counts.sort { |y, x| x[1] <=> y[1] }
     return ranked_results
   end
 
@@ -66,7 +66,7 @@ class Trigram
   end
 
   def self.clean_up(str)
-    str.gsub!(/(\s|\(|\)|\-|\.|\/|\'|\,)+/, "")
+    str.gsub!(/(\s|\(|\)|\-|\.|\/|\'|\,)+/, '')
     str.downcase!
   end
 

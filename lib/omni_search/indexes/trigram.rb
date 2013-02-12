@@ -6,7 +6,7 @@ module OmniSearch
     STORAGE_ENGINE = Indexes::Storage::Trigram
 
     def build_index(collection)
-      values = collection.map{|x| x[:value]}
+      values = collection.map { |x| x[:value] }
       Trigram.build_index(values)
     end
 

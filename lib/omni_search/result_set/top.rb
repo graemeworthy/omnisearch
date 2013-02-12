@@ -14,7 +14,7 @@ module OmniSearch
       ResultSet.new(ResultSet::Top, [instance.top], :top_hit)
     end
 
-    def initialize(  result_sets)
+    def initialize(result_sets)
       @result_sets = result_sets
       @top     = nil
       @top_score = 0

@@ -19,11 +19,11 @@ module OmniSearch
     end
 
     def winner
-      @result_sets.collect{|set| set.results}.flatten.first if winner?
+      @result_sets.collect { |set| set.results }.flatten.first if winner?
     end
 
     def winner?
-      @result_sets.collect{|set| set.results}.flatten.length == 1
+      @result_sets.collect { |set| set.results }.flatten.length == 1
     end
 
     def winner_index

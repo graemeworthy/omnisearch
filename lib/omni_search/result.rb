@@ -10,7 +10,7 @@ module OmniSearch
     attr_accessor :score
 
     alias_method :label, :value
-    def initialize(data={})
+    def initialize(data = {})
       @raw_data   = data
       @score      = data[:score]
       @value      = data[:label]

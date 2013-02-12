@@ -15,7 +15,7 @@ module OmniSearch::Engines
         indexed_item  = indexed_item(match)
         next if score < @cutoff
 
-        results << Result.new(indexed_item.merge({:score => score}) )
+        results << Result.new(indexed_item.merge({score: score}))
       end
 
       results.compact

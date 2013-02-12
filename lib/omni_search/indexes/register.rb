@@ -36,10 +36,12 @@ module OmniSearch
     end
 
     module ClassMethods
+
       def indexes(klass_name)
         @index_name = klass_name
         OmniSearch::Indexes.list << self
       end
+
       def index_name
         raise NotImplementedError,
           "#{self.class} needs to declare indexes()" unless @index_name
@@ -52,9 +54,7 @@ module OmniSearch
     end
 
     def all
-      collection.collect {|item|
-        record_template(item)
-      }
+      collection.collect { |item| record_template(item) }
     end
 
     def index_name

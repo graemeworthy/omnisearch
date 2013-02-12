@@ -32,19 +32,20 @@ module OmniSearch
 
       def initialize(list, term, cutoff = 0, backmap = nil)
         @list = list
-        @term = term || ""
+        @term = term || ''
         @results = []
         @cutoff = cutoff
         @backmap = backmap
       end
 
       def score_list
-        @list.each{|item|
+        @list.each do |item|
           item ||= {}
           item_score = score(item)
-          scored_item = item.merge(:score => item_score)
+          scored_item = item.merge(score: item_score)
           @results << Result.new(scored_item) if item_score > @cutoff
-        }
+        end
+
         @results
       end
 

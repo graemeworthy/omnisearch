@@ -28,16 +28,16 @@ module OmniSearch
     attr_accessor :index_types
 
     DEFAULTS = {
-      :path_to_index_files => '/tmp/omnisearch/',
-      :path_to_autoload_search_classes_from => nil,
-      :index_types => [
+      path_to_index_files: '/tmp/omnisearch/',
+      path_to_autoload_search_classes_from: nil,
+      index_types: [
         Indexes::Plaintext,
         Indexes::Trigram
       ]
     }
 
     def initialize(options={})
-      DEFAULTS.each do |key,value|
+      DEFAULTS.each do |key, value|
         self.send("#{key}=", options[key] || value)
       end
     end

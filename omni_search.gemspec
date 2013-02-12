@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "ZenTest"
   s.add_development_dependency "rails"
   s.add_development_dependency "cane"
+  s.add_development_dependency "rubocop"
 
 
   s.add_runtime_dependency "activesupport"
