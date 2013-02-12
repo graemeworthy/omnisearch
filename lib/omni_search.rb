@@ -44,6 +44,8 @@ require 'omni_search/correction'
 
 require 'omni_search/configuration'
 require 'tools/trigram'
+require 'tools/string_distance'
+require 'tools/word_distance'
 
 #LOAD RAKE TASKS, if you happen to be rake
 load File.join(here, "../rails/tasks.rake") if defined?(Rake)
