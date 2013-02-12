@@ -32,6 +32,23 @@ describe ResultSet do
     subject.label.should eq 'Physicians'
   end
 
+  describe 'label' do
+
+    it "is normally a pluralized class name" do
+      subject.label.should eq 'Physicians'
+    end
+
+    it "can be 'Top Hit'" do
+      label = ResultSet.new(Physician, [a_result], :top_hit).label
+      label.should == 'Top Hit'
+    end
+    it "can be 'Site Search'" do
+      label = ResultSet.new(Physician, [a_result], :search_more).label
+      label.should == 'Site Search'
+    end
+  end
+
+
   it "should have an indexed_klass which is what it indexes" do
     subject.send(:indexed_klass).to_s.should eq "Physician"
   end

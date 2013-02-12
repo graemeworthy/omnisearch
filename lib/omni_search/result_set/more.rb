@@ -1,11 +1,8 @@
 # encoding: UTF-8
 module OmniSearch
 
-  # Finds the top result in a set of ResultSets
-  # Returns a new special resultset, 'TopHit'
+  # Returns a new special resultset, 'More'
   class ResultSet::More
-
-    attr_accessor :top
 
     def self.make(term)
       result = Result.new({label: term, klass:'Search', score: 1})

@@ -10,6 +10,7 @@ module OmniSearch
     attr_accessor :results
     attr_accessor :klass
     attr_accessor :label
+    attr_reader :special_type
 
     def initialize(klass, results_list, special_type=false)
       @klass = klass
