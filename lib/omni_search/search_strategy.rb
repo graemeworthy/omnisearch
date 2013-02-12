@@ -14,11 +14,36 @@ module OmniSearch
   #
   class Search::Strategy
 
-    def self.run(term)
-      results = ResultSet::Factory.sets(Indexes::Plaintext, Engines::Regex, term, 0)
-      return results unless results.empty?
-      #failover
-      return ResultSet::Factory.sets(Indexes::Plaintext, Engines::StringDistance, term, 0.55)
+    def self.run(query)
+      instance = self.new(query)
+      instance.run
+    end
+
+    def initialize(query)
+      @query = query
+    end
+
+    def run
+      return primary unless primary.empty?
+      return failover
+    end
+
+    def primary
+      @primary ||= ResultSet::Factory.sets(
+        Indexes::Plaintext,
+        Engines::Regex,
+        @query,
+        0
+      )
+    end
+
+    def failover
+      @failover ||= ResultSet::Factory.sets(
+        Indexes::Plaintext,
+        Engines::StringDistance,
+        @query,
+        0.55
+      )
     end
 
   end
