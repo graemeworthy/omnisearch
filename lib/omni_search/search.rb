@@ -2,10 +2,15 @@
 module OmniSearch
   # Usage
   # -------------------------------------
-  # OmniSearch::Search.find('term')
-  # returns a Results object
+  # OmniSearch::Search.new('term')
+  #
+  # Executes Search::Strategy, and returns the results.
+  #  also builds the extended results and gathers top results
+  #
   # if it finds a synonym, that is substituted for term
   # if it finds a 'perfect' match, the intellegent results are also returned
+  #
+  #
   class Search
 
     attr_accessor :original
@@ -13,13 +18,14 @@ module OmniSearch
     attr_accessor :correction
     attr_accessor :result_sets
     attr_accessor :extended_result_sets
+    attr_accessor :from_cache
 
     def initialize(term)
       @original = term
       @term     = term
       @result_sets = []
       @extended_result_sets = []
-
+      @from_cache = false
       auto_correct
       build_results
     end
@@ -35,6 +41,7 @@ module OmniSearch
       @term       = @correction.replacement if @correction
     end
 
+    # executes search strategy and populates local variables
     def build_results
       @result_sets          = Search::Strategy.run(@term)
 
@@ -43,9 +50,6 @@ module OmniSearch
         @top                  = ResultSet::Top.find(@result_sets)
         @result_sets.unshift @top
       end
-      # always add the search link?
-      # @more                  = ResultSet::More.make(@term)
-      # @result_sets.push @more
 
     end
   end

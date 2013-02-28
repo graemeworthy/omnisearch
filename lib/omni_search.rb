@@ -1,7 +1,9 @@
 # encoding: UTF-8
 require 'yaml'
+require 'memcache'
 require 'active_support'
 require 'active_support/core_ext/string/inflections'
+require 'active_support/cache/mem_cache_store'
 
 module OmniSearch
 end
@@ -12,6 +14,7 @@ $: << here
 #require 'omni_search/railtie'
 require 'omni_search/errors'
 require 'omni_search/search'
+require 'omni_search/search_cached'
 require 'omni_search/search_strategy'
 
 require 'omni_search/result'
@@ -36,8 +39,12 @@ require 'omni_search/engines/base'
 require 'omni_search/engines/regex'
 require 'omni_search/engines/start_distance'
 require 'omni_search/engines/string_distance'
-
 require 'omni_search/engines/triscore'
+
+require 'omni_search/cache'
+require 'omni_search/cache/base'
+require 'omni_search/cache/query_cache'
+require 'omni_search/cache/index_cache'
 
 require 'omni_search/auto_correct'
 require 'omni_search/correction'

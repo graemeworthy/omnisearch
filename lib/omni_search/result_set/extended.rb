@@ -40,9 +40,7 @@ module OmniSearch
       begin
         index = winner_index.new
         index.extended_results_for(winner)
-
       rescue NotImplementedError
-
         default_result
       end
 

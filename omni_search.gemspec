@@ -1,34 +1,35 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "omni_search/version"
+$:.push File.expand_path('../lib', __FILE__)
+require 'omni_search/version'
 
 Gem::Specification.new do |s|
-  s.name        = "omni_search"
+  s.name        = 'omni_search'
   s.version     = OmniSearch::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Graeme Worthy"]
-  s.email       = ["graeme@workben.ch"]
-  s.homepage    = ""
-  s.summary     = %q{OmniSearch is for providing fast intellegent results as search suggestions for sparkle}
+  s.authors     = ['Graeme Worthy']
+  s.email       = ['graeme@workben.ch']
+  s.homepage    = ''
+  s.summary     = <<-SUMMARY
+    OmniSearch is for providing fast intellegent results as search
+    suggestions for sparkle
+  SUMMARY
   s.description = %q{OmniSearch, is watching you.}
-
-  s.rubyforge_project = "omni_search"
   s.files           = Dir['lib/**/*.rb']
-  #
-  # s.files         = `git ls-files`.split("\n")
-  # s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  # s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.require_paths = ['lib']
 
-  s.add_development_dependency "activesupport"
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "simplecov"
-  s.add_development_dependency "ZenTest"
-  s.add_development_dependency "rails"
-  s.add_development_dependency "cane"
-  s.add_development_dependency "rubocop"
+  s.add_development_dependency 'activesupport'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'ZenTest'
+  s.add_development_dependency 'rails'
+  s.add_development_dependency 'cane'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'memcache'
+  s.add_development_dependency 'memcache-client'
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-rspec'
 
 
-  s.add_runtime_dependency "activesupport"
+  s.add_runtime_dependency 'activesupport'
 
 end

@@ -1,6 +1,5 @@
 require './spec/spec_helper'
 
-
 describe Search do
 
   let(:a_result) { Result.new({})}
