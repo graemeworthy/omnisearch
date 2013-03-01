@@ -173,7 +173,15 @@ describe OmniSearch::Indexes::Fetcher do
   end
 
   describe "If memcache is down" do
-     it 'should still load from disk'
+     it 'should still load from disk' do
+       fake_error = MemCache::MemCacheError.new('i am a fake error')
+
+       Cache.instance.should_receive(:read).
+         and_raise(fake_error)
+
+       an_instance.stub(:load).and_return(dummy_record)
+       an_instance.records.should == dummy_record
+     end
   end
 
 
