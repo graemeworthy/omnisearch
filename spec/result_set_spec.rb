@@ -1,14 +1,5 @@
 require './spec/spec_helper'
 
-class Physician
-end
-
-class PhysicianIndex
-  def self.index_name
-    "physician"
-  end
-end
-
 describe ResultSet do
   let(:a_result) { Result.new({})}
   let(:demo)  {ResultSet.new(PhysicianIndex, [a_result])}

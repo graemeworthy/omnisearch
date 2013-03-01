@@ -2,8 +2,6 @@
 require './spec/spec_helper'
 require 'benchmark'
 
-# load demo indexes
-require './spec/examples/search_indexes/indexes'
 describe Search::Cache do
     let(:the_term) { 'lorem' } # known good term look in the /spec indexes dir
 
@@ -51,29 +49,27 @@ describe Search::Cache do
 
     end
 
-    describe 'benchmark cache' do
+    # describe 'benchmark cache' do
+    #   it 'should be faster than without' do
+    #     # otherwise, why are we doing this?
+    #     without_cache = Benchmark.realtime do
+    #       1000.times { Search.new(the_term) }
+    #     end
+    #     Cache::QueryCache.clear
 
-      it 'should be faster than without' do
-        # otherwise, why are we doing this?
-        without_cache = Benchmark.realtime do
-          1000.times { Search.new(the_term) }
-        end
-        Cache::QueryCache.clear
+    #     without_precache = Benchmark.realtime do
+    #       1000.times { Search::Cached.find(the_term) }
+    #     end
 
-        without_precache = Benchmark.realtime do
-          1000.times { Search::Cached.find(the_term) }
-        end
+    #     Search::Cached.find(the_term)
 
-        Search::Cached.find(the_term)
+    #     with_precache = Benchmark.realtime do
+    #       1000.times { Search::Cached.find(the_term) }
+    #     end
 
-        with_precache = Benchmark.realtime do
-          1000.times { Search::Cached.find(the_term) }
-        end
+    #     without_cache.should be > without_precache
+    #     without_cache.should be > with_precache
+    #   end
 
-        without_cache.should be > without_precache
-        without_cache.should be > with_precache
-
-      end
-
-    end
+    # end
   end

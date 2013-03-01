@@ -1,19 +1,17 @@
+# Encoding: UTF-8
 require 'simplecov'
-SimpleCov.start do
-  add_filter "/spec/"
-end
-
-require 'rails' #fixme
+SimpleCov.start { add_filter '/spec/' }
 
 require './lib/omni_search'
+require './spec/examples/search_indexes/indexes'
 include OmniSearch
 
-OmniSearch.configure {|config|
-      index_path = "./spec/examples/index_path"
-      search_classes =  "./spec/examples/search_indexes"
+OmniSearch.configure do |config|
+      index_path = './spec/examples/index_path'
+      search_classes =  './spec/examples/search_indexes'
       config.path_to_index_files                   = index_path
       config.path_to_autoload_search_classes_from  = search_classes
-}
+end
 
 
 
