@@ -1,6 +1,5 @@
 # Encoding: UTF-8
 require 'simplecov'
-SimpleCov.start { add_filter '/spec/' }
 
 require './lib/omni_search'
 require './spec/examples/search_indexes/indexes'
