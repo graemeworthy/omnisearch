@@ -5,28 +5,38 @@ module OmniSearch
   # and provides read, write, and clear methods.
   # it also provides error handling in the case that MemCache Goes down.
   class Cache::Base
-    def self.namespace_query(query)
-        "#{query}"
+    # Public: takes a key(string)
+    # and modifies it to namespace it
+    # returns a string
+    def self.namespace_key(key)
+        "#{key}"
     end
 
-    def self.read(query)
+    # wrapper for Cache#read
+    #
+    def self.read(key)
         begin
-         query = self.namespace_query(query)
-         Cache.instance.read(query)
+         ns_key = self.namespace_key(key)
+         Cache.instance.read(ns_key)
         rescue  MemCache::MemCacheError
           return nil
         end
     end
 
-    def self.write(query, value)
+    # wrapper for Cache#write
+    # returns the passed value
+    # caches missing memcache errors
+    def self.write(key, value)
         begin
-          query = self.namespace_query(query)
-          Cache.instance.write(query, value)
+          ns_key = self.namespace_key(key)
+          Cache.instance.write(ns_key, value)
         rescue  MemCache::MemCacheError
           return value
         end
+        return value
     end
 
+    # wrapper for Cache#clear
     def self.clear()
         begin
           Cache.instance.clear
