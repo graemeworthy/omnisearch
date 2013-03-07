@@ -6,8 +6,9 @@ module OmniSearch
   class Cache < ActiveSupport::Cache::MemCacheStore
     include ::Singleton
     def initialize
-        server = 'localhost:11211'
-        super(server, namespace: 'omnisearch')
+        server    = OmniSearch.configuration.memcache_server
+        namespace = OmniSearch.configuration.memcache_namespace
+        super(server, namespace: namespace)
     end
   end
 end

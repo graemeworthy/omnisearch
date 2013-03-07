@@ -1,5 +1,6 @@
 # encoding: UTF-8
 module OmniSearch
+
   # The base class for writing cache reader/writer implementations
   # it namespaces the query
   # and provides read, write, and clear methods.

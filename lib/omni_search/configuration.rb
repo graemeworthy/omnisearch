@@ -27,13 +27,25 @@ module OmniSearch
     # you may add another index type by adding it to this array
     attr_accessor :index_types
 
+    # memcache server:
+    # in the format serveraddress:port
+    # the default for memcache is localhost:11211
+    attr_accessor :memcache_server
+
+    # memcache namespace:
+    # omnisearch not use the global memcache namespace
+    attr_accessor :memcache_namespace
+
+
     DEFAULTS = {
       path_to_index_files: '/tmp/omnisearch/',
       path_to_autoload_search_classes_from: nil,
       index_types: [
         Indexes::Plaintext,
         Indexes::Trigram
-      ]
+      ],
+      memcache_server: 'localhost:11211',
+      memcache_namespace: 'omnisearch'
     }
 
     def initialize(options={})
@@ -47,6 +59,7 @@ module OmniSearch
   def self.configuration
     @configuration ||= Configuration.new
   end
+
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)
