@@ -1,6 +1,7 @@
 # encoding: UTF-8
+
 require 'yaml'
-require 'memcache'
+require 'singleton'
 require 'active_support'
 require 'active_support/inflector'
 require 'active_support/core_ext/string/inflections'

@@ -17,20 +17,22 @@ Gem::Specification.new do |s|
   s.files           = Dir['lib/**/*.rb']
   s.require_paths = ['lib']
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'activesupport'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'ZenTest'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'cane'
   s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'memcache'
-  s.add_development_dependency 'memcache-client'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'terminal-notifier-guard'
   s.add_development_dependency 'rb-fsevent' #for guard
 
   s.add_runtime_dependency 'activesupport'
+  s.add_runtime_dependency 'memcache'
+  ## will use dalli in rails 4
+  ## s.add_runtime_dependency 'dalli'
+  s.add_runtime_dependency 'memcache-client'
 
 end
