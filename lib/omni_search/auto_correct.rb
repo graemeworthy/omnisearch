@@ -117,9 +117,7 @@ module OmniSearch
     end
 
     def circular?
-      if list.keys.include?(@correction)
-        raise CircularReference
-      end
+        raise CircularReference if list.keys.include?(@correction)
     end
 
 

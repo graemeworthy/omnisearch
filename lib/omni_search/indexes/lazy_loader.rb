@@ -26,9 +26,7 @@ module OmniSearch
     end
 
     def load
-      if indexes_path
         Dir[indexes_path + '/*.rb'].each { |file| require file }
-      end
     end
 
     def indexes_path
