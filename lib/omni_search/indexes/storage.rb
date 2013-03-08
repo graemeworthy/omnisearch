@@ -44,26 +44,52 @@ module OmniSearch
         @index_name = name
       end
 
-      def touch
-        mkdir
-        `touch #{file_path}`
-      end
-
+      # public
+      # saves records to disk.
       def save(records)
         mkdir
-        File.open(file_path, 'w') do |f|
-          yaml_output = records.to_yaml
-          f.puts yaml_output
-        end
+        File.open(file_path, 'w') { |f| f.puts serialize(records) }
       end
 
+      # public
+      # loads from storage or raises MissingIndexFile
+      #
       def load
         unless exists?
           raise MissingIndexFile, "could not file the file #{file_path}"
         end
         file   = File.read(file_path)
-        loaded = YAML::load(file);
+        loaded = deserialize(file)
         return loaded
+      end
+
+      # public
+      # destroys the records used by this storage
+      def delete
+        `rm #{file_path}`
+      end
+
+      # public
+      # creates an empty record
+      def touch
+        mkdir
+        `touch #{file_path}`
+      end
+
+      # public
+      # the location of the storage file
+      def file_path
+        File.join(root_path, filename)
+      end
+
+      protected
+
+      def serialize(records)
+        YAML::dump(records)
+      end
+
+      def deserialize(serialized_data)
+        YAML::load(serialized_data)
       end
 
       def exists?
@@ -78,12 +104,6 @@ module OmniSearch
         end
       end
 
-      def file_path
-        File.join(root_path, filename)
-      end
-
-      protected
-
       def mkdir
         unless File.exists?(root_path) && File.directory?(root_path)
           #puts "creating directories"
@@ -97,6 +117,7 @@ module OmniSearch
 
     end
 
+    # FIXME, while plain these things should be in thier own files
     # same as the base index, but with a different save location
     class Plaintext < Base
       BASE_FILENAME = 'omnisearch_plaintext_index'

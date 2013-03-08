@@ -10,5 +10,11 @@ describe OmniSearch::Cache do
             Cache.instance.should == Cache.instance
         end
     end
+    describe 'self.clear' do
+        it 'should call clear on the instance' do
+            Cache.instance.should_receive(:clear)
+            Cache.clear
+        end
+    end
 end
 

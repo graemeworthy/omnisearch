@@ -8,11 +8,12 @@ module OmniSearch
   #
   # it stores DoctorIndex.records,
   # formatted the way thay PlainText needs them
-  # in Plaintext::StorageEngine.save
+  #
   #
   # Usage:
   # ================================================================
-  # Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).save
+  # instance = Indexes::Builder.new(SomethingIndex, Indexes::Plaintext)
+  # instance.save
   #
   class Indexes::Builder
 
@@ -30,32 +31,38 @@ module OmniSearch
       @index_type  = index_type
     end
 
-    def name
-      index_class.index_name
-    end
-
-    def collection
-      @collection ||= index_class.new.all
-    end
-
-    def records
-      @records ||= build_index
-    end
-
-    def build_index
-      index_type.build(collection)
-    end
-
-    def storage
-      index_type::STORAGE_ENGINE.new(name)
-    end
-
+    # save the constructed records to the storage engine
     def save
       storage.save(records)
     end
 
-    def load
-      storage.load
+    # deletes the stored records
+    def delete
+      storage.delete
+    end
+
+    private
+
+    def name
+      index_class.index_name
+    end
+
+    def index
+      @index ||= index_class.new
+    end
+
+    def collection
+      index.all
+    end
+
+    # formats the collection using the index_type's build rules
+    def records
+      index_type.build(collection)
+    end
+
+    # creates an instance of the storage engine
+    def storage
+      @storage ||= index_type.storage_engine.new(name)
     end
 
   end

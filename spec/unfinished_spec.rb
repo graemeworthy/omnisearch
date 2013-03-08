@@ -34,20 +34,12 @@ describe 'unfinished specs' do
     Indexes.list #=> {"OmniSearch::Indexes"=>[SomethingIndex]}
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).index_type
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).index_class
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).name
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).collection
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).storage.file_path
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).save
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).load
 
 
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).index_type
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).index_class
-    Indexes::Builder.new(SomethingIndex, Indexes::Trigram).name
-    Indexes::Builder.new(SomethingIndex, Indexes::Trigram).collection
-    Indexes::Builder.new(SomethingIndex, Indexes::Trigram).storage.file_path
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).save
-    Indexes::Builder.new(SomethingIndex, Indexes::Trigram).load
 
     Indexes::Fetcher.new(SomethingIndex, Indexes::Plaintext).records
 
@@ -61,17 +53,7 @@ describe 'unfinished specs' do
 
 
 
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).collection
-    Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).records
     Indexes::Builder.new(SomethingIndex, Indexes::Plaintext).save
-    `cat #{Indexes::Builder.new(
-      SomethingIndex,
-      Indexes::Plaintext
-    ).storage.file_path}`
-
-    p"--"
-
-    Indexes::Builder.new(SomethingIndex, Indexes::Trigram).records
     Indexes::Builder.new(SomethingIndex, Indexes::Trigram).save
 
     @records       = Indexes::Fetcher.new(

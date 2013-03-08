@@ -32,15 +32,26 @@ describe Indexes do
       the_class.list << @b_index
 
     end
-    it '#build calls :build on everything in @@list' do
+    it '#build calls :save on everything in @@list' do
       builder_double = double()
       Indexes::Builder.should_receive(:new).
         at_least(4).times.
         and_return(builder_double)
       builder_double.should_receive(:save).
         at_least(4).times
-
       the_class.build
+
+    end
+
+    it '#destory calls :delete on everything in @@list' do
+      builder_double = double()
+      Indexes::Builder.should_receive(:new).
+        at_least(4).times.
+        and_return(builder_double)
+      builder_double.should_receive(:delete).
+        at_least(4).times
+
+      the_class.destroy
 
     end
   end

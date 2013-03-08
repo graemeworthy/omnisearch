@@ -11,12 +11,16 @@ module OmniSearch
       instance.build_index(collection)
     end
 
+    def self.storage_engine
+      self::STORAGE_ENGINE
+    end
+
     def build_index(collection)
       collection
     end
 
     def storage_engine
-      self.class::STORAGE_ENGINE
+      self.class.storage_engine
     end
 
   end
