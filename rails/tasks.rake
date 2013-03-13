@@ -9,9 +9,9 @@ namespace :omnisearch do
 
   desc 'rebuilds all indexes, clears memcache'
   task reindex: :environment do
-     OmniSearch::Cache.clear
      OmniSearch::Indexes.destroy
      OmniSearch::Indexes.build
+     OmniSearch::Cache.clear
   end
 
   desc 'clears memcache'
