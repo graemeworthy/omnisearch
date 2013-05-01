@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
   s.homepage    = ''
   s.summary     = <<-SUMMARY
     OmniSearch is for providing fast intellegent results as search
-    suggestions for sparkle
+    suggestions
   SUMMARY
-  s.description = %q{OmniSearch, is watching you.}
+  s.description = %q{OmniSearch, fast search for ActiveRecord models.}
   s.files           = Dir['lib/**/*.rb']
   s.require_paths = ['lib']
 
