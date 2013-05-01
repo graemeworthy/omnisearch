@@ -1,3 +1,8 @@
+#
+# Need specific searches to return what you want and not others?
+# write some tests!
+# here is a little dsl of how to test for presence and absence of results
+
 require 'pp'
 full_search = lambda {
     @found = []
@@ -13,12 +18,12 @@ full_search = lambda {
 test_search = lambda {
   @found   =  []
   @found_a =  []
-  
-  OmniSearch::Engines::StringDistance.score(@search_index, @term, @cutoff).each {|result| 
-    @found   << result.value.downcase 
+
+  OmniSearch::Engines::StringDistance.score(@search_index, @term, @cutoff).each {|result|
+    @found   << result.value.downcase
     @found_a << "#{result.value.downcase} #{result.score}"
   }
-  
+
 }
 @search = test_search
 
@@ -51,7 +56,7 @@ runner = lambda do
     where = @found.index(result)
     if where
       p "shouldn't have #{result}"
-      
+
       @overage[@term] ||= []
       @overage[@term] << @found_a[where]
     end
@@ -87,12 +92,12 @@ runner = lambda do
   has 'medical records'
   has_no 'recognizing medical emergencies'
 
-  if OmniSearch::Indexes.list != []  
+  if OmniSearch::Indexes.list != []
     @search = full_search
     my_search 'mari rose'
     has 'mary rose'
   end
-  
+
   puts "Missing: "
   pp @missing
   puts "Overage: "

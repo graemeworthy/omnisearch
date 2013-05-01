@@ -1,3 +1,5 @@
+A model example.
+
 class PhysicianIndex
   include OmniSearch::Indexes::Builder::Plain
   indexes :physician
