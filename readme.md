@@ -2,7 +2,9 @@ OmniSearch
 ==================
 
 Fast search for ActiveRecord Models
+Relies on memcached
 
+# Todo: Add Redis support
 
 How to use:
 
