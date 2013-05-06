@@ -1,0 +1,7 @@
+---
+- :id: paris_france
+  :value: Paris
+  :label: The city known as 'Paris'
+- :id: moscow_russia
+  :value: Moscow
+  :label: Moscow, capital of Russia
