@@ -2,11 +2,24 @@ OmniSearch
 ==================
 
 Fast search for ActiveRecord Models
-Relies on memcached
 
-# Todo: Add Redis support
+Relies on memcached
+ - there is a dalli version in the branch: rails_4
+
+What Makes It Interesting
+------------------------------
+
+Multiple kinds of index scoring.
+ *  Regex
+ *  *StringDistance* - measures the edit distance between a pair of strings
+ *  *StartDistance* -  a scoring system based on the start of a word
+ *  *TriScore* - how many trigrams in a word a query matches
+    * [tri][rig][igr][gra][ram]
+
+
 
 How to use:
+--------------
 
 include the gem
 in your Gemfile add the following
@@ -59,3 +72,6 @@ to search
 ```
 OmniSearch::Search.new query
 ```
+
+Todo:
+* Add Redis support
