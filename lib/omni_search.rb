@@ -5,7 +5,7 @@ require 'singleton'
 require 'active_support'
 require 'active_support/inflector'
 require 'active_support/core_ext/string/inflections'
-require 'active_support/cache/mem_cache_store'
+require 'active_support/cache/dalli_store'
 
 module OmniSearch
 end

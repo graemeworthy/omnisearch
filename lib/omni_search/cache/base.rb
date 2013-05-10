@@ -19,7 +19,7 @@ module OmniSearch
         begin
          ns_key = self.namespace_key(key)
          Cache.instance.read(ns_key)
-        rescue  MemCache::MemCacheError
+        rescue  Dalli::DalliError
           return nil
         end
     end
@@ -31,7 +31,7 @@ module OmniSearch
         begin
           ns_key = self.namespace_key(key)
           Cache.instance.write(ns_key, value)
-        rescue  MemCache::MemCacheError
+        rescue  Dalli::DalliError
           return value
         end
         return value
@@ -41,7 +41,7 @@ module OmniSearch
     def self.refresh
         begin
           Cache.refresh
-        rescue  MemCache::MemCacheError
+        rescue  Dalli::DalliError
           return nil
         end
     end

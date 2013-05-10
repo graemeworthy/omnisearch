@@ -6,6 +6,7 @@ describe Cache::Base do
   let(:a_value)        {'a complicated return object'}
   let(:the_class)      {Cache::Base}
   let(:cache_instance) {Cache.instance}
+  let(:error)          {Dalli::DalliError}
 
   describe 'Class Methods' do
 
@@ -27,7 +28,7 @@ describe Cache::Base do
 
       it 'should return nil if there is a cache error' do
         cache_instance.should_receive(:read).
-        and_raise(MemCache::MemCacheError)
+        and_raise(error)
 
         the_class.read(a_key).should be_nil
       end
@@ -48,7 +49,7 @@ describe Cache::Base do
 
       it 'should return the value if there is a cache error' do
         cache_instance.should_receive(:write).with(a_key, a_value).
-          and_raise(MemCache::MemCacheError)
+          and_raise(error)
 
         the_class.write(a_key, a_value).should == a_value
       end
@@ -67,8 +68,8 @@ describe Cache::Base do
         the_class.refresh
       end
        it 'should recover from a cache error' do
-        cache_instance.should_receive(:refresh).
-          and_raise(MemCache::MemCacheError)
+        cache_instance.should_receive(:clear).
+          and_raise(error)
 
         expect{ the_class.refresh}.to_not raise_error
       end

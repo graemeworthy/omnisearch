@@ -4,7 +4,7 @@ module OmniSearch
   # we create this as a singleton
   # so that only one connection to the cache exists
   #
-  class Cache < ActiveSupport::Cache::MemCacheStore
+  class Cache < ActiveSupport::Cache::DalliStore
     include ::Singleton
     attr_accessor :timestamp
     def initialize
