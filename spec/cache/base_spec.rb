@@ -68,7 +68,7 @@ describe Cache::Base do
         the_class.refresh
       end
        it 'should recover from a cache error' do
-        cache_instance.should_receive(:clear).
+        cache_instance.should_receive(:refresh).
           and_raise(error)
 
         expect{ the_class.refresh}.to_not raise_error
