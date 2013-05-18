@@ -36,6 +36,9 @@ module OmniSearch
     # omnisearch not use the global memcache namespace
     attr_accessor :memcache_namespace
 
+    #seach_strategy:
+    # the class to call '.run on, with a query'
+    attr_accessor :search_strategy
 
     DEFAULTS = {
       path_to_index_files: '/tmp/omnisearch/',
@@ -44,6 +47,7 @@ module OmniSearch
         Indexes::Plaintext,
         Indexes::Trigram
       ],
+      search_strategy: OmniSearch::Search::Strategy,
       memcache_server: 'localhost:11211',
       memcache_namespace: 'omnisearch'
     }

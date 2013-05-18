@@ -43,7 +43,7 @@ module OmniSearch
 
     # executes search strategy and populates local variables
     def build_results
-      @result_sets          = Search::Strategy.run(@term)
+      @result_sets          = OmniSearch.configuration.search_strategy.run(@term)
 
       unless @result_sets.empty?
         @extended_result_sets = ResultSet::Extended.find(@result_sets)
