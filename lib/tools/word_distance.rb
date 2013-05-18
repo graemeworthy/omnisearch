@@ -18,10 +18,13 @@ module OmniSearch
     ANCESTOR_SCORE       =  OmniSearch::StringDistance::ANCESTOR_SCORE
     BASE_SCORE           =  OmniSearch::StringDistance::BASE_SCORE
     NULL_SCORE           =  OmniSearch::StringDistance::NULL_SCORE
-
+    BINGO_SCORE          =  2
 
     attr_reader :query
     attr_reader :reference
+    # countless queries are scored against a reference
+    # but the reference is itself a query
+    # i need to rename some things.
 
     def initialize(query, reference)
       @query = query
@@ -45,6 +48,7 @@ module OmniSearch
     #                and NULL_SCORE (no match)
     #
     def word_score
+      return BINGO_SCORE if (query == reference)
       if string_index
         score = substring_score
       else
@@ -65,7 +69,7 @@ module OmniSearch
     # uses String#index, and behaves accordingly.
     # Returns nil or an offset.
     def string_index
-      @string_index ||= reference.index(query)
+      @string_index ||= query.index(reference)
     end
 
     # Internal: Calcuates the query's score based on it's offset from
@@ -82,6 +86,11 @@ module OmniSearch
     # Internal: Calculate a penalty for the query word being longer than the
     # reference word.
     #
+    # intent:
+    #  goal: peter rabbit
+    #  p
+    #  pe
+    #  peter
     # queries are not penalized for being shorter than the reference
     #
     # Returns a float that is the penalty score
@@ -102,25 +111,25 @@ module OmniSearch
     # Returns a float that is the penalty score
     #
     def offset_penalty(index)
-      OFFSET_PENALTY * index
+      OFFSET_PENALTY * index || nil
     end
 
     # Internal: Calculates a score based on how many backspaces it would take
     # to make the query match the reference
     #
     # Example:
-    #  ancestor_score("sarah", 'sara')      # => 0.2 (one jump)
-    #  ancestor_score("peterson", 'peters') # => 0.1 (two jumps)
+    #  randall, randy (one jump - the y)
+    #  randall, randys (two jumps, ys)
     #
     # Returns a float that is the penalty score
     def ancestor_score
       return NULL_SCORE unless first_letter_match
-      sub_word = "#{query}" #dup
+      sub_word = "#{reference}" #dup
       chops = 0
-      while sub_word do
+      while sub_word != "" do
           chops += 1
           sub_word.chop!
-          sub_ref = reference[0..sub_word.length - 1]
+          sub_ref = query[0..sub_word.length - 1]
           break if sub_word == sub_ref
       end
 

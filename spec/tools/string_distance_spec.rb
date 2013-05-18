@@ -3,6 +3,12 @@ require './spec/spec_helper'
 describe OmniSearch::StringDistance do
   let(:the_class) {OmniSearch::StringDistance}
 
+  def score(q, r)
+    s = StringDistance.score(q, r)
+    #p [q, r, s]
+    s
+  end
+
   it 'takes two arguments' do
     StringDistance.new('a', 'b')
   end
@@ -93,6 +99,27 @@ describe OmniSearch::StringDistance do
       bad_match  = the_class.score('quarn baa', 'queen beer')
       good_match.should > bad_match
     end
+
+    it 'score should increase as the match gets better' do
+      score("peter rabbit", "p")
+      (score("peter rabbit", "p")   < score("peter rabbit", "pe")    ).should be_true
+      (score("peter rabbit", "pe")  < score("peter rabbit", "pet")   ).should be_true
+      (score("peter rabbit", "pet") < score("peter rabbit", "peter") ).should be_true
+    end
+
+    it 'score should increase as the match gets better' do
+        expect {score("p rabbit", "pet") < score("peter rabbit", "peter")}.to be_true
+    (score("p rabbit", "pe")    < score("peter rabbit", "pe")).should be true
+    (score("p rabbit", "peter") < score("peter rabbit", "peter r")).should be true
+    end
+
+    it 'should match shorter words preferentially' do
+
+    (score("rabbit", "rab")    > score("rabbits", "rab")).should be true
+    (score("rabbit", "rabb")    > score("rabbits", "rabb")).should be true
+    (score("Randy Dalugdugan", "rand")    > score("Randall Goskowicz", "rand")).should be true
+
+    end
   end
 
   describe 'word score' do
@@ -115,6 +142,26 @@ describe OmniSearch::StringDistance do
       end
     end
 
+  end
+
+  describe 'matching single and multiple words' do
+    it 'should have a fairly even keel for initial matches' do
+      (score("Randy Dalduggan", "rand")      > score("Randall Goskowicz", "rand")).should be true
+      (score("Randy Dalduggan", "randy")     > score("Randall Goskowicz", "randy")).should be true
+      (score("Randall Goskowicz", "randa")   > score("Randy Dalduggan", "randa")).should be true
+      (score("Randall Goskowicz", "randall") > score("Randy Dalduggan", "randall")).should be true
+
+    end
+    it 'should not diminish the score for only matching one word of two with a query' do
+      (score("Randy Dalduggan", "rand") == score("Randy Goskowicz Sr", "rand")).should be true
+    end
+    it 'should not get a higher score for matching two words with one reference' do
+      (score("Randy Randerson", "rand") == score("Randy Goskowicz Sr", "rand")).should be true
+      score("Mia", "m")
+      score("Miller", "m")
+      score("adam", "m")
+      (score("Mia Miller", "m rosen") < score("adam rosen", "m rosen")).should be true
+    end
   end
 
 
