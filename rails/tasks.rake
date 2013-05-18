@@ -11,13 +11,12 @@ namespace :omnisearch do
   task reindex: :environment do
      OmniSearch::Indexes.destroy
      OmniSearch::Indexes.build
-     OmniSearch::Cache.clear
+     OmniSearch::Cache.refresh
   end
 
   desc 'clears memcache'
-  task clear_memcache: :environment do
-    puts 'warning: this clears everything in memcache'
-     OmniSearch::Cache.clear
+  task refresh_cache: :environment do
+     OmniSearch::Cache.refresh
   end
 
   desc 'searches every two letter combination of a-z (aa, ab..)'

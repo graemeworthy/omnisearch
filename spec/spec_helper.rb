@@ -1,5 +1,6 @@
 # Encoding: UTF-8
 require 'simplecov'
+require 'timecop'
 
 require './lib/omni_search'
 require './spec/examples/search_indexes/indexes'

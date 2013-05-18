@@ -17,7 +17,7 @@ describe Search::Cache do
 
     describe 'Objects returned from cache' do
       before(:all) do
-        Cache::QueryCache.clear
+        Cache::QueryCache.refresh
         @no_cache_return = Search.new(the_term)
         @first_return    = Search::Cached.find(the_term)
         @second_return   = Search::Cached.find(the_term)
@@ -55,7 +55,7 @@ describe Search::Cache do
     #     without_cache = Benchmark.realtime do
     #       1000.times { Search.new(the_term) }
     #     end
-    #     Cache::QueryCache.clear
+    #     Cache::QueryCache.refresh
 
     #     without_precache = Benchmark.realtime do
     #       1000.times { Search::Cached.find(the_term) }
