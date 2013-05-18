@@ -61,16 +61,16 @@ describe Cache::Base do
       end
     end
 
-    describe '##clear' do
-      it 'should call #clear on the cache instance' do
-        cache_instance.should_receive(:clear)
-        the_class.clear
+    describe '##refresh' do
+      it 'should call #refresh on the cache instance' do
+        cache_instance.should_receive(:refresh)
+        the_class.refresh
       end
        it 'should recover from a cache error' do
-        cache_instance.should_receive(:clear).
+        cache_instance.should_receive(:refresh).
           and_raise(MemCache::MemCacheError)
 
-        expect{ the_class.clear}.to_not raise_error
+        expect{ the_class.refresh}.to_not raise_error
       end
     end
   end

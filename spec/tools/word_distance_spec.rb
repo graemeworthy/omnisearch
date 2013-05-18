@@ -16,43 +16,43 @@ describe OmniSearch::StringDistance::WordDistance do
     end
 
     it 'gives a perfect score for a perfect match' do
-      score('query', 'query').should == 1
+      score('query', 'query').should == StringDistance::WordDistance::BINGO_SCORE
     end
 
     it 'can find a word inside another word' do
-      score('query', 'LqueryR').should > null_match
+      score('LqueryR', 'query').should > null_match
     end
 
     it 'can find a word at the beginning of another' do
-      score('query', 'queryR').should > null_match
+      score('queryR', 'query').should > null_match
     end
 
     it 'can find a word at the end of another' do
-      score('query', 'Lquery').should > null_match
+      score('Lquery', 'query').should > null_match
     end
 
     it 'should return the null value for any match thats negative' do
-      word_score = score('query', 'buriedinthemessquerynesslessness')
+      word_score = score('buriedinthemessquerynesslessness', 'query')
       word_score.should == null_match
     end
 
     describe 'should rank any match higher than no match' do
 
       it 'eg. final match higher than null' do
-        score('query', 'longquery').should >= null_match
+        score('longquery', 'query').should >= null_match
       end
 
       it 'eg. word initial match higher than null' do
-        score('query', 'querynesslessness').should >= null_match
+        score('querynesslessness', 'query').should >= null_match
       end
 
       it 'eg. a buried match higher than null' do
-        word_score = score('query', 'buriedinthemessquerynesslessness')
+        word_score = score('buriedinthemessquerynesslessness', 'query')
         word_score.should >= null_match
       end
     end
   end
-  describe 'parts of a scrore' do
+  describe 'parts of a score' do
 
 
     describe '#overlength penalty' do
@@ -119,13 +119,19 @@ describe OmniSearch::StringDistance::WordDistance do
 
       it 'should have a greater score for fewer hops' do
         few  =  ancestor_score('catsa', 'cat')
-        many =  ancestor_score('catsabcd', 'cat')
+        many =  ancestor_score('cats', 'cold')
         few.should > many
       end
 
+      it 'only compare the length of the reference parts' do
+        few  =  ancestor_score('randal',  'randy')
+        many =  ancestor_score('randall', 'randy')
+        few.should == many
+      end
+
       it 'it should give a similar score ' do
-        ancestor_score("sarah", 'sara').should eq 0.2
-        ancestor_score("peterson", 'peters').should == 0.1
+        ancestor_score("peterson", 'pets').should eq 0.2
+        ancestor_score("peterson", 'petre').should == 0.1
       end
     end
 

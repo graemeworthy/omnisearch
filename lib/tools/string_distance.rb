@@ -7,10 +7,14 @@ module OmniSearch
   # Usage:
   #   StringDistance.score('a string', 'another string')
   #
+  # This program uses two terms 'query and reference'
+  # What do they mean?
+  #
+  #
   class StringDistance
     OUT_OF_ORDER_PENALTY = 0.001
-    OVERLENGTH_PENALTY   = 0.001
-    OFFSET_PENALTY       = 0.3
+    OVERLENGTH_PENALTY   = 0.1
+    OFFSET_PENALTY       = 0.5
     ANCESTOR_SCORE       = 0.2
     BASE_SCORE           = 1
     NULL_SCORE           = 0
@@ -68,10 +72,13 @@ module OmniSearch
         end
         my_scores << query_word_best_score
       end
+      # debug your scores?
+      #pp Hash[query_words.zip(my_scores)]
 
       return NULL_SCORE if my_scores.empty?
+      my_scores   = my_scores.sort.reverse.take(reference_words.length)
       score_sum   = my_scores.inject(:+)
-      final_score = score_sum / query_words.length
+      final_score = score_sum / my_scores.length
       return final_score
     end
 
@@ -97,6 +104,8 @@ module OmniSearch
       penalty = OUT_OF_ORDER_PENALTY * diff
       penalty
     end
+
+
 
   end
 end

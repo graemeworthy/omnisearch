@@ -51,7 +51,7 @@ describe OmniSearch::Indexes::Fetcher do
       describe 'when there is not a cached record' do
 
         before(:each) {
-          an_instance.cache.clear
+          Cache.instance.clear
           an_instance.stub(:load).and_return(dummy_record2)
         }
 
@@ -77,7 +77,7 @@ describe OmniSearch::Indexes::Fetcher do
     describe '#save_to_cache' do
       let(:the_payload) {'something'}
       before(:each) {
-        an_instance.cache.clear
+        Cache.instance.clear
       }
 
       it 'should take one argument ' do
@@ -111,7 +111,7 @@ describe OmniSearch::Indexes::Fetcher do
 
     describe '#read cache' do
       it 'should return nil if there is nothing in the cache' do
-        an_instance.cache.clear
+        an_instance.cache.refresh
         an_instance.read_cache.should be nil
       end
       it 'should return the index we requested' do
@@ -164,7 +164,7 @@ describe OmniSearch::Indexes::Fetcher do
         an_instance.load_to_cache
       end
       it 'should save to cache' do
-        an_instance.cache.clear
+        an_instance.cache.refresh
         an_instance.stub(:load).and_return(dummy_record)
         an_instance.load_to_cache
         an_instance.read_cache.should == dummy_record

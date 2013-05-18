@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'terminal-notifier-guard'
   s.add_development_dependency 'rb-fsevent' #for guard
+  s.add_development_dependency 'timecop'
 
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'memcache'

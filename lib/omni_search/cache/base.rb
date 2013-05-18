@@ -37,10 +37,10 @@ module OmniSearch
         return value
     end
 
-    # wrapper for Cache#clear
-    def self.clear()
+    # wrapper for Cache#refresh
+    def self.refresh
         begin
-          Cache.instance.clear
+          Cache.refresh
         rescue  MemCache::MemCacheError
           return nil
         end
